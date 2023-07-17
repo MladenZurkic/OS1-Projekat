@@ -5,15 +5,19 @@
 #include "../lib/hw.h"
 #include "../h/tcb.hpp"
 #include "../h/print.hpp"
+#include "../h/syscall_c.hpp"
 
 static uint64 fibonacci(uint64 n)
 {
     if (n == 0 || n == 1) { return n; }
-    if (n % 4 == 0) TCB::yield();
+    if (n % 4 == 0) {
+        //printString("fibonacci yield\n");
+        thread_dispatch();
+    }
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-void workerBodyA()
+void workerBodyA(void* arg)
 {
     uint8 i = 0;
     for (; i < 3; i++)
@@ -25,7 +29,7 @@ void workerBodyA()
 
     printString("A: yield\n");
     __asm__ ("li t1, 7");
-    TCB::yield();
+    thread_dispatch();
 
     uint64 t1 = 0;
     __asm__ ("mv %[t1], t1" : [t1] "=r"(t1));
@@ -33,6 +37,8 @@ void workerBodyA()
     printString("A: t1=");
     printInteger(t1);
     printString("\n");
+
+
 
     uint64 result = fibonacci(20);
     printString("A: fibonaci=");
@@ -46,13 +52,13 @@ void workerBodyA()
         printString("\n");
     }
 
-    TCB::running->setFinished(true);
-    TCB::yield();
+    thread_dispatch();
 }
 
-void workerBodyB()
+void workerBodyB(void* arg)
 {
     uint8 i = 10;
+    thread_join((thread_t) arg);
     for (; i < 13; i++)
     {
         printString("B: i=");
@@ -62,10 +68,11 @@ void workerBodyB()
 
     printString("B: yield\n");
     __asm__ ("li t1, 5");
-    TCB::yield();
+    thread_dispatch();
+
 
     uint64 result = fibonacci(23);
-    printString("A: fibonaci=");
+    printString("B: fibonaci=");
     printInteger(result);
     printString("\n");
 
@@ -76,6 +83,5 @@ void workerBodyB()
         printString("\n");
     }
 
-    TCB::running->setFinished(true);
-    TCB::yield();
+    thread_dispatch();
 }

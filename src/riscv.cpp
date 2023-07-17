@@ -6,12 +6,15 @@
 #include "../h/tcb.hpp"
 #include "../lib/console.h"
 #include "../h/print.hpp"
+#include "../h/syscall_c.hpp"
 
 void Riscv::popSppSpie()
 {
     __asm__ volatile("csrw sepc, ra");
     __asm__ volatile("sret");
 }
+
+using Body = void (*)(void*);
 
 void Riscv::handleSupervisorTrap()
 {
@@ -39,6 +42,14 @@ void Riscv::handleSupervisorTrap()
                 //a2: start_routine - ono sto ce nit izvrsavati - Body TIP VEROVATNO?
                 //a3: arg - argument za start_routine
                 //Uspeh: u handle upisuje rucku i vraca 0, suprotno negativno
+
+                TCB** tcb;
+                Body body;
+                void* arg;
+                __asm__ volatile ("mv %0, a1" : "=r" (tcb));
+                __asm__ volatile ("mv %0, a2" : "=r" (body));
+                __asm__ volatile ("mv %0, a3" : "=r" (arg));
+                *tcb = TCB::createThread(body, arg);
                 break;
 
             case 0x12:
@@ -47,14 +58,15 @@ void Riscv::handleSupervisorTrap()
                 //0 ili -1 return
                 break;
 
-            case 0x13:
-                //thread_dispatch()
+            case 0x13:      //thread_dispatch()
                 //Poziva se thread dispatch
+                TCB::dispatch();
                 break;
 
             case 0x14:
-                //thread_join(handle)
-                //suspenduje nit i ceka handle nit
+                thread_t handle;
+                __asm__ volatile ("mv %0, a1" : "=r" (handle));
+                TCB::join(handle);
                 break;
 
             case 0x21:
@@ -104,17 +116,10 @@ void Riscv::handleConsoleInterrupt() {
 }
 
 void Riscv::handleTimerInterrupt() {
-    mc_sip(SIP_SSIP);
-    TCB::timeSliceCounter++;
-    TCB::timeSliceCounterTest++;
-    if (TCB::timeSliceCounter >= TCB::running->getTimeSlice())
-    {
-        uint64 volatile sepc = r_sepc();
-        uint64 volatile sstatus = r_sstatus();
-        TCB::timeSliceCounter = 0;
-        TCB::timeSliceCounterTest++;
-        TCB::dispatch();
-        w_sstatus(sstatus);
-        w_sepc(sepc);
-    }
+    mc_sip(SIP_SSIP); // MORA DA SE OBRISE PENDING BIT - ZATO NIJE RADILO!
+    /*uint64 volatile sepc = r_sepc();
+    uint64 volatile sstatus = r_sstatus();
+    TCB::dispatch();
+    w_sstatus(sstatus);
+    w_sepc(sepc);*/
 }
