@@ -50,7 +50,19 @@ void Riscv::handleSupervisorTrap()
                 __asm__ volatile ("mv %0, a2" : "=r" (body));
                 __asm__ volatile ("mv %0, a3" : "=r" (arg));
                 *tcb = TCB::createThread(body, arg);
+                //POVRATNA VREDNOST: Upis mora na stek direktno, jer se posle ovoga vraca stari kontekst
+                if(*tcb == nullptr) {
+                    //__asm__ volatile ("li a0, 0");
+                    __asm__ volatile ("li t0, 0");
+                    __asm__ volatile ("sw t0, 80(x8)");
+                }
+                else {
+                    //__asm__ volatile ("li a0, -1");
+                    __asm__ volatile ("li t0, -1");
+                    __asm__ volatile ("sw t0, 80(x8)");
+                }
                 break;
+
 
             case 0x12:
                 //thread_exit()

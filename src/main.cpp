@@ -18,10 +18,12 @@ int main()
     Riscv::w_stvec((uint64) &Riscv::stvecVectorTable | 0b01);
     Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 
-    thread_create(&threads[1], workerBodyA, nullptr);
+    int return1 = thread_create(&threads[1], workerBodyA, nullptr);
     printString("ThreadA created\n");
-    thread_create(&threads[2], workerBodyB, threads[1]);
+    printInteger(return1);
+    int return2 = thread_create(&threads[2], workerBodyB, threads[1]);
     printString("ThreadB created\n");
+    printInteger(return2);
 
 
 
