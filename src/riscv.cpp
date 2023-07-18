@@ -26,6 +26,8 @@ void Riscv::handleSupervisorTrap()
         uint64 volatile sstatus = r_sstatus();
 
         uint64 codeOperation = Riscv::r_a0();
+        int returnValue;
+        MySemaphore* semHandlePtr;
         switch (codeOperation) {
             case 0x01:
                 //mem_alloc
@@ -33,16 +35,11 @@ void Riscv::handleSupervisorTrap()
 
             case 0x02:
                 //mem_free -> a1: ono sta se brise prima
-                //Vraca 0 u slucaju uspeha, negativno u slucaju greske
                 break;
 
+            //THREAD DEO
             case 0x11:
                 //thread_create
-                //a1: handle - rucka niti - TCB TIP
-                //a2: start_routine - ono sto ce nit izvrsavati - Body TIP VEROVATNO?
-                //a3: arg - argument za start_routine
-                //Uspeh: u handle upisuje rucku i vraca 0, suprotno negativno
-
                 TCB** tcb;
                 Body body;
                 void* arg;
@@ -51,7 +48,7 @@ void Riscv::handleSupervisorTrap()
                 __asm__ volatile ("mv %0, a3" : "=r" (arg));
                 *tcb = TCB::createThread(body, arg);
                 //POVRATNA VREDNOST: Upis mora na stek direktno, jer se posle ovoga vraca stari kontekst
-                if(*tcb == nullptr) {
+                if(*tcb != nullptr) {
                     //__asm__ volatile ("li a0, 0");
                     __asm__ volatile ("li t0, 0");
                     __asm__ volatile ("sw t0, 80(x8)");
@@ -63,15 +60,16 @@ void Riscv::handleSupervisorTrap()
                 }
                 break;
 
-
             case 0x12:
                 //thread_exit()
-                //Gasi tekucu nit samo, znaci treba i dispatch da se uradi
-                //0 ili -1 return
+                TCB::running->setFinished(true);
+                TCB::dispatch();
+                __asm__ volatile ("li t0, 0");
+                __asm__ volatile ("sw t0, 80(x8)");
                 break;
 
-            case 0x13:      //thread_dispatch()
-                //Poziva se thread dispatch
+            case 0x13:
+                //thread_dispatch()
                 TCB::dispatch();
                 break;
 
@@ -83,23 +81,60 @@ void Riscv::handleSupervisorTrap()
 
             case 0x21:
                 //sem_open
-                //check document
+                unsigned init;
+                MySemaphore** semHandle;
+
+                __asm__ volatile ("mv %0, a2" : "=r" (init));
+                __asm__ volatile ("mv %0, a1" : "=r" (semHandle));
+                *semHandle = MySemaphore::createSemaphore();
+
+                if(*semHandle != nullptr) {
+                    __asm__ volatile ("li t0, 0");
+                    __asm__ volatile ("sw t0, 80(x8)");
+                }
+                else {
+                    __asm__ volatile ("li t0, -1");
+                    __asm__ volatile ("sw t0, 80(x8)");
+                }
                 break;
 
             case 0x22:
                 //sem_close
                 //check document
+                __asm__ volatile ("mv %0, a1" : "=r" (semHandlePtr));
+                if(semHandlePtr!= nullptr) {
+                    returnValue = semHandlePtr->close();
+                }
+                else returnValue = -2;
+
+                __asm__ volatile ("mv t0, %0" : : "r"(returnValue));
+                __asm__ volatile ("sw t0, 80(x8)");
                 break;
 
             case 0x23:
                 //sem_wait
-                //check document
+                __asm__ volatile ("mv %0, a1" : "=r" (semHandlePtr));
+                if(semHandlePtr!= nullptr) {
+                    returnValue = semHandlePtr->wait();
+                }
+                else returnValue = -2;
+
+                __asm__ volatile ("mv t0, %0" : : "r"(returnValue));
+                __asm__ volatile ("sw t0, 80(x8)");
                 break;
             case 0x24:
                 //sem_signal
+                __asm__ volatile ("mv %0, a1" : "=r" (semHandlePtr));
+                if(semHandlePtr!= nullptr)
+                    returnValue = semHandlePtr->signal();
+                else
+                    returnValue = -2;
+
+                __asm__ volatile ("mv t0, %0" : : "r"(returnValue));
+                __asm__ volatile ("sw t0, 80(x8)");
                 break;
 
-            case 0x31:
+            /*case 0x31:
                 //time_sleep
                 break;
 
@@ -109,7 +144,7 @@ void Riscv::handleSupervisorTrap()
 
             case 0x42:
                 //putc
-                break;
+                break;*/
             //Da li treba 0x41 i 0x42 ako se ne radi asinhrono? izgleda ne
         }
 
