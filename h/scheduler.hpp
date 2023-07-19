@@ -11,7 +11,7 @@ class TCB;
 
 class Scheduler
 {
-private:
+public:
     static List<TCB> readyThreadQueue;
 
 public:

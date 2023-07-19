@@ -85,3 +85,31 @@ void workerBodyB(void* arg)
 
     thread_dispatch();
 }
+
+//test semafora
+void workerBodyC(void* arg) {
+    printString("C: poziva se dispatch1.\n");
+    thread_dispatch();
+    printString("C: poziva se dispatch2..\n");
+    thread_dispatch();
+    printString("C: poziva se dispatch3...\n");
+    thread_dispatch();
+    printString("C: poziva se dispatch4....\n");
+    printString("C: Signal semafora!\n");
+    sem_close((sem_t) arg);
+    thread_dispatch();
+    printString("C: posle signala..\n");
+    printString("C: posle signala.2.\n");
+}
+
+
+void workerBodyD(void *arg) {
+    printString("D: Usli smo u D 1. put\n");
+    printString("D: Cekamo na semaforu..\n");
+
+    int returnValue = sem_wait((sem_t) arg);
+
+    printString("D: rezultat: ");
+    printInteger(returnValue);
+    printString("\nD: izlazim automatski, pozdrav!\n");
+}

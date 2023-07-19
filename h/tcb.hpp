@@ -18,6 +18,10 @@ public:
 
     void setFinished(bool value) { finished = value; }
 
+    bool isBlocked() const { return this->blocked; }
+
+    void setBlocked(bool value) { this->blocked = value; }
+
     //uint64 getTimeSlice() const { return timeSlice; }
 
     //static uint64 getTimeSliceTest() { return timeSliceCounterTest; }
@@ -38,7 +42,9 @@ private:
                      stack != nullptr ? (uint64) &stack[STACK_SIZE] : 0
                     }),
             finished(false),
+            blocked(false),
             arg(arg)
+
     {
         if (body != nullptr) { Scheduler::put(this); }
     }
@@ -53,6 +59,7 @@ private:
     uint64 *stack;
     Context context;
     bool finished;
+    bool blocked;
     void* arg;
 
     friend class Riscv;

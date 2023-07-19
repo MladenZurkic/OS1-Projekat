@@ -86,7 +86,7 @@ void Riscv::handleSupervisorTrap()
 
                 __asm__ volatile ("mv %0, a2" : "=r" (init));
                 __asm__ volatile ("mv %0, a1" : "=r" (semHandle));
-                *semHandle = MySemaphore::createSemaphore();
+                *semHandle = MySemaphore::createSemaphore(init);
 
                 if(*semHandle != nullptr) {
                     __asm__ volatile ("li t0, 0");
@@ -146,6 +146,9 @@ void Riscv::handleSupervisorTrap()
                 //putc
                 break;*/
             //Da li treba 0x41 i 0x42 ako se ne radi asinhrono? izgleda ne
+            case 0x43:
+                TCB::dispatch();
+                break;
         }
 
         w_sstatus(sstatus);

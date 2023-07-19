@@ -25,6 +25,9 @@ int main()
     printString("ThreadB created\n");
     printInteger(return2);
 
+    MySemaphore* semaphore[2];
+    sem_open(&semaphore[0], 0);
+
 
 
     while (!(threads[1]->isFinished() &&
@@ -33,11 +36,20 @@ int main()
         thread_dispatch();
     }
 
-    for (auto &thread: threads)
-    {
+
+
+    thread_create(&threads[3], workerBodyC, semaphore[0]);
+    thread_create(&threads[3], workerBodyD, semaphore[0]);
+    //thread_dispatch();
+    int returnValue = sem_wait(semaphore[0]);
+
+    printString("Finished\nReturn value: ");
+    printInteger(returnValue);
+    printString("\n");
+
+    thread_dispatch();
+    for (auto &thread: threads) {
         delete thread;
     }
-    printString("Finished\n");
-
     return 0;
 }

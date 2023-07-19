@@ -6,8 +6,9 @@ int MySemaphore::wait() {
         return -1;
     }
 
-    if(--this->value < 0) {
+    if((int)--this->value < 0) {
         this->blocked.addLast(TCB::running);
+        TCB::running->setBlocked(true);
         thread_dispatch();
 
         //Provera da li smo se vratili jer je bio signal() ili je bio close()
@@ -22,8 +23,10 @@ int MySemaphore::signal() {
     if(this->closed) {
         return -1;
     }
-    if(++this->value <= 0) {
-        TCB *tcb = this->blocked.removeFirst();
+    if((int)++this->value <= 0) {
+        TCB* tcb;
+        tcb = this->blocked.peekFirst();
+        tcb->setBlocked(false);
         Scheduler::put(tcb);
     }
     return 0;
@@ -41,6 +44,7 @@ int MySemaphore::close() {
 
     while (this->blocked.peekFirst()) {
         TCB* tcb = this->blocked.removeFirst();
+        tcb->setBlocked(false);
         Scheduler::put(tcb);
     }
     return 0;

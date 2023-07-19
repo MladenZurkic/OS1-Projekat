@@ -3,6 +3,8 @@
 //
 
 #include "../lib/mem.h"
+#include "../h/syscall_cpp.hpp"
+
 
 using size_t = decltype(sizeof(0));
 
