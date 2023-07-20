@@ -25,7 +25,7 @@ int MySemaphore::signal() {
     }
     if((int)++this->value <= 0) {
         TCB* tcb;
-        tcb = this->blocked.peekFirst();
+        tcb = this->blocked.removeFirst();
         tcb->setBlocked(false);
         Scheduler::put(tcb);
     }

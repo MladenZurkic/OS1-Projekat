@@ -18,3 +18,21 @@ int Semaphore::wait() {
 int Semaphore::signal() {
     return sem_signal(this->myHandle);
 }
+
+//THREAD
+void Thread::dispatch() {
+    thread_dispatch();
+}
+
+Thread::Thread(void (*body)(void *), void *arg) {
+    thread_create(&this->myHandle, body, arg);
+}
+
+void Thread::join() {
+    thread_join(myHandle);
+}
+
+Thread::~Thread() {
+    thread_exit(); //Da li ovo tako treba? Msm da ne
+}
+
