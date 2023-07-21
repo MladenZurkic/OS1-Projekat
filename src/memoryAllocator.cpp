@@ -2,10 +2,15 @@
 #include "../h/memoryAllocator.hpp"
 
 
+DataBlock* MemoryAllocator::free = nullptr;
+DataBlock* MemoryAllocator::used = nullptr;
+
+
+
 void *MemoryAllocator::mem_alloc(size_t size) {
     size_t newSize;
     if(size%MEM_BLOCK_SIZE != 0) {
-        newSize = size/blockSize + (blockSize - size);
+        newSize = size/MEM_BLOCK_SIZE + (MEM_BLOCK_SIZE - size);
     }
     else {
         newSize = size;
@@ -15,7 +20,8 @@ void *MemoryAllocator::mem_alloc(size_t size) {
         if(curr->size<size) continue;
         if(curr->size > newSize) {
             //new fragment needs to be created
-            //novi ce biti offsetovan od curr za novi size i plus za sizeof(DataBlock) zato sto se posle curr nalazi taj "header"
+            //novi ce biti offsetovan od curr za novi size i plus za sizeof(DataBlock) zato sto se posle curr
+            // nalazi taj "header"
             DataBlock *newBlock;
             newBlock = (DataBlock*) ((char*)curr + newSize + sizeof(DataBlock));
 
@@ -29,42 +35,136 @@ void *MemoryAllocator::mem_alloc(size_t size) {
             //pa mora i to da se cuva
             newBlock->size = curr->size - newSize - sizeof(DataBlock);
 
-            //azuriranje used liste
+            //azuriranje USED liste
             DataBlock* currUsed = used;
+            DataBlock* prevUsed = nullptr;
 
-            //PROVERITI
-            for(;currUsed->next && (char*)currUsed->next+currUsed->size + sizeof(DataBlock) < (char*) newBlock;
-            currUsed = currUsed->next);
+            for(;currUsed->next && (char*)currUsed + sizeof(DataBlock) + currUsed->size  < (char*) curr;
+                 prevUsed = currUsed, currUsed = currUsed->next);
 
-            if(currUsed == used && ((char*)currUsed->next+currUsed->size + sizeof(DataBlock) < (char*) newBlock)) {
+            if(currUsed == used) {
                 //Insert before used
-                newBlock->next = used;
-                newBlock->prev = nullptr;
-                used->prev = newBlock;
-                used = newBlock;
+                curr->next = used;
+                curr->prev = nullptr;
+                used->prev = curr;
+                used = curr;
+            }
+            else if (currUsed->next == nullptr) {
+                //Insert at the end
+                currUsed->next = curr;
+                curr->prev = currUsed;
+                curr->next = nullptr;
             }
             else {
-                //Insert into list
-                newBlock->next = currUsed->next;
-                newBlock->prev = currUsed;
-                if(currUsed->next) {
-                    currUsed->next->prev = newBlock;
-                }
-                currUsed->next = newBlock;
+                //Insert into list in the middle (prev, curr, currUsed)
+                prevUsed->next = curr;
+                curr->prev = prevUsed;
+                curr->next = currUsed;
+                currUsed->prev = curr;
             }
-
             return (char*)curr + sizeof(DataBlock);
         }
         else {
             //They are the exact same size
-            //FIX and finish
+            //Update FREE list
             if (curr->prev) curr->prev->next = curr->next;
             else MemoryAllocator::free = curr->next;
-            return (void *) curr;
+
+            if(curr->next) curr->next->prev = curr->prev;
+
+
+            //azuriranje USED liste
+            DataBlock* currUsed = used;
+            DataBlock* prevUsed = nullptr;
+
+            for(;currUsed->next && (char*)currUsed + sizeof(DataBlock) + currUsed->size  < (char*) curr;
+                 prevUsed = currUsed, currUsed = currUsed->next);
+
+            if(currUsed == used) {
+                //Insert before used
+                curr->next = used;
+                curr->prev = nullptr;
+                used->prev = curr;
+                used = curr;
+            }
+            else if (currUsed->next == nullptr) {
+                //Insert at the end
+                currUsed->next = curr;
+                curr->prev = currUsed;
+                curr->next = nullptr;
+            }
+            else {
+                //Insert into list in the middle (prev, curr, currUsed)
+                //DOES IT NEED TO BE BEFORE CURRUSED?
+//                curr->next = currUsed->next;
+//                curr->prev = currUsed;
+//                if(currUsed->next) {
+//                    currUsed->next->prev = curr;
+//                }
+//                currUsed->next = curr;
+
+                prevUsed->next = curr;
+                curr->prev = prevUsed;
+                curr->next = currUsed;
+                currUsed->prev = curr;
+            }
+            return (char*)curr + sizeof(DataBlock);
         }
     }
+    return nullptr; //should not enter here
 }
 
-int MemoryAllocator::mem_free(void *) {
+int MemoryAllocator::mem_free(void* ptr) {
+    if(used == nullptr) return -1;
+    if(ptr == nullptr || ptr < HEAP_START_ADDR || ptr > HEAP_END_ADDR) return -2;
+
+    DataBlock* curr = (DataBlock*)(char*)ptr - sizeof(DataBlock);
+    if(curr < used) return -3;
+
+    //Delete from USED list
+    if(used == curr) {
+        used = curr->next;
+        if(used) used->prev = nullptr;
+        curr->next = nullptr;
+        curr->prev = nullptr;
+    } else {
+        curr->prev->next = curr->next;
+        curr->next->prev = curr->prev;
+        curr->next = nullptr;
+        curr->prev = nullptr;
+    }
+
+    //Insert into FREE list
+    if (free == nullptr) {
+        //Insert as first
+        free = curr;
+    }
+    else if(curr < free) {
+        free->prev = curr;
+        curr->prev = nullptr;
+        curr->next = free;
+        free = curr;
+        tryToJoin(free);
+    }
+    else {
+        //Find place in list
+        DataBlock* currFree = free;
+        for(currFree = free; currFree->next && (char*)(currFree->next) < (char*) curr; currFree = currFree->next);
+
+        curr->next = currFree->next;
+        curr->prev = currFree;
+        if(curr->next) curr->next->prev = curr;
+        curr->next = curr;
+        tryToJoin(curr);
+        tryToJoin(currFree);
+    }
     return 0;
+}
+
+void MemoryAllocator::tryToJoin(DataBlock *curr) {
+    if(curr->next && (char*)curr + sizeof(DataBlock) + curr->size == (char*)curr->next) {
+        curr->size += curr->next->size + sizeof(DataBlock);
+        curr->next = curr->next->next;
+        if(curr->next) curr->next->prev = curr;
+    }
 }

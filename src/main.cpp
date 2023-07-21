@@ -28,8 +28,6 @@ int main()
     MySemaphore* semaphore[2];
     sem_open(&semaphore[0], 0);
 
-
-
     while (!(threads[1]->isFinished() &&
              threads[2]->isFinished()))
     {

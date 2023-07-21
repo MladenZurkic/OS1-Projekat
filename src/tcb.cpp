@@ -43,7 +43,6 @@ void TCB::threadWrapper()
     running->body(running->arg);
     running->setFinished(true);
     thread_dispatch();
-
 }
 
 void TCB::join(TCB* handle) {

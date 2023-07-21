@@ -247,4 +247,5 @@ inline void Riscv::w_a0(uint64 writeValue) {
     __asm__ volatile ("mv a0, %0" : : "r"(writeValue));
 }
 
+
 #endif //OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_RISCV_HPP
