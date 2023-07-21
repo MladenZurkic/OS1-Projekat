@@ -36,3 +36,16 @@ Thread::~Thread() {
     thread_exit(); //Da li ovo tako treba? Msm da ne
 }
 
+int Thread::start() {
+    //todo
+    return 0;
+}
+
+Thread::Thread() {
+    //todo
+}
+
+void Thread::run() {
+    //todo
+}
+
