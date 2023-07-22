@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccRotGSC.s 			page 1
+GAS LISTING /tmp/cc18FQhI.s 			page 1
 
 
    1              		.file	"_new.cpp"
@@ -23,27 +23,58 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
   10:src/_new.cpp  **** 
   11:src/_new.cpp  **** //THEIR MEMORY
   12:src/_new.cpp  **** 
-  13:src/_new.cpp  **** void *operator new(size_t n)
-  14:src/_new.cpp  **** {
-  12              		.loc 1 14 1
+  13:src/_new.cpp  **** 
+  14:src/_new.cpp  **** /*
+  15:src/_new.cpp  **** void *operator new(size_t n)
+  16:src/_new.cpp  **** {
+  17:src/_new.cpp  ****     return __mem_alloc(n);
+  18:src/_new.cpp  **** }
+  19:src/_new.cpp  **** 
+  20:src/_new.cpp  **** void *operator new[](size_t n)
+  21:src/_new.cpp  **** {
+  22:src/_new.cpp  ****     return __mem_alloc(n);
+  23:src/_new.cpp  **** }
+  24:src/_new.cpp  **** 
+  25:src/_new.cpp  **** void operator delete(void *p) noexcept
+  26:src/_new.cpp  **** {
+  27:src/_new.cpp  ****     __mem_free(p);
+  28:src/_new.cpp  **** }
+  29:src/_new.cpp  **** 
+  30:src/_new.cpp  **** void operator delete[](void *p) noexcept
+  31:src/_new.cpp  **** {
+  32:src/_new.cpp  ****     __mem_free(p);
+  33:src/_new.cpp  **** }
+  34:src/_new.cpp  **** */
+  35:src/_new.cpp  **** 
+  36:src/_new.cpp  **** 
+  37:src/_new.cpp  **** 
+  38:src/_new.cpp  **** //****************************MY MEMORY********************************
+  39:src/_new.cpp  **** 
+  40:src/_new.cpp  **** 
+  41:src/_new.cpp  **** void *operator new(size_t n)
+  42:src/_new.cpp  **** {
+  12              		.loc 1 42 1
   13              		.cfi_startproc
   14              	.LVL0:
   15 0000 130101FF 		addi	sp,sp,-16
   16              		.cfi_def_cfa_offset 16
+GAS LISTING /tmp/cc18FQhI.s 			page 2
+
+
   17 0004 23341100 		sd	ra,8(sp)
   18 0008 23308100 		sd	s0,0(sp)
   19              		.cfi_offset 1, -8
   20              		.cfi_offset 8, -16
   21 000c 13040101 		addi	s0,sp,16
   22              		.cfi_def_cfa 8, 0
-  15:src/_new.cpp  ****     return __mem_alloc(n);
-  23              		.loc 1 15 5
-  24              		.loc 1 15 23 is_stmt 0
-  25 0010 97000000 		call	__mem_alloc@plt
+  43:src/_new.cpp  ****     return MemoryAllocator::mem_alloc(n);
+  23              		.loc 1 43 5
+  24              		.loc 1 43 38 is_stmt 0
+  25 0010 97000000 		call	_ZN15MemoryAllocator9mem_allocEm@plt
   25      E7800000 
   26              	.LVL1:
-  16:src/_new.cpp  **** }
-  27              		.loc 1 16 1
+  44:src/_new.cpp  **** }
+  27              		.loc 1 44 1
   28 0018 83308100 		ld	ra,8(sp)
   29              		.cfi_restore 1
   30 001c 03340100 		ld	s0,0(sp)
@@ -58,13 +89,10 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
   40              		.globl	_Znam
   42              	_Znam:
   43              	.LFB24:
-GAS LISTING /tmp/ccRotGSC.s 			page 2
-
-
-  17:src/_new.cpp  **** 
-  18:src/_new.cpp  **** void *operator new[](size_t n)
-  19:src/_new.cpp  **** {
-  44              		.loc 1 19 1 is_stmt 1
+  45:src/_new.cpp  **** 
+  46:src/_new.cpp  **** void *operator new[](size_t n)
+  47:src/_new.cpp  **** {
+  44              		.loc 1 47 1 is_stmt 1
   45              		.cfi_startproc
   46              	.LVL2:
   47 0028 130101FF 		addi	sp,sp,-16
@@ -75,14 +103,14 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
   52              		.cfi_offset 8, -16
   53 0034 13040101 		addi	s0,sp,16
   54              		.cfi_def_cfa 8, 0
-  20:src/_new.cpp  ****     return __mem_alloc(n);
-  55              		.loc 1 20 5
-  56              		.loc 1 20 23 is_stmt 0
-  57 0038 97000000 		call	__mem_alloc@plt
+  48:src/_new.cpp  ****     return MemoryAllocator::mem_alloc(n);
+  55              		.loc 1 48 5
+  56              		.loc 1 48 38 is_stmt 0
+  57 0038 97000000 		call	_ZN15MemoryAllocator9mem_allocEm@plt
   57      E7800000 
   58              	.LVL3:
-  21:src/_new.cpp  **** }
-  59              		.loc 1 21 1
+  49:src/_new.cpp  **** }
+  59              		.loc 1 49 1
   60 0040 83308100 		ld	ra,8(sp)
   61              		.cfi_restore 1
   62 0044 03340100 		ld	s0,0(sp)
@@ -90,6 +118,9 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
   64              		.cfi_def_cfa 2, 16
   65 0048 13010101 		addi	sp,sp,16
   66              		.cfi_def_cfa_offset 0
+GAS LISTING /tmp/cc18FQhI.s 			page 3
+
+
   67 004c 67800000 		jr	ra
   68              		.cfi_endproc
   69              	.LFE24:
@@ -97,10 +128,10 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
   72              		.globl	_ZdlPv
   74              	_ZdlPv:
   75              	.LFB25:
-  22:src/_new.cpp  **** 
-  23:src/_new.cpp  **** void operator delete(void *p) noexcept
-  24:src/_new.cpp  **** {
-  76              		.loc 1 24 1 is_stmt 1
+  50:src/_new.cpp  **** 
+  51:src/_new.cpp  **** void operator delete(void *p) noexcept
+  52:src/_new.cpp  **** {
+  76              		.loc 1 52 1 is_stmt 1
   77              		.cfi_startproc
   78              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
   79              		.cfi_lsda 0x1b,.LLSDA25
@@ -113,17 +144,14 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
   86              		.cfi_offset 8, -16
   87 005c 13040101 		addi	s0,sp,16
   88              		.cfi_def_cfa 8, 0
-  25:src/_new.cpp  ****     __mem_free(p);
-  89              		.loc 1 25 5
-  90              		.loc 1 25 15 is_stmt 0
-  91 0060 97000000 		call	__mem_free@plt
+  53:src/_new.cpp  ****     MemoryAllocator::mem_free(p);
+  89              		.loc 1 53 5
+  90              		.loc 1 53 30 is_stmt 0
+  91 0060 97000000 		call	_ZN15MemoryAllocator8mem_freeEPv@plt
   91      E7800000 
-GAS LISTING /tmp/ccRotGSC.s 			page 3
-
-
   92              	.LVL5:
-  26:src/_new.cpp  **** }
-  93              		.loc 1 26 1
+  54:src/_new.cpp  **** }
+  93              		.loc 1 54 1
   94 0068 83308100 		ld	ra,8(sp)
   95              		.cfi_restore 1
   96 006c 03340100 		ld	s0,0(sp)
@@ -146,10 +174,13 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
  114              		.globl	_ZdaPv
  116              	_ZdaPv:
  117              	.LFB26:
-  27:src/_new.cpp  **** 
-  28:src/_new.cpp  **** void operator delete[](void *p) noexcept
-  29:src/_new.cpp  **** {
- 118              		.loc 1 29 1 is_stmt 1
+  55:src/_new.cpp  **** 
+  56:src/_new.cpp  **** void operator delete[](void *p) noexcept
+  57:src/_new.cpp  **** {
+ 118              		.loc 1 57 1 is_stmt 1
+GAS LISTING /tmp/cc18FQhI.s 			page 4
+
+
  119              		.cfi_startproc
  120              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
  121              		.cfi_lsda 0x1b,.LLSDA26
@@ -162,14 +193,14 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
  128              		.cfi_offset 8, -16
  129 0084 13040101 		addi	s0,sp,16
  130              		.cfi_def_cfa 8, 0
-  30:src/_new.cpp  ****     __mem_free(p);
- 131              		.loc 1 30 5
- 132              		.loc 1 30 15 is_stmt 0
- 133 0088 97000000 		call	__mem_free@plt
+  58:src/_new.cpp  ****     MemoryAllocator::mem_free(p);
+ 131              		.loc 1 58 5
+ 132              		.loc 1 58 30 is_stmt 0
+ 133 0088 97000000 		call	_ZN15MemoryAllocator8mem_freeEPv@plt
  133      E7800000 
  134              	.LVL7:
-  31:src/_new.cpp  **** }
- 135              		.loc 1 31 1
+  59:src/_new.cpp  **** }
+ 135              		.loc 1 59 1
  136 0090 83308100 		ld	ra,8(sp)
  137              		.cfi_restore 1
  138 0094 03340100 		ld	s0,0(sp)
@@ -178,9 +209,6 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
  141 0098 13010101 		addi	sp,sp,16
  142              		.cfi_def_cfa_offset 0
  143 009c 67800000 		jr	ra
-GAS LISTING /tmp/ccRotGSC.s 			page 4
-
-
  144              		.cfi_endproc
  145              	.LFE26:
  146              		.section	.gcc_except_table
@@ -192,147 +220,160 @@ GAS LISTING /tmp/ccRotGSC.s 			page 1
  152              		.text
  154              	.Letext0:
  155              		.file 2 "src/../lib/hw.h"
- 156              		.file 3 "src/../lib/mem.h"
- 818              		.align	3
- 821              	DW.ref.__gxx_personality_v0:
- 822 0000 00000000 		.dword	__gxx_personality_v0
- 822      00000000 
- 823              		.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0"
- 824              		.section	.note.GNU-stack,"",@progbits
-GAS LISTING /tmp/ccRotGSC.s 			page 5
+ 156              		.file 3 "src/../h/memoryAllocator.hpp"
+ 1083              		.align	3
+ 1086              	DW.ref.__gxx_personality_v0:
+ 1087 0000 00000000 		.dword	__gxx_personality_v0
+ 1087      00000000 
+ 1088              		.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0"
+ 1089              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/cc18FQhI.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 _new.cpp
-     /tmp/ccRotGSC.s:9      .text:0000000000000000 _Znwm
-     /tmp/ccRotGSC.s:13     .text:0000000000000000 .L0 
-     /tmp/ccRotGSC.s:15     .text:0000000000000000 .L0 
-     /tmp/ccRotGSC.s:16     .text:0000000000000004 .L0 
-     /tmp/ccRotGSC.s:19     .text:000000000000000c .L0 
-     /tmp/ccRotGSC.s:20     .text:000000000000000c .L0 
-     /tmp/ccRotGSC.s:22     .text:0000000000000010 .L0 
-     /tmp/ccRotGSC.s:24     .text:0000000000000010 .L0 
-     /tmp/ccRotGSC.s:25     .text:0000000000000010 .L0 
-     /tmp/ccRotGSC.s:28     .text:0000000000000018 .L0 
-     /tmp/ccRotGSC.s:29     .text:000000000000001c .L0 
-     /tmp/ccRotGSC.s:31     .text:0000000000000020 .L0 
-     /tmp/ccRotGSC.s:32     .text:0000000000000020 .L0 
-     /tmp/ccRotGSC.s:34     .text:0000000000000024 .L0 
-     /tmp/ccRotGSC.s:36     .text:0000000000000028 .L0 
-     /tmp/ccRotGSC.s:42     .text:0000000000000028 _Znam
-     /tmp/ccRotGSC.s:45     .text:0000000000000028 .L0 
-     /tmp/ccRotGSC.s:47     .text:0000000000000028 .L0 
-     /tmp/ccRotGSC.s:48     .text:000000000000002c .L0 
-     /tmp/ccRotGSC.s:51     .text:0000000000000034 .L0 
-     /tmp/ccRotGSC.s:52     .text:0000000000000034 .L0 
-     /tmp/ccRotGSC.s:54     .text:0000000000000038 .L0 
-     /tmp/ccRotGSC.s:56     .text:0000000000000038 .L0 
-     /tmp/ccRotGSC.s:57     .text:0000000000000038 .L0 
-     /tmp/ccRotGSC.s:60     .text:0000000000000040 .L0 
-     /tmp/ccRotGSC.s:61     .text:0000000000000044 .L0 
-     /tmp/ccRotGSC.s:63     .text:0000000000000048 .L0 
-     /tmp/ccRotGSC.s:64     .text:0000000000000048 .L0 
-     /tmp/ccRotGSC.s:66     .text:000000000000004c .L0 
-     /tmp/ccRotGSC.s:68     .text:0000000000000050 .L0 
-     /tmp/ccRotGSC.s:74     .text:0000000000000050 _ZdlPv
-     /tmp/ccRotGSC.s:77     .text:0000000000000050 .L0 
-     /tmp/ccRotGSC.s:821    .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
-     /tmp/ccRotGSC.s:81     .text:0000000000000050 .L0 
-     /tmp/ccRotGSC.s:82     .text:0000000000000054 .L0 
-     /tmp/ccRotGSC.s:85     .text:000000000000005c .L0 
-     /tmp/ccRotGSC.s:86     .text:000000000000005c .L0 
-     /tmp/ccRotGSC.s:88     .text:0000000000000060 .L0 
-     /tmp/ccRotGSC.s:90     .text:0000000000000060 .L0 
-     /tmp/ccRotGSC.s:91     .text:0000000000000060 .L0 
-     /tmp/ccRotGSC.s:94     .text:0000000000000068 .L0 
-     /tmp/ccRotGSC.s:95     .text:000000000000006c .L0 
-     /tmp/ccRotGSC.s:97     .text:0000000000000070 .L0 
-     /tmp/ccRotGSC.s:98     .text:0000000000000070 .L0 
-     /tmp/ccRotGSC.s:100    .text:0000000000000074 .L0 
-     /tmp/ccRotGSC.s:102    .text:0000000000000078 .L0 
-     /tmp/ccRotGSC.s:116    .text:0000000000000078 _ZdaPv
-     /tmp/ccRotGSC.s:119    .text:0000000000000078 .L0 
-     /tmp/ccRotGSC.s:123    .text:0000000000000078 .L0 
-     /tmp/ccRotGSC.s:124    .text:000000000000007c .L0 
-     /tmp/ccRotGSC.s:127    .text:0000000000000084 .L0 
-     /tmp/ccRotGSC.s:128    .text:0000000000000084 .L0 
-     /tmp/ccRotGSC.s:130    .text:0000000000000088 .L0 
-     /tmp/ccRotGSC.s:132    .text:0000000000000088 .L0 
-     /tmp/ccRotGSC.s:133    .text:0000000000000088 .L0 
-GAS LISTING /tmp/ccRotGSC.s 			page 6
+     /tmp/cc18FQhI.s:9      .text:0000000000000000 _Znwm
+     /tmp/cc18FQhI.s:13     .text:0000000000000000 .L0 
+     /tmp/cc18FQhI.s:15     .text:0000000000000000 .L0 
+     /tmp/cc18FQhI.s:16     .text:0000000000000004 .L0 
+     /tmp/cc18FQhI.s:19     .text:000000000000000c .L0 
+     /tmp/cc18FQhI.s:20     .text:000000000000000c .L0 
+     /tmp/cc18FQhI.s:22     .text:0000000000000010 .L0 
+     /tmp/cc18FQhI.s:24     .text:0000000000000010 .L0 
+     /tmp/cc18FQhI.s:25     .text:0000000000000010 .L0 
+     /tmp/cc18FQhI.s:28     .text:0000000000000018 .L0 
+     /tmp/cc18FQhI.s:29     .text:000000000000001c .L0 
+     /tmp/cc18FQhI.s:31     .text:0000000000000020 .L0 
+     /tmp/cc18FQhI.s:32     .text:0000000000000020 .L0 
+     /tmp/cc18FQhI.s:34     .text:0000000000000024 .L0 
+     /tmp/cc18FQhI.s:36     .text:0000000000000028 .L0 
+     /tmp/cc18FQhI.s:42     .text:0000000000000028 _Znam
+     /tmp/cc18FQhI.s:45     .text:0000000000000028 .L0 
+     /tmp/cc18FQhI.s:47     .text:0000000000000028 .L0 
+     /tmp/cc18FQhI.s:48     .text:000000000000002c .L0 
+     /tmp/cc18FQhI.s:51     .text:0000000000000034 .L0 
+     /tmp/cc18FQhI.s:52     .text:0000000000000034 .L0 
+     /tmp/cc18FQhI.s:54     .text:0000000000000038 .L0 
+     /tmp/cc18FQhI.s:56     .text:0000000000000038 .L0 
+     /tmp/cc18FQhI.s:57     .text:0000000000000038 .L0 
+     /tmp/cc18FQhI.s:60     .text:0000000000000040 .L0 
+     /tmp/cc18FQhI.s:61     .text:0000000000000044 .L0 
+     /tmp/cc18FQhI.s:63     .text:0000000000000048 .L0 
+     /tmp/cc18FQhI.s:64     .text:0000000000000048 .L0 
+     /tmp/cc18FQhI.s:66     .text:000000000000004c .L0 
+     /tmp/cc18FQhI.s:68     .text:0000000000000050 .L0 
+     /tmp/cc18FQhI.s:74     .text:0000000000000050 _ZdlPv
+     /tmp/cc18FQhI.s:77     .text:0000000000000050 .L0 
+     /tmp/cc18FQhI.s:1086   .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/cc18FQhI.s:81     .text:0000000000000050 .L0 
+     /tmp/cc18FQhI.s:82     .text:0000000000000054 .L0 
+     /tmp/cc18FQhI.s:85     .text:000000000000005c .L0 
+     /tmp/cc18FQhI.s:86     .text:000000000000005c .L0 
+     /tmp/cc18FQhI.s:88     .text:0000000000000060 .L0 
+     /tmp/cc18FQhI.s:90     .text:0000000000000060 .L0 
+     /tmp/cc18FQhI.s:91     .text:0000000000000060 .L0 
+     /tmp/cc18FQhI.s:94     .text:0000000000000068 .L0 
+     /tmp/cc18FQhI.s:95     .text:000000000000006c .L0 
+     /tmp/cc18FQhI.s:97     .text:0000000000000070 .L0 
+     /tmp/cc18FQhI.s:98     .text:0000000000000070 .L0 
+     /tmp/cc18FQhI.s:100    .text:0000000000000074 .L0 
+     /tmp/cc18FQhI.s:102    .text:0000000000000078 .L0 
+     /tmp/cc18FQhI.s:116    .text:0000000000000078 _ZdaPv
+     /tmp/cc18FQhI.s:119    .text:0000000000000078 .L0 
+     /tmp/cc18FQhI.s:123    .text:0000000000000078 .L0 
+     /tmp/cc18FQhI.s:124    .text:000000000000007c .L0 
+     /tmp/cc18FQhI.s:127    .text:0000000000000084 .L0 
+     /tmp/cc18FQhI.s:128    .text:0000000000000084 .L0 
+     /tmp/cc18FQhI.s:130    .text:0000000000000088 .L0 
+     /tmp/cc18FQhI.s:132    .text:0000000000000088 .L0 
+     /tmp/cc18FQhI.s:133    .text:0000000000000088 .L0 
+GAS LISTING /tmp/cc18FQhI.s 			page 6
 
 
-     /tmp/ccRotGSC.s:136    .text:0000000000000090 .L0 
-     /tmp/ccRotGSC.s:137    .text:0000000000000094 .L0 
-     /tmp/ccRotGSC.s:139    .text:0000000000000098 .L0 
-     /tmp/ccRotGSC.s:140    .text:0000000000000098 .L0 
-     /tmp/ccRotGSC.s:142    .text:000000000000009c .L0 
-     /tmp/ccRotGSC.s:144    .text:00000000000000a0 .L0 
-     /tmp/ccRotGSC.s:157    .text:00000000000000a0 .L0 
-     /tmp/ccRotGSC.s:429    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccRotGSC.s:805    .debug_str:000000000000019b .LASF29
-     /tmp/ccRotGSC.s:809    .debug_str:000000000000026e .LASF30
-     /tmp/ccRotGSC.s:777    .debug_str:000000000000009a .LASF31
-     /tmp/ccRotGSC.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccRotGSC.s:154    .text:00000000000000a0 .Letext0
-     /tmp/ccRotGSC.s:749    .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccRotGSC.s:781    .debug_str:00000000000000f1 .LASF0
-     /tmp/ccRotGSC.s:783    .debug_str:00000000000000fe .LASF1
-     /tmp/ccRotGSC.s:775    .debug_str:000000000000008c .LASF2
-     /tmp/ccRotGSC.s:769    .debug_str:0000000000000078 .LASF4
-     /tmp/ccRotGSC.s:799    .debug_str:0000000000000166 .LASF3
-     /tmp/ccRotGSC.s:753    .debug_str:0000000000000010 .LASF5
-     /tmp/ccRotGSC.s:785    .debug_str:0000000000000111 .LASF6
-     /tmp/ccRotGSC.s:779    .debug_str:00000000000000de .LASF7
-     /tmp/ccRotGSC.s:811    .debug_str:000000000000027b .LASF8
-     /tmp/ccRotGSC.s:767    .debug_str:000000000000006a .LASF9
-     /tmp/ccRotGSC.s:791    .debug_str:000000000000012f .LASF10
-     /tmp/ccRotGSC.s:807    .debug_str:000000000000025f .LASF11
-     /tmp/ccRotGSC.s:755    .debug_str:0000000000000017 .LASF12
-     /tmp/ccRotGSC.s:751    .debug_str:0000000000000000 .LASF13
-     /tmp/ccRotGSC.s:757    .debug_str:0000000000000027 .LASF14
-     /tmp/ccRotGSC.s:793    .debug_str:000000000000013e .LASF15
-     /tmp/ccRotGSC.s:759    .debug_str:0000000000000033 .LASF16
-     /tmp/ccRotGSC.s:763    .debug_str:0000000000000055 .LASF17
-     /tmp/ccRotGSC.s:787    .debug_str:0000000000000124 .LASF18
-     /tmp/ccRotGSC.s:803    .debug_str:0000000000000188 .LASF19
-     /tmp/ccRotGSC.s:797    .debug_str:000000000000015f .LASF21
-     /tmp/ccRotGSC.s:117    .text:0000000000000078 .LFB26
-     /tmp/ccRotGSC.s:145    .text:00000000000000a0 .LFE26
-     /tmp/ccRotGSC.s:680    .debug_loc:0000000000000000 .LLST3
-     /tmp/ccRotGSC.s:134    .text:0000000000000090 .LVL7
-     /tmp/ccRotGSC.s:801    .debug_str:0000000000000178 .LASF20
-     /tmp/ccRotGSC.s:773    .debug_str:0000000000000085 .LASF22
-     /tmp/ccRotGSC.s:75     .text:0000000000000050 .LFB25
-     /tmp/ccRotGSC.s:103    .text:0000000000000078 .LFE25
-     /tmp/ccRotGSC.s:694    .debug_loc:0000000000000039 .LLST2
-     /tmp/ccRotGSC.s:92     .text:0000000000000068 .LVL5
-     /tmp/ccRotGSC.s:765    .debug_str:000000000000005a .LASF23
-     /tmp/ccRotGSC.s:789    .debug_str:0000000000000129 .LASF25
-     /tmp/ccRotGSC.s:43     .text:0000000000000028 .LFB24
-     /tmp/ccRotGSC.s:69     .text:0000000000000050 .LFE24
-     /tmp/ccRotGSC.s:708    .debug_loc:0000000000000072 .LLST1
-     /tmp/ccRotGSC.s:58     .text:0000000000000040 .LVL3
-     /tmp/ccRotGSC.s:813    .debug_str:000000000000028b .LASF24
-     /tmp/ccRotGSC.s:771    .debug_str:000000000000007f .LASF26
-     /tmp/ccRotGSC.s:10     .text:0000000000000000 .LFB23
-     /tmp/ccRotGSC.s:37     .text:0000000000000028 .LFE23
-     /tmp/ccRotGSC.s:722    .debug_loc:00000000000000ab .LLST0
-     /tmp/ccRotGSC.s:26     .text:0000000000000018 .LVL1
-GAS LISTING /tmp/ccRotGSC.s 			page 7
+     /tmp/cc18FQhI.s:136    .text:0000000000000090 .L0 
+     /tmp/cc18FQhI.s:137    .text:0000000000000094 .L0 
+     /tmp/cc18FQhI.s:139    .text:0000000000000098 .L0 
+     /tmp/cc18FQhI.s:140    .text:0000000000000098 .L0 
+     /tmp/cc18FQhI.s:142    .text:000000000000009c .L0 
+     /tmp/cc18FQhI.s:144    .text:00000000000000a0 .L0 
+     /tmp/cc18FQhI.s:157    .text:00000000000000a0 .L0 
+     /tmp/cc18FQhI.s:512    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cc18FQhI.s:1062   .debug_str:000000000000023b .LASF34
+     /tmp/cc18FQhI.s:1066   .debug_str:000000000000030e .LASF35
+     /tmp/cc18FQhI.s:1026   .debug_str:0000000000000107 .LASF36
+     /tmp/cc18FQhI.s:5      .text:0000000000000000 .Ltext0
+     /tmp/cc18FQhI.s:154    .text:00000000000000a0 .Letext0
+     /tmp/cc18FQhI.s:988    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cc18FQhI.s:1030   .debug_str:000000000000015e .LASF0
+     /tmp/cc18FQhI.s:1032   .debug_str:000000000000016b .LASF1
+     /tmp/cc18FQhI.s:1024   .debug_str:00000000000000f9 .LASF2
+     /tmp/cc18FQhI.s:1014   .debug_str:00000000000000c2 .LASF4
+     /tmp/cc18FQhI.s:1048   .debug_str:00000000000001d1 .LASF3
+     /tmp/cc18FQhI.s:992    .debug_str:0000000000000010 .LASF5
+     /tmp/cc18FQhI.s:1034   .debug_str:000000000000017e .LASF6
+     /tmp/cc18FQhI.s:1028   .debug_str:000000000000014b .LASF7
+     /tmp/cc18FQhI.s:1070   .debug_str:0000000000000320 .LASF8
+     /tmp/cc18FQhI.s:1012   .debug_str:00000000000000b4 .LASF9
+     /tmp/cc18FQhI.s:1040   .debug_str:000000000000019c .LASF10
+     /tmp/cc18FQhI.s:1064   .debug_str:00000000000002ff .LASF11
+     /tmp/cc18FQhI.s:994    .debug_str:0000000000000017 .LASF12
+     /tmp/cc18FQhI.s:990    .debug_str:0000000000000000 .LASF13
+     /tmp/cc18FQhI.s:996    .debug_str:0000000000000027 .LASF14
+     /tmp/cc18FQhI.s:1044   .debug_str:00000000000001b4 .LASF15
+     /tmp/cc18FQhI.s:998    .debug_str:0000000000000033 .LASF16
+     /tmp/cc18FQhI.s:1006   .debug_str:000000000000007e .LASF17
+     /tmp/cc18FQhI.s:1036   .debug_str:0000000000000191 .LASF18
+     /tmp/cc18FQhI.s:1060   .debug_str:0000000000000231 .LASF37
+     /tmp/cc18FQhI.s:1078   .debug_str:000000000000036d .LASF19
+     /tmp/cc18FQhI.s:1074   .debug_str:000000000000033d .LASF20
+     /tmp/cc18FQhI.s:1056   .debug_str:000000000000021e .LASF21
+     /tmp/cc18FQhI.s:1020   .debug_str:00000000000000e2 .LASF38
+     /tmp/cc18FQhI.s:1004   .debug_str:0000000000000079 .LASF22
+     /tmp/cc18FQhI.s:1068   .debug_str:000000000000031b .LASF23
+     /tmp/cc18FQhI.s:1050   .debug_str:00000000000001e3 .LASF24
+     /tmp/cc18FQhI.s:1054   .debug_str:00000000000001fd .LASF26
+     /tmp/cc18FQhI.s:1042   .debug_str:00000000000001ab .LASF25
+     /tmp/cc18FQhI.s:1010   .debug_str:0000000000000093 .LASF27
+     /tmp/cc18FQhI.s:1000   .debug_str:0000000000000049 .LASF39
+     /tmp/cc18FQhI.s:1076   .debug_str:0000000000000342 .LASF40
+     /tmp/cc18FQhI.s:1058   .debug_str:0000000000000223 .LASF41
+     /tmp/cc18FQhI.s:1002   .debug_str:0000000000000053 .LASF42
+     /tmp/cc18FQhI.s:1016   .debug_str:00000000000000c9 .LASF28
+     /tmp/cc18FQhI.s:1046   .debug_str:00000000000001ca .LASF30
+     /tmp/cc18FQhI.s:117    .text:0000000000000078 .LFB26
+     /tmp/cc18FQhI.s:145    .text:00000000000000a0 .LFE26
+     /tmp/cc18FQhI.s:919    .debug_loc:0000000000000000 .LLST3
+     /tmp/cc18FQhI.s:134    .text:0000000000000090 .LVL7
+     /tmp/cc18FQhI.s:1052   .debug_str:00000000000001ed .LASF29
+     /tmp/cc18FQhI.s:1022   .debug_str:00000000000000f2 .LASF31
+     /tmp/cc18FQhI.s:75     .text:0000000000000050 .LFB25
+GAS LISTING /tmp/cc18FQhI.s 			page 7
 
 
-     /tmp/ccRotGSC.s:795    .debug_str:0000000000000154 .LASF27
-     /tmp/ccRotGSC.s:761    .debug_str:0000000000000049 .LASF28
-     /tmp/ccRotGSC.s:122    .text:0000000000000078 .LVL6
-     /tmp/ccRotGSC.s:80     .text:0000000000000050 .LVL4
-     /tmp/ccRotGSC.s:46     .text:0000000000000028 .LVL2
-     /tmp/ccRotGSC.s:14     .text:0000000000000000 .LVL0
-     /tmp/ccRotGSC.s:158    .debug_info:0000000000000000 .Ldebug_info0
-     /tmp/ccRotGSC.s:106    .gcc_except_table:0000000000000000 .LLSDA25
-     /tmp/ccRotGSC.s:147    .gcc_except_table:0000000000000004 .LLSDA26
+     /tmp/cc18FQhI.s:103    .text:0000000000000078 .LFE25
+     /tmp/cc18FQhI.s:933    .debug_loc:0000000000000039 .LLST2
+     /tmp/cc18FQhI.s:92     .text:0000000000000068 .LVL5
+     /tmp/cc18FQhI.s:1008   .debug_str:0000000000000083 .LASF43
+     /tmp/cc18FQhI.s:1038   .debug_str:0000000000000196 .LASF44
+     /tmp/cc18FQhI.s:43     .text:0000000000000028 .LFB24
+     /tmp/cc18FQhI.s:69     .text:0000000000000050 .LFE24
+     /tmp/cc18FQhI.s:947    .debug_loc:0000000000000072 .LLST1
+     /tmp/cc18FQhI.s:58     .text:0000000000000040 .LVL3
+     /tmp/cc18FQhI.s:1072   .debug_str:0000000000000330 .LASF32
+     /tmp/cc18FQhI.s:1018   .debug_str:00000000000000dc .LASF33
+     /tmp/cc18FQhI.s:10     .text:0000000000000000 .LFB23
+     /tmp/cc18FQhI.s:37     .text:0000000000000028 .LFE23
+     /tmp/cc18FQhI.s:961    .debug_loc:00000000000000ab .LLST0
+     /tmp/cc18FQhI.s:26     .text:0000000000000018 .LVL1
+     /tmp/cc18FQhI.s:122    .text:0000000000000078 .LVL6
+     /tmp/cc18FQhI.s:80     .text:0000000000000050 .LVL4
+     /tmp/cc18FQhI.s:46     .text:0000000000000028 .LVL2
+     /tmp/cc18FQhI.s:14     .text:0000000000000000 .LVL0
+     /tmp/cc18FQhI.s:158    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/cc18FQhI.s:106    .gcc_except_table:0000000000000000 .LLSDA25
+     /tmp/cc18FQhI.s:147    .gcc_except_table:0000000000000004 .LLSDA26
 
 UNDEFINED SYMBOLS
-__mem_alloc
-__mem_free
+_ZN15MemoryAllocator9mem_allocEm
+_ZN15MemoryAllocator8mem_freeEPv
 __gxx_personality_v0

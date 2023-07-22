@@ -17,7 +17,7 @@ void *MemoryAllocator::mem_alloc(size_t size) {
     }
 
     for(DataBlock* curr = MemoryAllocator::free; curr != nullptr; curr=curr->next) {
-        if(curr->size<size) continue;
+        if(curr->size<newSize) continue;
         if(curr->size > newSize) {
             //new fragment needs to be created
             //novi ce biti offsetovan od curr za novi size i plus za sizeof(DataBlock) zato sto se posle curr
@@ -34,15 +34,26 @@ void *MemoryAllocator::mem_alloc(size_t size) {
             //size novi je sada prethodni size - novi size i jos - sizeof(DataBlock) jer se to ne brise kada se zauzme
             //pa mora i to da se cuva
             newBlock->size = curr->size - newSize - sizeof(DataBlock);
+            curr->size = newSize;
+
 
             //azuriranje USED liste
             DataBlock* currUsed = used;
             DataBlock* prevUsed = nullptr;
 
+            if(used == nullptr) {
+                used = curr;
+                curr->next = nullptr;
+                curr->prev = nullptr;
+                return (char*)curr + sizeof(DataBlock);
+            }
+
+            //Mora da se promeni!
             for(;currUsed->next && (char*)currUsed + sizeof(DataBlock) + currUsed->size  < (char*) curr;
                  prevUsed = currUsed, currUsed = currUsed->next);
 
-            if(currUsed == used) {
+
+            if(currUsed == used && (char*)currUsed < (char*)used) {
                 //Insert before used
                 curr->next = used;
                 curr->prev = nullptr;
@@ -77,6 +88,7 @@ void *MemoryAllocator::mem_alloc(size_t size) {
             DataBlock* currUsed = used;
             DataBlock* prevUsed = nullptr;
 
+            //Mora da se promeni!
             for(;currUsed->next && (char*)currUsed + sizeof(DataBlock) + currUsed->size  < (char*) curr;
                  prevUsed = currUsed, currUsed = currUsed->next);
 
@@ -118,7 +130,7 @@ int MemoryAllocator::mem_free(void* ptr) {
     if(used == nullptr) return -1;
     if(ptr == nullptr || ptr < HEAP_START_ADDR || ptr > HEAP_END_ADDR) return -2;
 
-    DataBlock* curr = (DataBlock*)(char*)ptr - sizeof(DataBlock);
+    DataBlock* curr = (DataBlock*)((char*)ptr - sizeof(DataBlock));
     if(curr < used) return -3;
 
     //Delete from USED list
