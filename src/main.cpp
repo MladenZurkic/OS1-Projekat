@@ -7,10 +7,13 @@
 #include "../h/print.hpp"
 #include "../h/riscv.hpp"
 #include "../h/syscall_c.hpp"
+#include "../h/memoryAllocator.hpp"
 
 int main()
 {
     TCB *threads[5];
+
+    MemoryAllocator::initFreeBlock();
 
     threads[0] = TCB::createThread(nullptr,nullptr);
     TCB::running = threads[0];

@@ -14,21 +14,22 @@ public:
     static DataBlock* free;
     static DataBlock* used;
 
-    void* mem_alloc(size_t size);
+    static void* mem_alloc(size_t size);
 
-    int mem_free (void* ptr);
+    static int mem_free (void* ptr);
 
     static void tryToJoin(DataBlock* curr);
 
     static void initFreeBlock() {
 
+        MemoryAllocator::free = (DataBlock*)((char*)HEAP_START_ADDR);
+        used = nullptr;
+
         free->next = nullptr;
         free->prev  = nullptr;
-        free->size = ((char*)HEAP_START_ADDR - (char*)HEAP_END_ADDR - 1); //FOR NOW
+        free->size = ((char*)HEAP_START_ADDR - (char*)HEAP_END_ADDR - sizeof(DataBlock)); //FOR NOW
 
-        MemoryAllocator::free = (DataBlock*)((char*)HEAP_START_ADDR);
-        MemoryAllocator::used = nullptr;
-        used = nullptr;
+
     }
 };
 

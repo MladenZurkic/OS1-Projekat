@@ -10,7 +10,7 @@ DataBlock* MemoryAllocator::used = nullptr;
 void *MemoryAllocator::mem_alloc(size_t size) {
     size_t newSize;
     if(size%MEM_BLOCK_SIZE != 0) {
-        newSize = size/MEM_BLOCK_SIZE + (MEM_BLOCK_SIZE - size);
+        newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
     }
     else {
         newSize = size;
