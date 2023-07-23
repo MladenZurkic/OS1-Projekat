@@ -4,7 +4,10 @@
 
 DataBlock* MemoryAllocator::free = nullptr;
 DataBlock* MemoryAllocator::used = nullptr;
-
+int MemoryAllocator::newCalled = 0;
+int MemoryAllocator::newArrayCalled = 0;
+int MemoryAllocator::deleteCalled = 0;
+int MemoryAllocator::deleteArrayCalled = 0;
 
 
 void *MemoryAllocator::mem_alloc(size_t size) {
@@ -38,42 +41,28 @@ void *MemoryAllocator::mem_alloc(size_t size) {
 
 
             //azuriranje USED liste
-            DataBlock* currUsed = used;
-            DataBlock* prevUsed = nullptr;
-
             if(used == nullptr) {
                 used = curr;
                 curr->next = nullptr;
                 curr->prev = nullptr;
-                return (char*)curr + sizeof(DataBlock);
             }
-
-            //Mora da se promeni!
-            for(;currUsed->next && (char*)currUsed + sizeof(DataBlock) + currUsed->size  < (char*) curr;
-                 prevUsed = currUsed, currUsed = currUsed->next);
-
-
-            if(currUsed == used && (char*)currUsed < (char*)used) {
-                //Insert before used
-                curr->next = used;
-                curr->prev = nullptr;
+            else if((char*) curr < (char*)used) {
+                //treba da ide pre trenutnog used
                 used->prev = curr;
+                curr->prev = nullptr;
+                curr->next = used;
                 used = curr;
             }
-            else if (currUsed->next == nullptr) {
-                //Insert at the end
-                currUsed->next = curr;
-                curr->prev = currUsed;
-                curr->next = nullptr;
-            }
             else {
-                //Insert into list in the middle (prev, curr, currUsed)
-                prevUsed->next = curr;
-                curr->prev = prevUsed;
-                curr->next = currUsed;
-                currUsed->prev = curr;
+                //Find place in list
+                DataBlock* currUsed = used;
+                for(; currUsed->next && (char*)(currUsed->next) < (char*) curr; currUsed = currUsed->next);
+
+                curr->next = currUsed->next;
+                curr->prev = currUsed;
+                if(curr->next) curr->next->prev = curr;
+                currUsed->next = curr;
             }
-            return (char*)curr + sizeof(DataBlock);
         }
         else {
             //They are the exact same size
@@ -83,45 +72,31 @@ void *MemoryAllocator::mem_alloc(size_t size) {
 
             if(curr->next) curr->next->prev = curr->prev;
 
-
             //azuriranje USED liste
-            DataBlock* currUsed = used;
-            DataBlock* prevUsed = nullptr;
-
-            //Mora da se promeni!
-            for(;currUsed->next && (char*)currUsed + sizeof(DataBlock) + currUsed->size  < (char*) curr;
-                 prevUsed = currUsed, currUsed = currUsed->next);
-
-            if(currUsed == used) {
-                //Insert before used
-                curr->next = used;
+            if(used == nullptr) {
+                used = curr;
+                curr->next = nullptr;
                 curr->prev = nullptr;
+            }
+            else if((char*) curr < (char*)used) {
+                //treba da ide pre trenutnog used
                 used->prev = curr;
+                curr->prev = nullptr;
+                curr->next = used;
                 used = curr;
             }
-            else if (currUsed->next == nullptr) {
-                //Insert at the end
-                currUsed->next = curr;
-                curr->prev = currUsed;
-                curr->next = nullptr;
-            }
             else {
-                //Insert into list in the middle (prev, curr, currUsed)
-                //DOES IT NEED TO BE BEFORE CURRUSED?
-//                curr->next = currUsed->next;
-//                curr->prev = currUsed;
-//                if(currUsed->next) {
-//                    currUsed->next->prev = curr;
-//                }
-//                currUsed->next = curr;
+                //Find place in list
+                DataBlock* currUsed = used;
+                for(; currUsed->next && (char*)(currUsed->next) < (char*) curr; currUsed = currUsed->next);
 
-                prevUsed->next = curr;
-                curr->prev = prevUsed;
-                curr->next = currUsed;
-                currUsed->prev = curr;
+                curr->next = currUsed->next;
+                curr->prev = currUsed;
+                if(curr->next) curr->next->prev = curr;
+                currUsed->next = curr;
             }
-            return (char*)curr + sizeof(DataBlock);
         }
+        return (char*)curr + sizeof(DataBlock);
     }
     return nullptr; //should not enter here
 }
@@ -141,7 +116,7 @@ int MemoryAllocator::mem_free(void* ptr) {
         curr->prev = nullptr;
     } else {
         curr->prev->next = curr->next;
-        curr->next->prev = curr->prev;
+        if(curr->next) curr->next->prev = curr->prev;
         curr->next = nullptr;
         curr->prev = nullptr;
     }
@@ -150,8 +125,10 @@ int MemoryAllocator::mem_free(void* ptr) {
     if (free == nullptr) {
         //Insert as first
         free = curr;
+        curr->next = nullptr;
+        curr->prev = nullptr;
     }
-    else if(curr < free) {
+    else if((char*)curr < (char*)free) {
         free->prev = curr;
         curr->prev = nullptr;
         curr->next = free;
@@ -166,7 +143,7 @@ int MemoryAllocator::mem_free(void* ptr) {
         curr->next = currFree->next;
         curr->prev = currFree;
         if(curr->next) curr->next->prev = curr;
-        curr->next = curr;
+        currFree->next = curr;
         tryToJoin(curr);
         tryToJoin(currFree);
     }

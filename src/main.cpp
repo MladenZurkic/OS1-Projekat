@@ -38,8 +38,9 @@ int main()
     }
 
 
-
+    printString("main: Pravimo C...");
     thread_create(&threads[3], workerBodyC, semaphore[0]);
+    printString("main: Pravimo D....");
     thread_create(&threads[3], workerBodyD, semaphore[0]);
     //thread_dispatch();
     int returnValue = sem_wait(semaphore[0]);
@@ -52,5 +53,25 @@ int main()
     for (auto &thread: threads) {
         delete thread;
     }
+
+
+    //Testing
+    printString("New called: ");
+    printInteger(MemoryAllocator::newCalled);
+    printString("\n");
+
+    printString("New[] called: ");
+    printInteger(MemoryAllocator::newArrayCalled);
+    printString("\n");
+
+
+    printString("Delete called: ");
+    printInteger(MemoryAllocator::deleteCalled);
+    printString("\n");
+
+    printString("Delete[] called: ");
+    printInteger(MemoryAllocator::deleteArrayCalled);
+    printString("\n");
+
     return 0;
 }
