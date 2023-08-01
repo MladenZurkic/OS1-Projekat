@@ -30,4 +30,15 @@ int sem_wait(sem_t id);
 
 int sem_signal(sem_t id);
 
+char getc();
+
+void putc(char c);
+
+int time_sleep(time_t time);
+
+int thread_create_without_start(thread_t* handle,
+                                void (*start_routine)(void*), void* arg);
+
+void thread_start(TCB* tcb);
+
 #endif //syscall_c

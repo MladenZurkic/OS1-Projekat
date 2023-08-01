@@ -4,7 +4,7 @@
 
 #include "../h/tcb.hpp"
 #include "../h/riscv.hpp"
-#include "../h/print.hpp"
+#include "../test/printing.hpp"
 #include "../h/syscall_c.hpp"
 
 TCB *TCB::running = nullptr;
@@ -14,7 +14,16 @@ TCB *TCB::running = nullptr;
 
 TCB *TCB::createThread(Body body, void* arg)
 {
-    return new TCB(body, arg);
+    TCB* newTCB = new TCB(body, arg);
+    Scheduler::put(newTCB);
+    return newTCB;
+}
+
+TCB *TCB::createThreadWithoutStarting(Body body, void* arg)
+{
+    TCB* newTCB = new TCB(body, arg);
+    //Scheduler::put(newTCB);
+    return newTCB;
 }
 
 void TCB::yield()
@@ -34,12 +43,24 @@ void TCB::dispatch()
         running = Scheduler::get();
     }*/
 
+    //Ovde treba promena privilegije?
+
+    if(running->isMain()) {
+        Riscv::ms_sstatus(Riscv::SSTATUS_SPP);
+    }
+    else {
+        Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
+    }
+
     TCB::contextSwitch(&old->context, &running->context);
 }
 
 void TCB::threadWrapper()
 {
     Riscv::popSppSpie();
+    //Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
+    //Ovde smo uvek u niti koja nije main zar ne?
+
     running->body(running->arg);
     running->setFinished(true);
     thread_dispatch();
@@ -50,3 +71,4 @@ void TCB::join(TCB* handle) {
         TCB::dispatch();
     }
 }
+

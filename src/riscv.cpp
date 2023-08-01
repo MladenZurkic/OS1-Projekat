@@ -5,8 +5,7 @@
 #include "../h/riscv.hpp"
 #include "../h/tcb.hpp"
 #include "../lib/console.h"
-#include "../h/print.hpp"
-#include "../h/syscall_c.hpp"
+#include "../test/printing.hpp"
 
 void Riscv::popSppSpie()
 {
@@ -30,14 +29,60 @@ void Riscv::handleSupervisorTrap()
         MySemaphore* semHandlePtr;
         switch (codeOperation) {
             case 0x01:
-                //mem_alloc
+                //mem_alloc(size)
+
+                size_t size;
+                void* ptr;
+                __asm__ volatile("mv %0, a1" : "=r" (size));
+                ptr = MemoryAllocator::mem_alloc(size);
+
+                __asm__ volatile("mv t0, %0" : : "r"(ptr));
+                __asm__ volatile ("sw t0, 80(x8)");
                 break;
 
             case 0x02:
-                //mem_free -> a1: ono sta se brise prima
+                //mem_free(ptr)
+
+                void* memptr;
+                __asm__ volatile("mv %0, a1" : "=r" (memptr));
+
+                returnValue = MemoryAllocator::mem_free(memptr);
+
+                __asm__ volatile("mv t0, %0" : : "r"(returnValue));
+                __asm__ volatile ("sw t0, 80(x8)");
                 break;
 
             //THREAD DEO
+            case 0x09:
+                //thread_start
+                TCB* tcbForStart;
+                __asm__ volatile("mv %0, a1" : "=r" (tcbForStart));
+
+                TCB::startThread(tcbForStart);
+
+                break;
+
+
+
+            case 0x10:
+                //dodato kasnije
+                //thread_create_without_start
+                TCB** tcbNoStart;
+                Body bodyNoStart;
+                void* argNoStart;
+                __asm__ volatile ("mv %0, a1" : "=r" (tcbNoStart));
+                __asm__ volatile ("mv %0, a2" : "=r" (bodyNoStart));
+                __asm__ volatile ("mv %0, a7" : "=r" (argNoStart));
+                *tcbNoStart = TCB::createThreadWithoutStarting(bodyNoStart, argNoStart);
+                if(*tcbNoStart != nullptr) {
+                    __asm__ volatile ("li t0, 0");
+                    __asm__ volatile ("sw t0, 80(x8)");
+                }
+                else {
+                    __asm__ volatile ("li t0, -1");
+                    __asm__ volatile ("sw t0, 80(x8)");
+                }
+                break;
             case 0x11:
                 //thread_create
                 TCB** tcb;
@@ -45,7 +90,7 @@ void Riscv::handleSupervisorTrap()
                 void* arg;
                 __asm__ volatile ("mv %0, a1" : "=r" (tcb));
                 __asm__ volatile ("mv %0, a2" : "=r" (body));
-                __asm__ volatile ("mv %0, a3" : "=r" (arg));
+                __asm__ volatile ("mv %0, a7" : "=r" (arg));
                 *tcb = TCB::createThread(body, arg);
                 //POVRATNA VREDNOST: Upis mora na stek direktno, jer se posle ovoga vraca stari kontekst
                 if(*tcb != nullptr) {
@@ -137,17 +182,26 @@ void Riscv::handleSupervisorTrap()
             /*case 0x31:
                 //time_sleep
                 break;
-
+                */
             case 0x41:
                 //getc
+                returnValue = __getc();
+                __asm__ volatile ("mv t0, %0" : : "r"(returnValue));
+                __asm__ volatile ("sw t0, 80(x8)");
                 break;
 
             case 0x42:
                 //putc
-                break;*/
+                char c;
+                __asm__ volatile ("mv %0, a1" : "=r" (c));
+                __putc(c);
+                break;
+
             //Da li treba 0x41 i 0x42 ako se ne radi asinhrono? izgleda ne
             case 0x43:
                 TCB::dispatch();
+                break;
+            default:
                 break;
         }
 
@@ -158,6 +212,9 @@ void Riscv::handleSupervisorTrap()
     {
         // unexpected trap cause
         // Ovde se ulazi ako se desi neki interrupt tabele
+        printString("ERROR! SCAUSE:");
+        printInt(scause);
+        printString("\n");
     }
 }
 

@@ -5,6 +5,8 @@
 #ifndef OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_LIST_HPP
 #define OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_LIST_HPP
 
+#include "memoryAllocator.hpp"
+
 template<typename T>
 class List
 {
@@ -15,6 +17,35 @@ private:
         Elem *next;
 
         Elem(T *data, Elem *next) : data(data), next(next) {}
+
+        void* operator new(size_t size) {
+            size_t newSize;
+            if(size%MEM_BLOCK_SIZE != 0) {
+                newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
+            }
+            else {
+                newSize = size;
+            }
+
+            return MemoryAllocator::mem_alloc(newSize);
+        }
+        void* operator new[](size_t size) {
+            size_t newSize;
+            if(size%MEM_BLOCK_SIZE != 0) {
+                newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
+            }
+            else {
+                newSize = size;
+            }
+
+            return MemoryAllocator::mem_alloc(newSize);
+        }
+        void operator delete(void *ptr) {
+            MemoryAllocator::mem_free(ptr);
+        }
+        void operator delete[](void *ptr) {
+            MemoryAllocator::mem_free(ptr);
+        }
     };
 
     Elem *head, *tail;
@@ -90,6 +121,7 @@ public:
         if (!tail) { return 0; }
         return tail->data;
     }
+
 };
 
 #endif //OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_LIST_HPP

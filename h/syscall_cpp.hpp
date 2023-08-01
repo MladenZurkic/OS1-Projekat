@@ -3,8 +3,8 @@
 
 #include "syscall_c.hpp"
 
-//void* ::operator new(size_t size);
-//void ::operator delete(void* p);
+void* operator new(size_t size);
+void operator delete(void* p) noexcept;
 
 class Thread {
 public:
@@ -16,7 +16,7 @@ public:
     void join();
 
     static void dispatch();
-    //static int sleep(time_t time);
+    static int sleep(time_t time);
 
 protected:
     Thread();
@@ -26,6 +26,13 @@ private:
     thread_t myHandle;
     void (*body)(void*);
     void* arg;
+
+    //wrapper za poziv run() metode
+    static void runWrapper(void* thread) {
+        if(thread) {
+            ((Thread*)thread)->run();
+        }
+    }
 };
 
 

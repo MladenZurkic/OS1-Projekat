@@ -1,0 +1,8 @@
+Potrebno je postaviti vrednosti makroa LEVEL_N_IMPLEMENTED na 1 za svaki urađeni zadatak, gde je N broj zadatka iz postavke.
+Funkciju userMain pozvati unutar main funkcije kada se odradi potrebna inicijalizacija kernela.
+Testovi iz funkcije userMain se uslovno izvršavaju.
+Izbor testova se vrši unosom odgovarajuće cifre.
+Datoteke iz ove .zip arhive sa izvornim kodom testova ubaciti u projekat i uskladiti include direktive prema mestu gde su ubačene datoteke.
+
+Napomena:
+Očekivano ponašanje za test 7 jeste da ne dolazi do regularnog završetka procesa.

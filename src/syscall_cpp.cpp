@@ -37,15 +37,26 @@ Thread::~Thread() {
 }
 
 int Thread::start() {
-    //todo
+    thread_start(this->myHandle);
     return 0;
 }
 
 Thread::Thread() {
-    //todo
+    thread_create_without_start(&this->myHandle, runWrapper, this);
 }
 
 void Thread::run() {
     //todo
 }
 
+int Thread::sleep(time_t time) {
+    return 0;
+}
+
+void Console::putc(char c) {
+    syscall_c::putc(c);
+}
+
+char Console::getc() {
+    return syscall_c::getc();
+}

@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccOBrmoo.s 			page 1
+GAS LISTING /tmp/ccJeaSte.s 			page 1
 
 
    1              		.file	"memoryAllocator.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
   22:src/memoryAllocator.cpp ****     for(DataBlock* curr = MemoryAllocator::free; curr != nullptr; curr=curr->next) {
   35              		.loc 1 22 5 is_stmt 1
   36              	.LBB2:
-GAS LISTING /tmp/ccOBrmoo.s 			page 2
+GAS LISTING /tmp/ccJeaSte.s 			page 2
 
 
   37              		.loc 1 22 20 is_stmt 0
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
   35:src/memoryAllocator.cpp ****             newBlock->prev = curr->prev;
   78              		.loc 1 35 13 is_stmt 1
   79              		.loc 1 35 36 is_stmt 0
-GAS LISTING /tmp/ccOBrmoo.s 			page 3
+GAS LISTING /tmp/ccJeaSte.s 			page 3
 
 
   80 0058 83368500 		ld	a3,8(a0)
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  119 0088 6378F504 		bleu	a5,a0,.L12
   50:src/memoryAllocator.cpp ****                 //treba da ide pre trenutnog used
   51:src/memoryAllocator.cpp ****                 used->prev = curr;
-GAS LISTING /tmp/ccOBrmoo.s 			page 4
+GAS LISTING /tmp/ccJeaSte.s 			page 4
 
 
  120              		.loc 1 51 17
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
   86:src/memoryAllocator.cpp ****                 used = curr;
   87:src/memoryAllocator.cpp ****             }
   88:src/memoryAllocator.cpp ****             else {
-GAS LISTING /tmp/ccOBrmoo.s 			page 5
+GAS LISTING /tmp/ccJeaSte.s 			page 5
 
 
   89:src/memoryAllocator.cpp ****                 //Find place in list
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  173              		.loc 1 33 40 is_stmt 0
  174 00b8 97060000 		sd	a4,.LANCHOR0,a3
  174      23B0E600 
-GAS LISTING /tmp/ccOBrmoo.s 			page 6
+GAS LISTING /tmp/ccJeaSte.s 			page 6
 
 
  175 00c0 6FF0DFF8 		j	.L8
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
   63:src/memoryAllocator.cpp ****                 currUsed->next = curr;
  212              		.loc 1 63 32 discriminator 1
   63:src/memoryAllocator.cpp ****                 currUsed->next = curr;
-GAS LISTING /tmp/ccOBrmoo.s 			page 7
+GAS LISTING /tmp/ccJeaSte.s 			page 7
 
 
  213              		.loc 1 63 49 is_stmt 0 discriminator 1
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  252              	.LBB15:
   76:src/memoryAllocator.cpp ****                 used = curr;
  253              		.loc 1 76 21 is_stmt 0
-GAS LISTING /tmp/ccOBrmoo.s 			page 8
+GAS LISTING /tmp/ccJeaSte.s 			page 8
 
 
  254 0120 97070000 		ld	a5,.LANCHOR0+8
@@ -478,7 +478,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  292              	.L25:
  293              	.LBB20:
   77:src/memoryAllocator.cpp ****                 curr->next = nullptr;
-GAS LISTING /tmp/ccOBrmoo.s 			page 9
+GAS LISTING /tmp/ccJeaSte.s 			page 9
 
 
  294              		.loc 1 77 17 is_stmt 1
@@ -538,7 +538,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  330              	.L21:
   96:src/memoryAllocator.cpp ****             }
  331              		.loc 1 96 17 is_stmt 1
-GAS LISTING /tmp/ccOBrmoo.s 			page 10
+GAS LISTING /tmp/ccJeaSte.s 			page 10
 
 
   96:src/memoryAllocator.cpp ****             }
@@ -598,7 +598,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  140:src/memoryAllocator.cpp ****         DataBlock* currFree = free;
  141:src/memoryAllocator.cpp ****         for(currFree = free; currFree->next && (char*)(currFree->next) < (char*) curr; currFree = c
  142:src/memoryAllocator.cpp **** 
-GAS LISTING /tmp/ccOBrmoo.s 			page 11
+GAS LISTING /tmp/ccJeaSte.s 			page 11
 
 
  143:src/memoryAllocator.cpp ****         curr->next = currFree->next;
@@ -658,7 +658,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  155:src/memoryAllocator.cpp ****         curr->size += curr->next->size + sizeof(DataBlock);
  385              		.loc 1 155 20
  386 01c8 B386E600 		add	a3,a3,a4
-GAS LISTING /tmp/ccOBrmoo.s 			page 12
+GAS LISTING /tmp/ccJeaSte.s 			page 12
 
 
  387 01cc 93868601 		addi	a3,a3,24
@@ -718,7 +718,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  426      83B60600 
  427 0214 83B60600 		ld	a3,0(a3)
  106:src/memoryAllocator.cpp **** 
-GAS LISTING /tmp/ccOBrmoo.s 			page 13
+GAS LISTING /tmp/ccJeaSte.s 			page 13
 
 
  428              		.loc 1 106 48 discriminator 4
@@ -778,7 +778,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  463      83B70700 
  125:src/memoryAllocator.cpp ****         //Insert as first
  464              		.loc 1 125 5
-GAS LISTING /tmp/ccOBrmoo.s 			page 14
+GAS LISTING /tmp/ccJeaSte.s 			page 14
 
 
  465 0250 63860708 		beqz	a5,.L49
@@ -838,7 +838,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  506              	.L39:
  146:src/memoryAllocator.cpp ****         tryToJoin(curr);
  507              		.loc 1 146 9 is_stmt 1
-GAS LISTING /tmp/ccOBrmoo.s 			page 15
+GAS LISTING /tmp/ccJeaSte.s 			page 15
 
 
  146:src/memoryAllocator.cpp ****         tryToJoin(curr);
@@ -898,7 +898,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  114:src/memoryAllocator.cpp ****         curr->next = nullptr;
  547              		.loc 1 114 29 is_stmt 0 discriminator 1
  548 02cc 23B40700 		sd	zero,8(a5)
-GAS LISTING /tmp/ccOBrmoo.s 			page 16
+GAS LISTING /tmp/ccJeaSte.s 			page 16
 
 
  549              	.L33:
@@ -958,7 +958,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  134:src/memoryAllocator.cpp ****         free = curr;
  587              		.loc 1 134 9 is_stmt 1
  134:src/memoryAllocator.cpp ****         free = curr;
-GAS LISTING /tmp/ccOBrmoo.s 			page 17
+GAS LISTING /tmp/ccJeaSte.s 			page 17
 
 
  588              		.loc 1 134 20 is_stmt 0
@@ -1018,7 +1018,7 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  633 033c 67800000 		ret
  634              	.LVL39:
  635              	.L44:
-GAS LISTING /tmp/ccOBrmoo.s 			page 18
+GAS LISTING /tmp/ccJeaSte.s 			page 18
 
 
  109:src/memoryAllocator.cpp **** 
@@ -1057,498 +1057,498 @@ GAS LISTING /tmp/ccOBrmoo.s 			page 1
  678              	.Letext0:
  679              		.file 2 "src/../lib/hw.h"
  680              		.file 3 "src/../h/memoryAllocator.hpp"
-GAS LISTING /tmp/ccOBrmoo.s 			page 19
+GAS LISTING /tmp/ccJeaSte.s 			page 19
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 memoryAllocator.cpp
-     /tmp/ccOBrmoo.s:9      .text:0000000000000000 _ZN15MemoryAllocator9mem_allocEm
-     /tmp/ccOBrmoo.s:13     .text:0000000000000000 .L0 
-     /tmp/ccOBrmoo.s:15     .text:0000000000000000 .L0 
-     /tmp/ccOBrmoo.s:16     .text:0000000000000004 .L0 
-     /tmp/ccOBrmoo.s:18     .text:0000000000000008 .L0 
-     /tmp/ccOBrmoo.s:20     .text:000000000000000c .L0 
-     /tmp/ccOBrmoo.s:23     .text:0000000000000010 .L0 
-     /tmp/ccOBrmoo.s:24     .text:0000000000000010 .L0 
-     /tmp/ccOBrmoo.s:25     .text:0000000000000010 .L0 
-     /tmp/ccOBrmoo.s:27     .text:0000000000000014 .L0 
-     /tmp/ccOBrmoo.s:29     .text:0000000000000018 .L0 
-     /tmp/ccOBrmoo.s:30     .text:0000000000000018 .L0 
-     /tmp/ccOBrmoo.s:32     .text:000000000000001c .L0 
-     /tmp/ccOBrmoo.s:37     .text:0000000000000020 .L0 
-     /tmp/ccOBrmoo.s:38     .text:0000000000000020 .L0 
-     /tmp/ccOBrmoo.s:42     .text:0000000000000028 .L0 
-     /tmp/ccOBrmoo.s:45     .text:000000000000002c .L0 
-     /tmp/ccOBrmoo.s:46     .text:000000000000002c .L0 
-     /tmp/ccOBrmoo.s:48     .text:0000000000000030 .L0 
-     /tmp/ccOBrmoo.s:51     .text:0000000000000034 .L0 
-     /tmp/ccOBrmoo.s:54     .text:0000000000000038 .L0 
-     /tmp/ccOBrmoo.s:55     .text:0000000000000038 .L0 
-     /tmp/ccOBrmoo.s:56     .text:0000000000000038 .L0 
-     /tmp/ccOBrmoo.s:58     .text:000000000000003c .L0 
-     /tmp/ccOBrmoo.s:61     .text:0000000000000040 .L0 
-     /tmp/ccOBrmoo.s:62     .text:0000000000000040 .L0 
-     /tmp/ccOBrmoo.s:64     .text:0000000000000044 .L0 
-     /tmp/ccOBrmoo.s:66     .text:0000000000000048 .L0 
-     /tmp/ccOBrmoo.s:67     .text:0000000000000048 .L0 
-     /tmp/ccOBrmoo.s:70     .text:000000000000004c .L0 
-     /tmp/ccOBrmoo.s:71     .text:000000000000004c .L0 
-     /tmp/ccOBrmoo.s:73     .text:0000000000000050 .L0 
-     /tmp/ccOBrmoo.s:75     .text:0000000000000054 .L0 
-     /tmp/ccOBrmoo.s:76     .text:0000000000000054 .L0 
-     /tmp/ccOBrmoo.s:79     .text:0000000000000058 .L0 
-     /tmp/ccOBrmoo.s:80     .text:0000000000000058 .L0 
-     /tmp/ccOBrmoo.s:82     .text:000000000000005c .L0 
-     /tmp/ccOBrmoo.s:84     .text:0000000000000060 .L0 
-     /tmp/ccOBrmoo.s:85     .text:0000000000000060 .L0 
-     /tmp/ccOBrmoo.s:87     .text:0000000000000064 .L0 
-     /tmp/ccOBrmoo.s:89     .text:0000000000000068 .L0 
-     /tmp/ccOBrmoo.s:90     .text:0000000000000068 .L0 
-     /tmp/ccOBrmoo.s:92     .text:000000000000006c .L0 
-     /tmp/ccOBrmoo.s:94     .text:0000000000000070 .L0 
-     /tmp/ccOBrmoo.s:96     .text:0000000000000074 .L0 
-     /tmp/ccOBrmoo.s:98     .text:0000000000000078 .L0 
-     /tmp/ccOBrmoo.s:99     .text:0000000000000078 .L0 
-     /tmp/ccOBrmoo.s:102    .text:000000000000007c .L0 
-     /tmp/ccOBrmoo.s:103    .text:000000000000007c .L0 
-     /tmp/ccOBrmoo.s:106    .text:0000000000000084 .L0 
-     /tmp/ccOBrmoo.s:119    .text:0000000000000088 .L0 
-     /tmp/ccOBrmoo.s:121    .text:000000000000008c .L0 
-     /tmp/ccOBrmoo.s:122    .text:000000000000008c .L0 
-     /tmp/ccOBrmoo.s:125    .text:0000000000000090 .L0 
-     /tmp/ccOBrmoo.s:126    .text:0000000000000090 .L0 
-GAS LISTING /tmp/ccOBrmoo.s 			page 20
+     /tmp/ccJeaSte.s:9      .text:0000000000000000 _ZN15MemoryAllocator9mem_allocEm
+     /tmp/ccJeaSte.s:13     .text:0000000000000000 .L0 
+     /tmp/ccJeaSte.s:15     .text:0000000000000000 .L0 
+     /tmp/ccJeaSte.s:16     .text:0000000000000004 .L0 
+     /tmp/ccJeaSte.s:18     .text:0000000000000008 .L0 
+     /tmp/ccJeaSte.s:20     .text:000000000000000c .L0 
+     /tmp/ccJeaSte.s:23     .text:0000000000000010 .L0 
+     /tmp/ccJeaSte.s:24     .text:0000000000000010 .L0 
+     /tmp/ccJeaSte.s:25     .text:0000000000000010 .L0 
+     /tmp/ccJeaSte.s:27     .text:0000000000000014 .L0 
+     /tmp/ccJeaSte.s:29     .text:0000000000000018 .L0 
+     /tmp/ccJeaSte.s:30     .text:0000000000000018 .L0 
+     /tmp/ccJeaSte.s:32     .text:000000000000001c .L0 
+     /tmp/ccJeaSte.s:37     .text:0000000000000020 .L0 
+     /tmp/ccJeaSte.s:38     .text:0000000000000020 .L0 
+     /tmp/ccJeaSte.s:42     .text:0000000000000028 .L0 
+     /tmp/ccJeaSte.s:45     .text:000000000000002c .L0 
+     /tmp/ccJeaSte.s:46     .text:000000000000002c .L0 
+     /tmp/ccJeaSte.s:48     .text:0000000000000030 .L0 
+     /tmp/ccJeaSte.s:51     .text:0000000000000034 .L0 
+     /tmp/ccJeaSte.s:54     .text:0000000000000038 .L0 
+     /tmp/ccJeaSte.s:55     .text:0000000000000038 .L0 
+     /tmp/ccJeaSte.s:56     .text:0000000000000038 .L0 
+     /tmp/ccJeaSte.s:58     .text:000000000000003c .L0 
+     /tmp/ccJeaSte.s:61     .text:0000000000000040 .L0 
+     /tmp/ccJeaSte.s:62     .text:0000000000000040 .L0 
+     /tmp/ccJeaSte.s:64     .text:0000000000000044 .L0 
+     /tmp/ccJeaSte.s:66     .text:0000000000000048 .L0 
+     /tmp/ccJeaSte.s:67     .text:0000000000000048 .L0 
+     /tmp/ccJeaSte.s:70     .text:000000000000004c .L0 
+     /tmp/ccJeaSte.s:71     .text:000000000000004c .L0 
+     /tmp/ccJeaSte.s:73     .text:0000000000000050 .L0 
+     /tmp/ccJeaSte.s:75     .text:0000000000000054 .L0 
+     /tmp/ccJeaSte.s:76     .text:0000000000000054 .L0 
+     /tmp/ccJeaSte.s:79     .text:0000000000000058 .L0 
+     /tmp/ccJeaSte.s:80     .text:0000000000000058 .L0 
+     /tmp/ccJeaSte.s:82     .text:000000000000005c .L0 
+     /tmp/ccJeaSte.s:84     .text:0000000000000060 .L0 
+     /tmp/ccJeaSte.s:85     .text:0000000000000060 .L0 
+     /tmp/ccJeaSte.s:87     .text:0000000000000064 .L0 
+     /tmp/ccJeaSte.s:89     .text:0000000000000068 .L0 
+     /tmp/ccJeaSte.s:90     .text:0000000000000068 .L0 
+     /tmp/ccJeaSte.s:92     .text:000000000000006c .L0 
+     /tmp/ccJeaSte.s:94     .text:0000000000000070 .L0 
+     /tmp/ccJeaSte.s:96     .text:0000000000000074 .L0 
+     /tmp/ccJeaSte.s:98     .text:0000000000000078 .L0 
+     /tmp/ccJeaSte.s:99     .text:0000000000000078 .L0 
+     /tmp/ccJeaSte.s:102    .text:000000000000007c .L0 
+     /tmp/ccJeaSte.s:103    .text:000000000000007c .L0 
+     /tmp/ccJeaSte.s:106    .text:0000000000000084 .L0 
+     /tmp/ccJeaSte.s:119    .text:0000000000000088 .L0 
+     /tmp/ccJeaSte.s:121    .text:000000000000008c .L0 
+     /tmp/ccJeaSte.s:122    .text:000000000000008c .L0 
+     /tmp/ccJeaSte.s:125    .text:0000000000000090 .L0 
+     /tmp/ccJeaSte.s:126    .text:0000000000000090 .L0 
+GAS LISTING /tmp/ccJeaSte.s 			page 20
 
 
-     /tmp/ccOBrmoo.s:128    .text:0000000000000094 .L0 
-     /tmp/ccOBrmoo.s:129    .text:0000000000000094 .L0 
-     /tmp/ccOBrmoo.s:131    .text:0000000000000098 .L0 
-     /tmp/ccOBrmoo.s:132    .text:0000000000000098 .L0 
-     /tmp/ccOBrmoo.s:140    .text:00000000000000a0 .L0 
-     /tmp/ccOBrmoo.s:141    .text:00000000000000a0 .L0 
-     /tmp/ccOBrmoo.s:147    .text:00000000000000a4 .L0 
-     /tmp/ccOBrmoo.s:148    .text:00000000000000a8 .L0 
-     /tmp/ccOBrmoo.s:149    .text:00000000000000a8 .L0 
-     /tmp/ccOBrmoo.s:150    .text:00000000000000a8 .L0 
-     /tmp/ccOBrmoo.s:152    .text:00000000000000ac .L0 
-     /tmp/ccOBrmoo.s:156    .text:00000000000000b0 .L0 
-     /tmp/ccOBrmoo.s:161    .text:00000000000000b0 .L0 
-     /tmp/ccOBrmoo.s:162    .text:00000000000000b0 .L0 
-     /tmp/ccOBrmoo.s:163    .text:00000000000000b0 .L0 
-     /tmp/ccOBrmoo.s:166    .text:00000000000000b4 .L0 
-     /tmp/ccOBrmoo.s:173    .text:00000000000000b8 .L0 
-     /tmp/ccOBrmoo.s:174    .text:00000000000000b8 .L0 
-     /tmp/ccOBrmoo.s:180    .text:00000000000000c4 .L0 
-     /tmp/ccOBrmoo.s:181    .text:00000000000000c4 .L0 
-     /tmp/ccOBrmoo.s:183    .text:00000000000000cc .L0 
-     /tmp/ccOBrmoo.s:184    .text:00000000000000cc .L0 
-     /tmp/ccOBrmoo.s:186    .text:00000000000000d0 .L0 
-     /tmp/ccOBrmoo.s:187    .text:00000000000000d0 .L0 
-     /tmp/ccOBrmoo.s:194    .text:00000000000000d8 .L0 
-     /tmp/ccOBrmoo.s:195    .text:00000000000000d8 .L0 
-     /tmp/ccOBrmoo.s:197    .text:00000000000000dc .L0 
-     /tmp/ccOBrmoo.s:200    .text:00000000000000e0 .L0 
-     /tmp/ccOBrmoo.s:202    .text:00000000000000e4 .L0 
-     /tmp/ccOBrmoo.s:205    .text:00000000000000e8 .L0 
-     /tmp/ccOBrmoo.s:206    .text:00000000000000e8 .L0 
-     /tmp/ccOBrmoo.s:208    .text:00000000000000ec .L0 
-     /tmp/ccOBrmoo.s:209    .text:00000000000000ec .L0 
-     /tmp/ccOBrmoo.s:211    .text:00000000000000f0 .L0 
-     /tmp/ccOBrmoo.s:213    .text:00000000000000f4 .L0 
-     /tmp/ccOBrmoo.s:214    .text:00000000000000f4 .L0 
-     /tmp/ccOBrmoo.s:218    .text:00000000000000f8 .L0 
-     /tmp/ccOBrmoo.s:219    .text:00000000000000f8 .L0 
-     /tmp/ccOBrmoo.s:229    .text:0000000000000100 .L0 
-     /tmp/ccOBrmoo.s:230    .text:0000000000000100 .L0 
-     /tmp/ccOBrmoo.s:233    .text:0000000000000104 .L0 
-     /tmp/ccOBrmoo.s:235    .text:0000000000000108 .L0 
-     /tmp/ccOBrmoo.s:236    .text:0000000000000108 .L0 
-     /tmp/ccOBrmoo.s:238    .text:000000000000010c .L0 
-     /tmp/ccOBrmoo.s:241    .text:0000000000000110 .L0 
-     /tmp/ccOBrmoo.s:242    .text:0000000000000110 .L0 
-     /tmp/ccOBrmoo.s:244    .text:0000000000000114 .L0 
-     /tmp/ccOBrmoo.s:246    .text:0000000000000118 .L0 
-     /tmp/ccOBrmoo.s:247    .text:0000000000000118 .L0 
-     /tmp/ccOBrmoo.s:249    .text:000000000000011c .L0 
-     /tmp/ccOBrmoo.s:253    .text:0000000000000120 .L0 
-     /tmp/ccOBrmoo.s:254    .text:0000000000000120 .L0 
-     /tmp/ccOBrmoo.s:256    .text:0000000000000128 .L0 
-     /tmp/ccOBrmoo.s:269    .text:000000000000012c .L0 
-     /tmp/ccOBrmoo.s:271    .text:0000000000000130 .L0 
-     /tmp/ccOBrmoo.s:272    .text:0000000000000130 .L0 
-     /tmp/ccOBrmoo.s:274    .text:0000000000000134 .L0 
-GAS LISTING /tmp/ccOBrmoo.s 			page 21
+     /tmp/ccJeaSte.s:128    .text:0000000000000094 .L0 
+     /tmp/ccJeaSte.s:129    .text:0000000000000094 .L0 
+     /tmp/ccJeaSte.s:131    .text:0000000000000098 .L0 
+     /tmp/ccJeaSte.s:132    .text:0000000000000098 .L0 
+     /tmp/ccJeaSte.s:140    .text:00000000000000a0 .L0 
+     /tmp/ccJeaSte.s:141    .text:00000000000000a0 .L0 
+     /tmp/ccJeaSte.s:147    .text:00000000000000a4 .L0 
+     /tmp/ccJeaSte.s:148    .text:00000000000000a8 .L0 
+     /tmp/ccJeaSte.s:149    .text:00000000000000a8 .L0 
+     /tmp/ccJeaSte.s:150    .text:00000000000000a8 .L0 
+     /tmp/ccJeaSte.s:152    .text:00000000000000ac .L0 
+     /tmp/ccJeaSte.s:156    .text:00000000000000b0 .L0 
+     /tmp/ccJeaSte.s:161    .text:00000000000000b0 .L0 
+     /tmp/ccJeaSte.s:162    .text:00000000000000b0 .L0 
+     /tmp/ccJeaSte.s:163    .text:00000000000000b0 .L0 
+     /tmp/ccJeaSte.s:166    .text:00000000000000b4 .L0 
+     /tmp/ccJeaSte.s:173    .text:00000000000000b8 .L0 
+     /tmp/ccJeaSte.s:174    .text:00000000000000b8 .L0 
+     /tmp/ccJeaSte.s:180    .text:00000000000000c4 .L0 
+     /tmp/ccJeaSte.s:181    .text:00000000000000c4 .L0 
+     /tmp/ccJeaSte.s:183    .text:00000000000000cc .L0 
+     /tmp/ccJeaSte.s:184    .text:00000000000000cc .L0 
+     /tmp/ccJeaSte.s:186    .text:00000000000000d0 .L0 
+     /tmp/ccJeaSte.s:187    .text:00000000000000d0 .L0 
+     /tmp/ccJeaSte.s:194    .text:00000000000000d8 .L0 
+     /tmp/ccJeaSte.s:195    .text:00000000000000d8 .L0 
+     /tmp/ccJeaSte.s:197    .text:00000000000000dc .L0 
+     /tmp/ccJeaSte.s:200    .text:00000000000000e0 .L0 
+     /tmp/ccJeaSte.s:202    .text:00000000000000e4 .L0 
+     /tmp/ccJeaSte.s:205    .text:00000000000000e8 .L0 
+     /tmp/ccJeaSte.s:206    .text:00000000000000e8 .L0 
+     /tmp/ccJeaSte.s:208    .text:00000000000000ec .L0 
+     /tmp/ccJeaSte.s:209    .text:00000000000000ec .L0 
+     /tmp/ccJeaSte.s:211    .text:00000000000000f0 .L0 
+     /tmp/ccJeaSte.s:213    .text:00000000000000f4 .L0 
+     /tmp/ccJeaSte.s:214    .text:00000000000000f4 .L0 
+     /tmp/ccJeaSte.s:218    .text:00000000000000f8 .L0 
+     /tmp/ccJeaSte.s:219    .text:00000000000000f8 .L0 
+     /tmp/ccJeaSte.s:229    .text:0000000000000100 .L0 
+     /tmp/ccJeaSte.s:230    .text:0000000000000100 .L0 
+     /tmp/ccJeaSte.s:233    .text:0000000000000104 .L0 
+     /tmp/ccJeaSte.s:235    .text:0000000000000108 .L0 
+     /tmp/ccJeaSte.s:236    .text:0000000000000108 .L0 
+     /tmp/ccJeaSte.s:238    .text:000000000000010c .L0 
+     /tmp/ccJeaSte.s:241    .text:0000000000000110 .L0 
+     /tmp/ccJeaSte.s:242    .text:0000000000000110 .L0 
+     /tmp/ccJeaSte.s:244    .text:0000000000000114 .L0 
+     /tmp/ccJeaSte.s:246    .text:0000000000000118 .L0 
+     /tmp/ccJeaSte.s:247    .text:0000000000000118 .L0 
+     /tmp/ccJeaSte.s:249    .text:000000000000011c .L0 
+     /tmp/ccJeaSte.s:253    .text:0000000000000120 .L0 
+     /tmp/ccJeaSte.s:254    .text:0000000000000120 .L0 
+     /tmp/ccJeaSte.s:256    .text:0000000000000128 .L0 
+     /tmp/ccJeaSte.s:269    .text:000000000000012c .L0 
+     /tmp/ccJeaSte.s:271    .text:0000000000000130 .L0 
+     /tmp/ccJeaSte.s:272    .text:0000000000000130 .L0 
+     /tmp/ccJeaSte.s:274    .text:0000000000000134 .L0 
+GAS LISTING /tmp/ccJeaSte.s 			page 21
 
 
-     /tmp/ccOBrmoo.s:275    .text:0000000000000134 .L0 
-     /tmp/ccOBrmoo.s:277    .text:0000000000000138 .L0 
-     /tmp/ccOBrmoo.s:278    .text:0000000000000138 .L0 
-     /tmp/ccOBrmoo.s:280    .text:000000000000013c .L0 
-     /tmp/ccOBrmoo.s:281    .text:000000000000013c .L0 
-     /tmp/ccOBrmoo.s:287    .text:0000000000000148 .L0 
-     /tmp/ccOBrmoo.s:288    .text:0000000000000148 .L0 
-     /tmp/ccOBrmoo.s:290    .text:000000000000014c .L0 
-     /tmp/ccOBrmoo.s:295    .text:0000000000000158 .L0 
-     /tmp/ccOBrmoo.s:296    .text:0000000000000158 .L0 
-     /tmp/ccOBrmoo.s:298    .text:0000000000000160 .L0 
-     /tmp/ccOBrmoo.s:299    .text:0000000000000160 .L0 
-     /tmp/ccOBrmoo.s:301    .text:0000000000000164 .L0 
-     /tmp/ccOBrmoo.s:302    .text:0000000000000164 .L0 
-     /tmp/ccOBrmoo.s:309    .text:000000000000016c .L0 
-     /tmp/ccOBrmoo.s:310    .text:000000000000016c .L0 
-     /tmp/ccOBrmoo.s:312    .text:0000000000000170 .L0 
-     /tmp/ccOBrmoo.s:315    .text:0000000000000174 .L0 
-     /tmp/ccOBrmoo.s:317    .text:0000000000000178 .L0 
-     /tmp/ccOBrmoo.s:320    .text:000000000000017c .L0 
-     /tmp/ccOBrmoo.s:321    .text:000000000000017c .L0 
-     /tmp/ccOBrmoo.s:323    .text:0000000000000180 .L0 
-     /tmp/ccOBrmoo.s:324    .text:0000000000000180 .L0 
-     /tmp/ccOBrmoo.s:326    .text:0000000000000184 .L0 
-     /tmp/ccOBrmoo.s:328    .text:0000000000000188 .L0 
-     /tmp/ccOBrmoo.s:329    .text:0000000000000188 .L0 
-     /tmp/ccOBrmoo.s:332    .text:000000000000018c .L0 
-     /tmp/ccOBrmoo.s:333    .text:000000000000018c .L0 
-     /tmp/ccOBrmoo.s:342    .text:0000000000000194 .L0 
-     /tmp/ccOBrmoo.s:348    .text:0000000000000194 _ZN15MemoryAllocator9tryToJoinEP9DataBlock
-     /tmp/ccOBrmoo.s:351    .text:0000000000000194 .L0 
-     /tmp/ccOBrmoo.s:353    .text:0000000000000194 .L0 
-     /tmp/ccOBrmoo.s:354    .text:0000000000000198 .L0 
-     /tmp/ccOBrmoo.s:356    .text:000000000000019c .L0 
-     /tmp/ccOBrmoo.s:358    .text:00000000000001a0 .L0 
-     /tmp/ccOBrmoo.s:360    .text:00000000000001a0 .L0 
-     /tmp/ccOBrmoo.s:361    .text:00000000000001a0 .L0 
-     /tmp/ccOBrmoo.s:363    .text:00000000000001a4 .L0 
-     /tmp/ccOBrmoo.s:365    .text:00000000000001a8 .L0 
-     /tmp/ccOBrmoo.s:367    .text:00000000000001ac .L0 
-     /tmp/ccOBrmoo.s:370    .text:00000000000001b4 .L0 
-     /tmp/ccOBrmoo.s:373    .text:00000000000001b8 .L0 
-     /tmp/ccOBrmoo.s:374    .text:00000000000001bc .L0 
-     /tmp/ccOBrmoo.s:375    .text:00000000000001bc .L0 
-     /tmp/ccOBrmoo.s:376    .text:00000000000001bc .L0 
-     /tmp/ccOBrmoo.s:378    .text:00000000000001c0 .L0 
-     /tmp/ccOBrmoo.s:381    .text:00000000000001c4 .L0 
-     /tmp/ccOBrmoo.s:383    .text:00000000000001c4 .L0 
-     /tmp/ccOBrmoo.s:384    .text:00000000000001c4 .L0 
-     /tmp/ccOBrmoo.s:386    .text:00000000000001c8 .L0 
-     /tmp/ccOBrmoo.s:390    .text:00000000000001d4 .L0 
-     /tmp/ccOBrmoo.s:391    .text:00000000000001d4 .L0 
-     /tmp/ccOBrmoo.s:393    .text:00000000000001d8 .L0 
-     /tmp/ccOBrmoo.s:395    .text:00000000000001dc .L0 
-     /tmp/ccOBrmoo.s:397    .text:00000000000001e0 .L0 
-     /tmp/ccOBrmoo.s:398    .text:00000000000001e0 .L0 
-     /tmp/ccOBrmoo.s:400    .text:00000000000001e4 .L0 
-GAS LISTING /tmp/ccOBrmoo.s 			page 22
+     /tmp/ccJeaSte.s:275    .text:0000000000000134 .L0 
+     /tmp/ccJeaSte.s:277    .text:0000000000000138 .L0 
+     /tmp/ccJeaSte.s:278    .text:0000000000000138 .L0 
+     /tmp/ccJeaSte.s:280    .text:000000000000013c .L0 
+     /tmp/ccJeaSte.s:281    .text:000000000000013c .L0 
+     /tmp/ccJeaSte.s:287    .text:0000000000000148 .L0 
+     /tmp/ccJeaSte.s:288    .text:0000000000000148 .L0 
+     /tmp/ccJeaSte.s:290    .text:000000000000014c .L0 
+     /tmp/ccJeaSte.s:295    .text:0000000000000158 .L0 
+     /tmp/ccJeaSte.s:296    .text:0000000000000158 .L0 
+     /tmp/ccJeaSte.s:298    .text:0000000000000160 .L0 
+     /tmp/ccJeaSte.s:299    .text:0000000000000160 .L0 
+     /tmp/ccJeaSte.s:301    .text:0000000000000164 .L0 
+     /tmp/ccJeaSte.s:302    .text:0000000000000164 .L0 
+     /tmp/ccJeaSte.s:309    .text:000000000000016c .L0 
+     /tmp/ccJeaSte.s:310    .text:000000000000016c .L0 
+     /tmp/ccJeaSte.s:312    .text:0000000000000170 .L0 
+     /tmp/ccJeaSte.s:315    .text:0000000000000174 .L0 
+     /tmp/ccJeaSte.s:317    .text:0000000000000178 .L0 
+     /tmp/ccJeaSte.s:320    .text:000000000000017c .L0 
+     /tmp/ccJeaSte.s:321    .text:000000000000017c .L0 
+     /tmp/ccJeaSte.s:323    .text:0000000000000180 .L0 
+     /tmp/ccJeaSte.s:324    .text:0000000000000180 .L0 
+     /tmp/ccJeaSte.s:326    .text:0000000000000184 .L0 
+     /tmp/ccJeaSte.s:328    .text:0000000000000188 .L0 
+     /tmp/ccJeaSte.s:329    .text:0000000000000188 .L0 
+     /tmp/ccJeaSte.s:332    .text:000000000000018c .L0 
+     /tmp/ccJeaSte.s:333    .text:000000000000018c .L0 
+     /tmp/ccJeaSte.s:342    .text:0000000000000194 .L0 
+     /tmp/ccJeaSte.s:348    .text:0000000000000194 _ZN15MemoryAllocator9tryToJoinEP9DataBlock
+     /tmp/ccJeaSte.s:351    .text:0000000000000194 .L0 
+     /tmp/ccJeaSte.s:353    .text:0000000000000194 .L0 
+     /tmp/ccJeaSte.s:354    .text:0000000000000198 .L0 
+     /tmp/ccJeaSte.s:356    .text:000000000000019c .L0 
+     /tmp/ccJeaSte.s:358    .text:00000000000001a0 .L0 
+     /tmp/ccJeaSte.s:360    .text:00000000000001a0 .L0 
+     /tmp/ccJeaSte.s:361    .text:00000000000001a0 .L0 
+     /tmp/ccJeaSte.s:363    .text:00000000000001a4 .L0 
+     /tmp/ccJeaSte.s:365    .text:00000000000001a8 .L0 
+     /tmp/ccJeaSte.s:367    .text:00000000000001ac .L0 
+     /tmp/ccJeaSte.s:370    .text:00000000000001b4 .L0 
+     /tmp/ccJeaSte.s:373    .text:00000000000001b8 .L0 
+     /tmp/ccJeaSte.s:374    .text:00000000000001bc .L0 
+     /tmp/ccJeaSte.s:375    .text:00000000000001bc .L0 
+     /tmp/ccJeaSte.s:376    .text:00000000000001bc .L0 
+     /tmp/ccJeaSte.s:378    .text:00000000000001c0 .L0 
+     /tmp/ccJeaSte.s:381    .text:00000000000001c4 .L0 
+     /tmp/ccJeaSte.s:383    .text:00000000000001c4 .L0 
+     /tmp/ccJeaSte.s:384    .text:00000000000001c4 .L0 
+     /tmp/ccJeaSte.s:386    .text:00000000000001c8 .L0 
+     /tmp/ccJeaSte.s:390    .text:00000000000001d4 .L0 
+     /tmp/ccJeaSte.s:391    .text:00000000000001d4 .L0 
+     /tmp/ccJeaSte.s:393    .text:00000000000001d8 .L0 
+     /tmp/ccJeaSte.s:395    .text:00000000000001dc .L0 
+     /tmp/ccJeaSte.s:397    .text:00000000000001e0 .L0 
+     /tmp/ccJeaSte.s:398    .text:00000000000001e0 .L0 
+     /tmp/ccJeaSte.s:400    .text:00000000000001e4 .L0 
+GAS LISTING /tmp/ccJeaSte.s 			page 22
 
 
-     /tmp/ccOBrmoo.s:401    .text:00000000000001e8 .L0 
-     /tmp/ccOBrmoo.s:407    .text:00000000000001e8 _ZN15MemoryAllocator8mem_freeEPv
-     /tmp/ccOBrmoo.s:410    .text:00000000000001e8 .L0 
-     /tmp/ccOBrmoo.s:412    .text:00000000000001e8 .L0 
-     /tmp/ccOBrmoo.s:413    .text:00000000000001e8 .L0 
-     /tmp/ccOBrmoo.s:414    .text:00000000000001e8 .L0 
-     /tmp/ccOBrmoo.s:416    .text:00000000000001f0 .L0 
-     /tmp/ccOBrmoo.s:419    .text:00000000000001f8 .L0 
-     /tmp/ccOBrmoo.s:421    .text:00000000000001fc .L0 
-     /tmp/ccOBrmoo.s:424    .text:0000000000000208 .L0 
-     /tmp/ccOBrmoo.s:426    .text:000000000000020c .L0 
-     /tmp/ccOBrmoo.s:429    .text:0000000000000218 .L0 
-     /tmp/ccOBrmoo.s:431    .text:000000000000021c .L0 
-     /tmp/ccOBrmoo.s:432    .text:000000000000021c .L0 
-     /tmp/ccOBrmoo.s:435    .text:0000000000000220 .L0 
-     /tmp/ccOBrmoo.s:437    .text:0000000000000224 .L0 
-     /tmp/ccOBrmoo.s:439    .text:0000000000000228 .L0 
-     /tmp/ccOBrmoo.s:440    .text:0000000000000228 .L0 
-     /tmp/ccOBrmoo.s:442    .text:000000000000022c .L0 
-     /tmp/ccOBrmoo.s:444    .text:0000000000000230 .L0 
-     /tmp/ccOBrmoo.s:446    .text:0000000000000234 .L0 
-     /tmp/ccOBrmoo.s:448    .text:0000000000000238 .L0 
-     /tmp/ccOBrmoo.s:449    .text:0000000000000238 .L0 
-     /tmp/ccOBrmoo.s:451    .text:000000000000023c .L0 
-     /tmp/ccOBrmoo.s:454    .text:0000000000000240 .L0 
-     /tmp/ccOBrmoo.s:455    .text:0000000000000240 .L0 
-     /tmp/ccOBrmoo.s:457    .text:0000000000000244 .L0 
-     /tmp/ccOBrmoo.s:458    .text:0000000000000244 .L0 
-     /tmp/ccOBrmoo.s:462    .text:0000000000000248 .L0 
-     /tmp/ccOBrmoo.s:463    .text:0000000000000248 .L0 
-     /tmp/ccOBrmoo.s:465    .text:0000000000000250 .L0 
-     /tmp/ccOBrmoo.s:468    .text:0000000000000254 .L0 
-     /tmp/ccOBrmoo.s:469    .text:0000000000000258 .L0 
-     /tmp/ccOBrmoo.s:473    .text:0000000000000264 .L0 
-     /tmp/ccOBrmoo.s:474    .text:0000000000000264 .L0 
-     /tmp/ccOBrmoo.s:475    .text:0000000000000264 .L0 
-     /tmp/ccOBrmoo.s:477    .text:0000000000000268 .L0 
-     /tmp/ccOBrmoo.s:481    .text:0000000000000268 .L0 
-     /tmp/ccOBrmoo.s:486    .text:000000000000026c .L0 
-     /tmp/ccOBrmoo.s:488    .text:0000000000000270 .L0 
-     /tmp/ccOBrmoo.s:491    .text:0000000000000274 .L0 
-     /tmp/ccOBrmoo.s:493    .text:0000000000000278 .L0 
-     /tmp/ccOBrmoo.s:496    .text:000000000000027c .L0 
-     /tmp/ccOBrmoo.s:497    .text:000000000000027c .L0 
-     /tmp/ccOBrmoo.s:499    .text:0000000000000280 .L0 
-     /tmp/ccOBrmoo.s:500    .text:0000000000000280 .L0 
-     /tmp/ccOBrmoo.s:502    .text:0000000000000284 .L0 
-     /tmp/ccOBrmoo.s:504    .text:0000000000000288 .L0 
-     /tmp/ccOBrmoo.s:505    .text:0000000000000288 .L0 
-     /tmp/ccOBrmoo.s:508    .text:000000000000028c .L0 
-     /tmp/ccOBrmoo.s:509    .text:000000000000028c .L0 
-     /tmp/ccOBrmoo.s:511    .text:0000000000000290 .L0 
-     /tmp/ccOBrmoo.s:512    .text:0000000000000290 .L0 
-     /tmp/ccOBrmoo.s:515    .text:0000000000000298 .L0 
-     /tmp/ccOBrmoo.s:516    .text:0000000000000298 .L0 
-     /tmp/ccOBrmoo.s:523    .text:00000000000002a4 .L0 
-     /tmp/ccOBrmoo.s:527    .text:00000000000002a8 .L0 
-GAS LISTING /tmp/ccOBrmoo.s 			page 23
+     /tmp/ccJeaSte.s:401    .text:00000000000001e8 .L0 
+     /tmp/ccJeaSte.s:407    .text:00000000000001e8 _ZN15MemoryAllocator8mem_freeEPv
+     /tmp/ccJeaSte.s:410    .text:00000000000001e8 .L0 
+     /tmp/ccJeaSte.s:412    .text:00000000000001e8 .L0 
+     /tmp/ccJeaSte.s:413    .text:00000000000001e8 .L0 
+     /tmp/ccJeaSte.s:414    .text:00000000000001e8 .L0 
+     /tmp/ccJeaSte.s:416    .text:00000000000001f0 .L0 
+     /tmp/ccJeaSte.s:419    .text:00000000000001f8 .L0 
+     /tmp/ccJeaSte.s:421    .text:00000000000001fc .L0 
+     /tmp/ccJeaSte.s:424    .text:0000000000000208 .L0 
+     /tmp/ccJeaSte.s:426    .text:000000000000020c .L0 
+     /tmp/ccJeaSte.s:429    .text:0000000000000218 .L0 
+     /tmp/ccJeaSte.s:431    .text:000000000000021c .L0 
+     /tmp/ccJeaSte.s:432    .text:000000000000021c .L0 
+     /tmp/ccJeaSte.s:435    .text:0000000000000220 .L0 
+     /tmp/ccJeaSte.s:437    .text:0000000000000224 .L0 
+     /tmp/ccJeaSte.s:439    .text:0000000000000228 .L0 
+     /tmp/ccJeaSte.s:440    .text:0000000000000228 .L0 
+     /tmp/ccJeaSte.s:442    .text:000000000000022c .L0 
+     /tmp/ccJeaSte.s:444    .text:0000000000000230 .L0 
+     /tmp/ccJeaSte.s:446    .text:0000000000000234 .L0 
+     /tmp/ccJeaSte.s:448    .text:0000000000000238 .L0 
+     /tmp/ccJeaSte.s:449    .text:0000000000000238 .L0 
+     /tmp/ccJeaSte.s:451    .text:000000000000023c .L0 
+     /tmp/ccJeaSte.s:454    .text:0000000000000240 .L0 
+     /tmp/ccJeaSte.s:455    .text:0000000000000240 .L0 
+     /tmp/ccJeaSte.s:457    .text:0000000000000244 .L0 
+     /tmp/ccJeaSte.s:458    .text:0000000000000244 .L0 
+     /tmp/ccJeaSte.s:462    .text:0000000000000248 .L0 
+     /tmp/ccJeaSte.s:463    .text:0000000000000248 .L0 
+     /tmp/ccJeaSte.s:465    .text:0000000000000250 .L0 
+     /tmp/ccJeaSte.s:468    .text:0000000000000254 .L0 
+     /tmp/ccJeaSte.s:469    .text:0000000000000258 .L0 
+     /tmp/ccJeaSte.s:473    .text:0000000000000264 .L0 
+     /tmp/ccJeaSte.s:474    .text:0000000000000264 .L0 
+     /tmp/ccJeaSte.s:475    .text:0000000000000264 .L0 
+     /tmp/ccJeaSte.s:477    .text:0000000000000268 .L0 
+     /tmp/ccJeaSte.s:481    .text:0000000000000268 .L0 
+     /tmp/ccJeaSte.s:486    .text:000000000000026c .L0 
+     /tmp/ccJeaSte.s:488    .text:0000000000000270 .L0 
+     /tmp/ccJeaSte.s:491    .text:0000000000000274 .L0 
+     /tmp/ccJeaSte.s:493    .text:0000000000000278 .L0 
+     /tmp/ccJeaSte.s:496    .text:000000000000027c .L0 
+     /tmp/ccJeaSte.s:497    .text:000000000000027c .L0 
+     /tmp/ccJeaSte.s:499    .text:0000000000000280 .L0 
+     /tmp/ccJeaSte.s:500    .text:0000000000000280 .L0 
+     /tmp/ccJeaSte.s:502    .text:0000000000000284 .L0 
+     /tmp/ccJeaSte.s:504    .text:0000000000000288 .L0 
+     /tmp/ccJeaSte.s:505    .text:0000000000000288 .L0 
+     /tmp/ccJeaSte.s:508    .text:000000000000028c .L0 
+     /tmp/ccJeaSte.s:509    .text:000000000000028c .L0 
+     /tmp/ccJeaSte.s:511    .text:0000000000000290 .L0 
+     /tmp/ccJeaSte.s:512    .text:0000000000000290 .L0 
+     /tmp/ccJeaSte.s:515    .text:0000000000000298 .L0 
+     /tmp/ccJeaSte.s:516    .text:0000000000000298 .L0 
+     /tmp/ccJeaSte.s:523    .text:00000000000002a4 .L0 
+     /tmp/ccJeaSte.s:527    .text:00000000000002a8 .L0 
+GAS LISTING /tmp/ccJeaSte.s 			page 23
 
 
-     /tmp/ccOBrmoo.s:528    .text:00000000000002ac .L0 
-     /tmp/ccOBrmoo.s:530    .text:00000000000002b0 .L0 
-     /tmp/ccOBrmoo.s:531    .text:00000000000002b0 .L0 
-     /tmp/ccOBrmoo.s:533    .text:00000000000002b4 .L0 
-     /tmp/ccOBrmoo.s:535    .text:00000000000002b8 .L0 
-     /tmp/ccOBrmoo.s:540    .text:00000000000002bc .L0 
-     /tmp/ccOBrmoo.s:541    .text:00000000000002bc .L0 
-     /tmp/ccOBrmoo.s:543    .text:00000000000002c0 .L0 
-     /tmp/ccOBrmoo.s:545    .text:00000000000002c8 .L0 
-     /tmp/ccOBrmoo.s:547    .text:00000000000002cc .L0 
-     /tmp/ccOBrmoo.s:548    .text:00000000000002cc .L0 
-     /tmp/ccOBrmoo.s:551    .text:00000000000002d0 .L0 
-     /tmp/ccOBrmoo.s:552    .text:00000000000002d0 .L0 
-     /tmp/ccOBrmoo.s:554    .text:00000000000002d4 .L0 
-     /tmp/ccOBrmoo.s:555    .text:00000000000002d4 .L0 
-     /tmp/ccOBrmoo.s:560    .text:00000000000002dc .L0 
-     /tmp/ccOBrmoo.s:561    .text:00000000000002dc .L0 
-     /tmp/ccOBrmoo.s:563    .text:00000000000002e4 .L0 
-     /tmp/ccOBrmoo.s:564    .text:00000000000002e4 .L0 
-     /tmp/ccOBrmoo.s:566    .text:00000000000002e8 .L0 
-     /tmp/ccOBrmoo.s:567    .text:00000000000002e8 .L0 
-     /tmp/ccOBrmoo.s:570    .text:00000000000002ec .L0 
-     /tmp/ccOBrmoo.s:576    .text:00000000000002f4 .L0 
-     /tmp/ccOBrmoo.s:577    .text:00000000000002f4 .L0 
-     /tmp/ccOBrmoo.s:578    .text:00000000000002f4 .L0 
-     /tmp/ccOBrmoo.s:579    .text:00000000000002f4 .L0 
-     /tmp/ccOBrmoo.s:582    .text:00000000000002f4 .L0 
-     /tmp/ccOBrmoo.s:583    .text:00000000000002f4 .L0 
-     /tmp/ccOBrmoo.s:585    .text:00000000000002f8 .L0 
-     /tmp/ccOBrmoo.s:586    .text:00000000000002f8 .L0 
-     /tmp/ccOBrmoo.s:588    .text:00000000000002fc .L0 
-     /tmp/ccOBrmoo.s:589    .text:00000000000002fc .L0 
-     /tmp/ccOBrmoo.s:593    .text:000000000000030c .L0 
-     /tmp/ccOBrmoo.s:594    .text:000000000000030c .L0 
-     /tmp/ccOBrmoo.s:596    .text:0000000000000310 .L0 
-     /tmp/ccOBrmoo.s:597    .text:0000000000000310 .L0 
-     /tmp/ccOBrmoo.s:602    .text:0000000000000318 .L0 
-     /tmp/ccOBrmoo.s:608    .text:0000000000000320 .L0 
-     /tmp/ccOBrmoo.s:609    .text:0000000000000320 .L0 
-     /tmp/ccOBrmoo.s:610    .text:0000000000000320 .L0 
-     /tmp/ccOBrmoo.s:611    .text:0000000000000320 .L0 
-     /tmp/ccOBrmoo.s:615    .text:0000000000000320 .L0 
-     /tmp/ccOBrmoo.s:621    .text:0000000000000328 .L0 
-     /tmp/ccOBrmoo.s:637    .text:0000000000000340 .L0 
-     /tmp/ccOBrmoo.s:640    .text:0000000000000344 .L0 
-     /tmp/ccOBrmoo.s:641    .text:0000000000000348 .L0 
-     /tmp/ccOBrmoo.s:663    .bss:0000000000000010 _ZN15MemoryAllocator17deleteArrayCalledE
-     /tmp/ccOBrmoo.s:667    .bss:0000000000000014 _ZN15MemoryAllocator12deleteCalledE
-     /tmp/ccOBrmoo.s:671    .bss:0000000000000018 _ZN15MemoryAllocator14newArrayCalledE
-     /tmp/ccOBrmoo.s:675    .bss:000000000000001c _ZN15MemoryAllocator9newCalledE
-     /tmp/ccOBrmoo.s:659    .bss:0000000000000008 _ZN15MemoryAllocator4usedE
-     /tmp/ccOBrmoo.s:655    .bss:0000000000000000 _ZN15MemoryAllocator4freeE
-     /tmp/ccOBrmoo.s:652    .bss:0000000000000000 .LANCHOR0
-     /tmp/ccOBrmoo.s:681    .text:0000000000000348 .L0 
-     /tmp/ccOBrmoo.s:38     .text:0000000000000020 .L0 
-     /tmp/ccOBrmoo.s:103    .text:000000000000007c .L0 
-     /tmp/ccOBrmoo.s:132    .text:0000000000000098 .L0 
-GAS LISTING /tmp/ccOBrmoo.s 			page 24
+     /tmp/ccJeaSte.s:528    .text:00000000000002ac .L0 
+     /tmp/ccJeaSte.s:530    .text:00000000000002b0 .L0 
+     /tmp/ccJeaSte.s:531    .text:00000000000002b0 .L0 
+     /tmp/ccJeaSte.s:533    .text:00000000000002b4 .L0 
+     /tmp/ccJeaSte.s:535    .text:00000000000002b8 .L0 
+     /tmp/ccJeaSte.s:540    .text:00000000000002bc .L0 
+     /tmp/ccJeaSte.s:541    .text:00000000000002bc .L0 
+     /tmp/ccJeaSte.s:543    .text:00000000000002c0 .L0 
+     /tmp/ccJeaSte.s:545    .text:00000000000002c8 .L0 
+     /tmp/ccJeaSte.s:547    .text:00000000000002cc .L0 
+     /tmp/ccJeaSte.s:548    .text:00000000000002cc .L0 
+     /tmp/ccJeaSte.s:551    .text:00000000000002d0 .L0 
+     /tmp/ccJeaSte.s:552    .text:00000000000002d0 .L0 
+     /tmp/ccJeaSte.s:554    .text:00000000000002d4 .L0 
+     /tmp/ccJeaSte.s:555    .text:00000000000002d4 .L0 
+     /tmp/ccJeaSte.s:560    .text:00000000000002dc .L0 
+     /tmp/ccJeaSte.s:561    .text:00000000000002dc .L0 
+     /tmp/ccJeaSte.s:563    .text:00000000000002e4 .L0 
+     /tmp/ccJeaSte.s:564    .text:00000000000002e4 .L0 
+     /tmp/ccJeaSte.s:566    .text:00000000000002e8 .L0 
+     /tmp/ccJeaSte.s:567    .text:00000000000002e8 .L0 
+     /tmp/ccJeaSte.s:570    .text:00000000000002ec .L0 
+     /tmp/ccJeaSte.s:576    .text:00000000000002f4 .L0 
+     /tmp/ccJeaSte.s:577    .text:00000000000002f4 .L0 
+     /tmp/ccJeaSte.s:578    .text:00000000000002f4 .L0 
+     /tmp/ccJeaSte.s:579    .text:00000000000002f4 .L0 
+     /tmp/ccJeaSte.s:582    .text:00000000000002f4 .L0 
+     /tmp/ccJeaSte.s:583    .text:00000000000002f4 .L0 
+     /tmp/ccJeaSte.s:585    .text:00000000000002f8 .L0 
+     /tmp/ccJeaSte.s:586    .text:00000000000002f8 .L0 
+     /tmp/ccJeaSte.s:588    .text:00000000000002fc .L0 
+     /tmp/ccJeaSte.s:589    .text:00000000000002fc .L0 
+     /tmp/ccJeaSte.s:593    .text:000000000000030c .L0 
+     /tmp/ccJeaSte.s:594    .text:000000000000030c .L0 
+     /tmp/ccJeaSte.s:596    .text:0000000000000310 .L0 
+     /tmp/ccJeaSte.s:597    .text:0000000000000310 .L0 
+     /tmp/ccJeaSte.s:602    .text:0000000000000318 .L0 
+     /tmp/ccJeaSte.s:608    .text:0000000000000320 .L0 
+     /tmp/ccJeaSte.s:609    .text:0000000000000320 .L0 
+     /tmp/ccJeaSte.s:610    .text:0000000000000320 .L0 
+     /tmp/ccJeaSte.s:611    .text:0000000000000320 .L0 
+     /tmp/ccJeaSte.s:615    .text:0000000000000320 .L0 
+     /tmp/ccJeaSte.s:621    .text:0000000000000328 .L0 
+     /tmp/ccJeaSte.s:637    .text:0000000000000340 .L0 
+     /tmp/ccJeaSte.s:640    .text:0000000000000344 .L0 
+     /tmp/ccJeaSte.s:641    .text:0000000000000348 .L0 
+     /tmp/ccJeaSte.s:663    .bss:0000000000000010 _ZN15MemoryAllocator17deleteArrayCalledE
+     /tmp/ccJeaSte.s:667    .bss:0000000000000014 _ZN15MemoryAllocator12deleteCalledE
+     /tmp/ccJeaSte.s:671    .bss:0000000000000018 _ZN15MemoryAllocator14newArrayCalledE
+     /tmp/ccJeaSte.s:675    .bss:000000000000001c _ZN15MemoryAllocator9newCalledE
+     /tmp/ccJeaSte.s:659    .bss:0000000000000008 _ZN15MemoryAllocator4usedE
+     /tmp/ccJeaSte.s:655    .bss:0000000000000000 _ZN15MemoryAllocator4freeE
+     /tmp/ccJeaSte.s:652    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccJeaSte.s:681    .text:0000000000000348 .L0 
+     /tmp/ccJeaSte.s:38     .text:0000000000000020 .L0 
+     /tmp/ccJeaSte.s:103    .text:000000000000007c .L0 
+     /tmp/ccJeaSte.s:132    .text:0000000000000098 .L0 
+GAS LISTING /tmp/ccJeaSte.s 			page 24
 
 
-     /tmp/ccOBrmoo.s:174    .text:00000000000000b8 .L0 
-     /tmp/ccOBrmoo.s:181    .text:00000000000000c4 .L0 
-     /tmp/ccOBrmoo.s:254    .text:0000000000000120 .L0 
-     /tmp/ccOBrmoo.s:281    .text:000000000000013c .L0 
-     /tmp/ccOBrmoo.s:290    .text:000000000000014c .L0 
-     /tmp/ccOBrmoo.s:296    .text:0000000000000158 .L0 
-     /tmp/ccOBrmoo.s:414    .text:00000000000001e8 .L0 
-     /tmp/ccOBrmoo.s:421    .text:00000000000001fc .L0 
-     /tmp/ccOBrmoo.s:426    .text:000000000000020c .L0 
-     /tmp/ccOBrmoo.s:463    .text:0000000000000248 .L0 
-     /tmp/ccOBrmoo.s:543    .text:00000000000002c0 .L0 
-     /tmp/ccOBrmoo.s:561    .text:00000000000002dc .L0 
-     /tmp/ccOBrmoo.s:589    .text:00000000000002fc .L0 
-     /tmp/ccOBrmoo.s:34     .text:0000000000000020 .L2
-     /tmp/ccOBrmoo.s:143    .text:00000000000000a4 .L1
-     /tmp/ccOBrmoo.s:155    .text:00000000000000b0 .L23
-     /tmp/ccOBrmoo.s:222    .text:0000000000000100 .L6
-     /tmp/ccOBrmoo.s:168    .text:00000000000000b8 .L7
-     /tmp/ccOBrmoo.s:77     .text:0000000000000058 .L9
-     /tmp/ccOBrmoo.s:177    .text:00000000000000c4 .L24
-     /tmp/ccOBrmoo.s:190    .text:00000000000000d8 .L12
-     /tmp/ccOBrmoo.s:40     .text:0000000000000028 .L5
-     /tmp/ccOBrmoo.s:68     .text:000000000000004c .L8
-     /tmp/ccOBrmoo.s:134    .text:00000000000000a0 .L11
-     /tmp/ccOBrmoo.s:203    .text:00000000000000e8 .L13
-     /tmp/ccOBrmoo.s:216    .text:00000000000000f8 .L14
-     /tmp/ccOBrmoo.s:283    .text:0000000000000148 .L15
-     /tmp/ccOBrmoo.s:250    .text:0000000000000120 .L17
-     /tmp/ccOBrmoo.s:292    .text:0000000000000158 .L25
-     /tmp/ccOBrmoo.s:304    .text:000000000000016c .L19
-     /tmp/ccOBrmoo.s:239    .text:0000000000000110 .L16
-     /tmp/ccOBrmoo.s:318    .text:000000000000017c .L20
-     /tmp/ccOBrmoo.s:330    .text:000000000000018c .L21
-     /tmp/ccOBrmoo.s:371    .text:00000000000001b8 .L26
-     /tmp/ccOBrmoo.s:380    .text:00000000000001c4 .L29
-     /tmp/ccOBrmoo.s:607    .text:0000000000000320 .L40
-     /tmp/ccOBrmoo.s:619    .text:0000000000000328 .L41
-     /tmp/ccOBrmoo.s:625    .text:0000000000000330 .L42
-     /tmp/ccOBrmoo.s:630    .text:0000000000000338 .L43
-     /tmp/ccOBrmoo.s:635    .text:0000000000000340 .L44
-     /tmp/ccOBrmoo.s:538    .text:00000000000002bc .L48
-     /tmp/ccOBrmoo.s:452    .text:0000000000000240 .L35
-     /tmp/ccOBrmoo.s:557    .text:00000000000002dc .L49
-     /tmp/ccOBrmoo.s:575    .text:00000000000002f4 .L50
-     /tmp/ccOBrmoo.s:494    .text:000000000000027c .L38
-     /tmp/ccOBrmoo.s:482    .text:000000000000026c .L37
-     /tmp/ccOBrmoo.s:506    .text:000000000000028c .L39
-     /tmp/ccOBrmoo.s:549    .text:00000000000002d0 .L33
-     /tmp/ccOBrmoo.s:459    .text:0000000000000248 .L34
-     /tmp/ccOBrmoo.s:525    .text:00000000000002a8 .L31
-     /tmp/ccOBrmoo.s:1150   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccOBrmoo.s:1941   .debug_str:00000000000001c0 .LASF41
-     /tmp/ccOBrmoo.s:1939   .debug_str:00000000000001a8 .LASF42
-     /tmp/ccOBrmoo.s:1929   .debug_str:0000000000000138 .LASF43
-     /tmp/ccOBrmoo.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccOBrmoo.s:678    .text:0000000000000348 .Letext0
-     /tmp/ccOBrmoo.s:1887   .debug_line:0000000000000000 .Ldebug_line0
-GAS LISTING /tmp/ccOBrmoo.s 			page 25
+     /tmp/ccJeaSte.s:174    .text:00000000000000b8 .L0 
+     /tmp/ccJeaSte.s:181    .text:00000000000000c4 .L0 
+     /tmp/ccJeaSte.s:254    .text:0000000000000120 .L0 
+     /tmp/ccJeaSte.s:281    .text:000000000000013c .L0 
+     /tmp/ccJeaSte.s:290    .text:000000000000014c .L0 
+     /tmp/ccJeaSte.s:296    .text:0000000000000158 .L0 
+     /tmp/ccJeaSte.s:414    .text:00000000000001e8 .L0 
+     /tmp/ccJeaSte.s:421    .text:00000000000001fc .L0 
+     /tmp/ccJeaSte.s:426    .text:000000000000020c .L0 
+     /tmp/ccJeaSte.s:463    .text:0000000000000248 .L0 
+     /tmp/ccJeaSte.s:543    .text:00000000000002c0 .L0 
+     /tmp/ccJeaSte.s:561    .text:00000000000002dc .L0 
+     /tmp/ccJeaSte.s:589    .text:00000000000002fc .L0 
+     /tmp/ccJeaSte.s:34     .text:0000000000000020 .L2
+     /tmp/ccJeaSte.s:143    .text:00000000000000a4 .L1
+     /tmp/ccJeaSte.s:155    .text:00000000000000b0 .L23
+     /tmp/ccJeaSte.s:222    .text:0000000000000100 .L6
+     /tmp/ccJeaSte.s:168    .text:00000000000000b8 .L7
+     /tmp/ccJeaSte.s:77     .text:0000000000000058 .L9
+     /tmp/ccJeaSte.s:177    .text:00000000000000c4 .L24
+     /tmp/ccJeaSte.s:190    .text:00000000000000d8 .L12
+     /tmp/ccJeaSte.s:40     .text:0000000000000028 .L5
+     /tmp/ccJeaSte.s:68     .text:000000000000004c .L8
+     /tmp/ccJeaSte.s:134    .text:00000000000000a0 .L11
+     /tmp/ccJeaSte.s:203    .text:00000000000000e8 .L13
+     /tmp/ccJeaSte.s:216    .text:00000000000000f8 .L14
+     /tmp/ccJeaSte.s:283    .text:0000000000000148 .L15
+     /tmp/ccJeaSte.s:250    .text:0000000000000120 .L17
+     /tmp/ccJeaSte.s:292    .text:0000000000000158 .L25
+     /tmp/ccJeaSte.s:304    .text:000000000000016c .L19
+     /tmp/ccJeaSte.s:239    .text:0000000000000110 .L16
+     /tmp/ccJeaSte.s:318    .text:000000000000017c .L20
+     /tmp/ccJeaSte.s:330    .text:000000000000018c .L21
+     /tmp/ccJeaSte.s:371    .text:00000000000001b8 .L26
+     /tmp/ccJeaSte.s:380    .text:00000000000001c4 .L29
+     /tmp/ccJeaSte.s:607    .text:0000000000000320 .L40
+     /tmp/ccJeaSte.s:619    .text:0000000000000328 .L41
+     /tmp/ccJeaSte.s:625    .text:0000000000000330 .L42
+     /tmp/ccJeaSte.s:630    .text:0000000000000338 .L43
+     /tmp/ccJeaSte.s:635    .text:0000000000000340 .L44
+     /tmp/ccJeaSte.s:538    .text:00000000000002bc .L48
+     /tmp/ccJeaSte.s:452    .text:0000000000000240 .L35
+     /tmp/ccJeaSte.s:557    .text:00000000000002dc .L49
+     /tmp/ccJeaSte.s:575    .text:00000000000002f4 .L50
+     /tmp/ccJeaSte.s:494    .text:000000000000027c .L38
+     /tmp/ccJeaSte.s:482    .text:000000000000026c .L37
+     /tmp/ccJeaSte.s:506    .text:000000000000028c .L39
+     /tmp/ccJeaSte.s:549    .text:00000000000002d0 .L33
+     /tmp/ccJeaSte.s:459    .text:0000000000000248 .L34
+     /tmp/ccJeaSte.s:525    .text:00000000000002a8 .L31
+     /tmp/ccJeaSte.s:1150   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccJeaSte.s:1941   .debug_str:0000000000000192 .LASF41
+     /tmp/ccJeaSte.s:1939   .debug_str:000000000000017a .LASF42
+     /tmp/ccJeaSte.s:1977   .debug_str:00000000000003ca .LASF43
+     /tmp/ccJeaSte.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccJeaSte.s:678    .text:0000000000000348 .Letext0
+     /tmp/ccJeaSte.s:1887   .debug_line:0000000000000000 .Ldebug_line0
+GAS LISTING /tmp/ccJeaSte.s 			page 25
 
 
-     /tmp/ccOBrmoo.s:1947   .debug_str:00000000000002ba .LASF0
-     /tmp/ccOBrmoo.s:1931   .debug_str:000000000000016e .LASF1
-     /tmp/ccOBrmoo.s:1927   .debug_str:000000000000012a .LASF2
-     /tmp/ccOBrmoo.s:1909   .debug_str:0000000000000083 .LASF4
-     /tmp/ccOBrmoo.s:1937   .debug_str:0000000000000196 .LASF3
-     /tmp/ccOBrmoo.s:1893   .debug_str:0000000000000023 .LASF5
-     /tmp/ccOBrmoo.s:1889   .debug_str:0000000000000000 .LASF6
-     /tmp/ccOBrmoo.s:1919   .debug_str:00000000000000e2 .LASF7
-     /tmp/ccOBrmoo.s:1949   .debug_str:00000000000002c7 .LASF8
-     /tmp/ccOBrmoo.s:1907   .debug_str:0000000000000075 .LASF9
-     /tmp/ccOBrmoo.s:1987   .debug_str:0000000000000425 .LASF10
-     /tmp/ccOBrmoo.s:1921   .debug_str:00000000000000f5 .LASF11
-     /tmp/ccOBrmoo.s:1973   .debug_str:00000000000003de .LASF12
-     /tmp/ccOBrmoo.s:1957   .debug_str:000000000000031a .LASF13
-     /tmp/ccOBrmoo.s:1933   .debug_str:0000000000000181 .LASF14
-     /tmp/ccOBrmoo.s:1915   .debug_str:00000000000000c2 .LASF15
-     /tmp/ccOBrmoo.s:1951   .debug_str:00000000000002d7 .LASF16
-     /tmp/ccOBrmoo.s:1917   .debug_str:00000000000000d8 .LASF44
-     /tmp/ccOBrmoo.s:1895   .debug_str:000000000000002a .LASF17
-     /tmp/ccOBrmoo.s:1983   .debug_str:000000000000040e .LASF18
-     /tmp/ccOBrmoo.s:1979   .debug_str:0000000000000400 .LASF19
-     /tmp/ccOBrmoo.s:1891   .debug_str:0000000000000013 .LASF45
-     /tmp/ccOBrmoo.s:1959   .debug_str:000000000000032a .LASF20
-     /tmp/ccOBrmoo.s:1905   .debug_str:0000000000000070 .LASF21
-     /tmp/ccOBrmoo.s:1897   .debug_str:000000000000002f .LASF22
-     /tmp/ccOBrmoo.s:1911   .debug_str:000000000000008a .LASF23
-     /tmp/ccOBrmoo.s:1965   .debug_str:0000000000000380 .LASF24
-     /tmp/ccOBrmoo.s:1985   .debug_str:0000000000000413 .LASF25
-     /tmp/ccOBrmoo.s:1975   .debug_str:00000000000003ee .LASF26
-     /tmp/ccOBrmoo.s:1967   .debug_str:000000000000038d .LASF28
-     /tmp/ccOBrmoo.s:1955   .debug_str:0000000000000311 .LASF27
-     /tmp/ccOBrmoo.s:1925   .debug_str:0000000000000109 .LASF29
-     /tmp/ccOBrmoo.s:1971   .debug_str:00000000000003d4 .LASF46
-     /tmp/ccOBrmoo.s:1963   .debug_str:0000000000000355 .LASF47
-     /tmp/ccOBrmoo.s:1901   .debug_str:0000000000000059 .LASF48
-     /tmp/ccOBrmoo.s:1961   .debug_str:000000000000032f .LASF49
-     /tmp/ccOBrmoo.s:1945   .debug_str:000000000000029f .LASF30
-     /tmp/ccOBrmoo.s:1943   .debug_str:0000000000000284 .LASF31
-     /tmp/ccOBrmoo.s:1899   .debug_str:0000000000000039 .LASF32
-     /tmp/ccOBrmoo.s:1969   .debug_str:00000000000003ae .LASF33
-     /tmp/ccOBrmoo.s:1953   .debug_str:00000000000002ed .LASF34
-     /tmp/ccOBrmoo.s:1913   .debug_str:0000000000000099 .LASF35
-     /tmp/ccOBrmoo.s:349    .text:0000000000000194 .LFB3
-     /tmp/ccOBrmoo.s:402    .text:00000000000001e8 .LFE3
-     /tmp/ccOBrmoo.s:1923   .debug_str:0000000000000104 .LASF36
-     /tmp/ccOBrmoo.s:408    .text:00000000000001e8 .LFB2
-     /tmp/ccOBrmoo.s:642    .text:0000000000000348 .LFE2
-     /tmp/ccOBrmoo.s:1635   .debug_loc:0000000000000000 .LLST6
-     /tmp/ccOBrmoo.s:1699   .debug_loc:0000000000000110 .LLST7
-     /tmp/ccOBrmoo.s:484    .text:000000000000026c .LBB34
-     /tmp/ccOBrmoo.s:519    .text:00000000000002a4 .LBE34
-     /tmp/ccOBrmoo.s:1935   .debug_str:000000000000018d .LASF37
-     /tmp/ccOBrmoo.s:1748   .debug_loc:00000000000001c6 .LLST8
-     /tmp/ccOBrmoo.s:513    .text:0000000000000298 .LVL24
-     /tmp/ccOBrmoo.s:518    .text:00000000000002a4 .LVL25
-     /tmp/ccOBrmoo.s:598    .text:0000000000000318 .LVL30
-     /tmp/ccOBrmoo.s:10     .text:0000000000000000 .LFB1
-GAS LISTING /tmp/ccOBrmoo.s 			page 26
+     /tmp/ccJeaSte.s:1947   .debug_str:000000000000028c .LASF0
+     /tmp/ccJeaSte.s:1931   .debug_str:000000000000014a .LASF1
+     /tmp/ccJeaSte.s:1927   .debug_str:000000000000012a .LASF2
+     /tmp/ccJeaSte.s:1909   .debug_str:0000000000000083 .LASF4
+     /tmp/ccJeaSte.s:1929   .debug_str:0000000000000138 .LASF3
+     /tmp/ccJeaSte.s:1893   .debug_str:0000000000000023 .LASF5
+     /tmp/ccJeaSte.s:1889   .debug_str:0000000000000000 .LASF6
+     /tmp/ccJeaSte.s:1919   .debug_str:00000000000000e2 .LASF7
+     /tmp/ccJeaSte.s:1949   .debug_str:0000000000000299 .LASF8
+     /tmp/ccJeaSte.s:1907   .debug_str:0000000000000075 .LASF9
+     /tmp/ccJeaSte.s:1987   .debug_str:0000000000000433 .LASF10
+     /tmp/ccJeaSte.s:1921   .debug_str:00000000000000f5 .LASF11
+     /tmp/ccJeaSte.s:1973   .debug_str:00000000000003b0 .LASF12
+     /tmp/ccJeaSte.s:1957   .debug_str:00000000000002ec .LASF13
+     /tmp/ccJeaSte.s:1935   .debug_str:0000000000000165 .LASF14
+     /tmp/ccJeaSte.s:1915   .debug_str:00000000000000c2 .LASF15
+     /tmp/ccJeaSte.s:1951   .debug_str:00000000000002a9 .LASF16
+     /tmp/ccJeaSte.s:1917   .debug_str:00000000000000d8 .LASF44
+     /tmp/ccJeaSte.s:1895   .debug_str:000000000000002a .LASF17
+     /tmp/ccJeaSte.s:1983   .debug_str:000000000000041c .LASF18
+     /tmp/ccJeaSte.s:1979   .debug_str:000000000000040e .LASF19
+     /tmp/ccJeaSte.s:1891   .debug_str:0000000000000013 .LASF45
+     /tmp/ccJeaSte.s:1959   .debug_str:00000000000002fc .LASF20
+     /tmp/ccJeaSte.s:1905   .debug_str:0000000000000070 .LASF21
+     /tmp/ccJeaSte.s:1897   .debug_str:000000000000002f .LASF22
+     /tmp/ccJeaSte.s:1911   .debug_str:000000000000008a .LASF23
+     /tmp/ccJeaSte.s:1965   .debug_str:0000000000000352 .LASF24
+     /tmp/ccJeaSte.s:1985   .debug_str:0000000000000421 .LASF25
+     /tmp/ccJeaSte.s:1975   .debug_str:00000000000003c0 .LASF26
+     /tmp/ccJeaSte.s:1967   .debug_str:000000000000035f .LASF28
+     /tmp/ccJeaSte.s:1955   .debug_str:00000000000002e3 .LASF27
+     /tmp/ccJeaSte.s:1925   .debug_str:0000000000000109 .LASF29
+     /tmp/ccJeaSte.s:1971   .debug_str:00000000000003a6 .LASF46
+     /tmp/ccJeaSte.s:1963   .debug_str:0000000000000327 .LASF47
+     /tmp/ccJeaSte.s:1901   .debug_str:0000000000000059 .LASF48
+     /tmp/ccJeaSte.s:1961   .debug_str:0000000000000301 .LASF49
+     /tmp/ccJeaSte.s:1945   .debug_str:0000000000000271 .LASF30
+     /tmp/ccJeaSte.s:1943   .debug_str:0000000000000256 .LASF31
+     /tmp/ccJeaSte.s:1899   .debug_str:0000000000000039 .LASF32
+     /tmp/ccJeaSte.s:1969   .debug_str:0000000000000380 .LASF33
+     /tmp/ccJeaSte.s:1953   .debug_str:00000000000002bf .LASF34
+     /tmp/ccJeaSte.s:1913   .debug_str:0000000000000099 .LASF35
+     /tmp/ccJeaSte.s:349    .text:0000000000000194 .LFB3
+     /tmp/ccJeaSte.s:402    .text:00000000000001e8 .LFE3
+     /tmp/ccJeaSte.s:1923   .debug_str:0000000000000104 .LASF36
+     /tmp/ccJeaSte.s:408    .text:00000000000001e8 .LFB2
+     /tmp/ccJeaSte.s:642    .text:0000000000000348 .LFE2
+     /tmp/ccJeaSte.s:1635   .debug_loc:0000000000000000 .LLST6
+     /tmp/ccJeaSte.s:1699   .debug_loc:0000000000000110 .LLST7
+     /tmp/ccJeaSte.s:484    .text:000000000000026c .LBB34
+     /tmp/ccJeaSte.s:519    .text:00000000000002a4 .LBE34
+     /tmp/ccJeaSte.s:1937   .debug_str:0000000000000171 .LASF37
+     /tmp/ccJeaSte.s:1748   .debug_loc:00000000000001c6 .LLST8
+     /tmp/ccJeaSte.s:513    .text:0000000000000298 .LVL24
+     /tmp/ccJeaSte.s:518    .text:00000000000002a4 .LVL25
+     /tmp/ccJeaSte.s:598    .text:0000000000000318 .LVL30
+     /tmp/ccJeaSte.s:10     .text:0000000000000000 .LFB1
+GAS LISTING /tmp/ccJeaSte.s 			page 26
 
 
-     /tmp/ccOBrmoo.s:343    .text:0000000000000194 .LFE1
-     /tmp/ccOBrmoo.s:1759   .debug_loc:00000000000001fc .LLST0
-     /tmp/ccOBrmoo.s:1977   .debug_str:00000000000003f8 .LASF38
-     /tmp/ccOBrmoo.s:1773   .debug_loc:0000000000000235 .LLST1
-     /tmp/ccOBrmoo.s:1867   .debug_ranges:0000000000000000 .Ldebug_ranges0
-     /tmp/ccOBrmoo.s:1798   .debug_loc:00000000000002a6 .LLST2
-     /tmp/ccOBrmoo.s:1903   .debug_str:0000000000000067 .LASF39
-     /tmp/ccOBrmoo.s:1809   .debug_loc:00000000000002dc .LLST3
-     /tmp/ccOBrmoo.s:192    .text:00000000000000d8 .LBB8
-     /tmp/ccOBrmoo.s:223    .text:0000000000000100 .LBE8
-     /tmp/ccOBrmoo.s:1981   .debug_str:0000000000000405 .LASF40
-     /tmp/ccOBrmoo.s:1832   .debug_loc:000000000000032d .LLST4
-     /tmp/ccOBrmoo.s:307    .text:000000000000016c .LBB17
-     /tmp/ccOBrmoo.s:335    .text:0000000000000194 .LBE17
-     /tmp/ccOBrmoo.s:1843   .debug_loc:0000000000000363 .LLST5
-     /tmp/ccOBrmoo.s:411    .text:00000000000001e8 .LVL20
-     /tmp/ccOBrmoo.s:433    .text:0000000000000220 .LVL21
-     /tmp/ccOBrmoo.s:537    .text:00000000000002bc .LVL27
-     /tmp/ccOBrmoo.s:606    .text:0000000000000320 .LVL31
-     /tmp/ccOBrmoo.s:616    .text:0000000000000324 .LVL32
-     /tmp/ccOBrmoo.s:618    .text:0000000000000328 .LVL33
-     /tmp/ccOBrmoo.s:622    .text:000000000000032c .LVL34
-     /tmp/ccOBrmoo.s:624    .text:0000000000000330 .LVL35
-     /tmp/ccOBrmoo.s:627    .text:0000000000000334 .LVL36
-     /tmp/ccOBrmoo.s:629    .text:0000000000000338 .LVL37
-     /tmp/ccOBrmoo.s:632    .text:000000000000033c .LVL38
-     /tmp/ccOBrmoo.s:571    .text:00000000000002f0 .LVL28
-     /tmp/ccOBrmoo.s:574    .text:00000000000002f4 .LVL29
-     /tmp/ccOBrmoo.s:634    .text:0000000000000340 .LVL39
-     /tmp/ccOBrmoo.s:638    .text:0000000000000344 .LVL40
-     /tmp/ccOBrmoo.s:483    .text:000000000000026c .LVL22
-     /tmp/ccOBrmoo.s:489    .text:0000000000000274 .LVL23
-     /tmp/ccOBrmoo.s:524    .text:00000000000002a8 .LVL26
-     /tmp/ccOBrmoo.s:14     .text:0000000000000000 .LVL0
-     /tmp/ccOBrmoo.s:39     .text:0000000000000028 .LVL2
-     /tmp/ccOBrmoo.s:33     .text:0000000000000020 .LVL1
-     /tmp/ccOBrmoo.s:104    .text:0000000000000084 .LVL4
-     /tmp/ccOBrmoo.s:123    .text:0000000000000090 .LVL5
-     /tmp/ccOBrmoo.s:154    .text:00000000000000b0 .LVL8
-     /tmp/ccOBrmoo.s:176    .text:00000000000000c4 .LVL11
-     /tmp/ccOBrmoo.s:215    .text:00000000000000f8 .LVL14
-     /tmp/ccOBrmoo.s:221    .text:0000000000000100 .LVL15
-     /tmp/ccOBrmoo.s:231    .text:0000000000000104 .LVL16
-     /tmp/ccOBrmoo.s:142    .text:00000000000000a4 .LVL7
-     /tmp/ccOBrmoo.s:59     .text:0000000000000040 .LVL3
-     /tmp/ccOBrmoo.s:133    .text:00000000000000a0 .LVL6
-     /tmp/ccOBrmoo.s:167    .text:00000000000000b8 .LVL10
-     /tmp/ccOBrmoo.s:189    .text:00000000000000d8 .LVL12
-     /tmp/ccOBrmoo.s:198    .text:00000000000000e0 .LVL13
-     /tmp/ccOBrmoo.s:305    .text:000000000000016c .LVL17
-     /tmp/ccOBrmoo.s:313    .text:0000000000000174 .LVL18
-     /tmp/ccOBrmoo.s:682    .debug_info:0000000000000000 .Ldebug_info0
-     /tmp/ccOBrmoo.s:36     .text:0000000000000020 .LBB2
-     /tmp/ccOBrmoo.s:111    .text:0000000000000088 .LBE2
-     /tmp/ccOBrmoo.s:113    .text:0000000000000088 .LBB29
-     /tmp/ccOBrmoo.s:145    .text:00000000000000a4 .LBE29
-     /tmp/ccOBrmoo.s:157    .text:00000000000000b0 .LBB30
-GAS LISTING /tmp/ccOBrmoo.s 			page 27
+     /tmp/ccJeaSte.s:343    .text:0000000000000194 .LFE1
+     /tmp/ccJeaSte.s:1759   .debug_loc:00000000000001fc .LLST0
+     /tmp/ccJeaSte.s:1933   .debug_str:000000000000015d .LASF38
+     /tmp/ccJeaSte.s:1773   .debug_loc:0000000000000235 .LLST1
+     /tmp/ccJeaSte.s:1867   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/ccJeaSte.s:1798   .debug_loc:00000000000002a6 .LLST2
+     /tmp/ccJeaSte.s:1903   .debug_str:0000000000000067 .LASF39
+     /tmp/ccJeaSte.s:1809   .debug_loc:00000000000002dc .LLST3
+     /tmp/ccJeaSte.s:192    .text:00000000000000d8 .LBB8
+     /tmp/ccJeaSte.s:223    .text:0000000000000100 .LBE8
+     /tmp/ccJeaSte.s:1981   .debug_str:0000000000000413 .LASF40
+     /tmp/ccJeaSte.s:1832   .debug_loc:000000000000032d .LLST4
+     /tmp/ccJeaSte.s:307    .text:000000000000016c .LBB17
+     /tmp/ccJeaSte.s:335    .text:0000000000000194 .LBE17
+     /tmp/ccJeaSte.s:1843   .debug_loc:0000000000000363 .LLST5
+     /tmp/ccJeaSte.s:411    .text:00000000000001e8 .LVL20
+     /tmp/ccJeaSte.s:433    .text:0000000000000220 .LVL21
+     /tmp/ccJeaSte.s:537    .text:00000000000002bc .LVL27
+     /tmp/ccJeaSte.s:606    .text:0000000000000320 .LVL31
+     /tmp/ccJeaSte.s:616    .text:0000000000000324 .LVL32
+     /tmp/ccJeaSte.s:618    .text:0000000000000328 .LVL33
+     /tmp/ccJeaSte.s:622    .text:000000000000032c .LVL34
+     /tmp/ccJeaSte.s:624    .text:0000000000000330 .LVL35
+     /tmp/ccJeaSte.s:627    .text:0000000000000334 .LVL36
+     /tmp/ccJeaSte.s:629    .text:0000000000000338 .LVL37
+     /tmp/ccJeaSte.s:632    .text:000000000000033c .LVL38
+     /tmp/ccJeaSte.s:571    .text:00000000000002f0 .LVL28
+     /tmp/ccJeaSte.s:574    .text:00000000000002f4 .LVL29
+     /tmp/ccJeaSte.s:634    .text:0000000000000340 .LVL39
+     /tmp/ccJeaSte.s:638    .text:0000000000000344 .LVL40
+     /tmp/ccJeaSte.s:483    .text:000000000000026c .LVL22
+     /tmp/ccJeaSte.s:489    .text:0000000000000274 .LVL23
+     /tmp/ccJeaSte.s:524    .text:00000000000002a8 .LVL26
+     /tmp/ccJeaSte.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccJeaSte.s:39     .text:0000000000000028 .LVL2
+     /tmp/ccJeaSte.s:33     .text:0000000000000020 .LVL1
+     /tmp/ccJeaSte.s:104    .text:0000000000000084 .LVL4
+     /tmp/ccJeaSte.s:123    .text:0000000000000090 .LVL5
+     /tmp/ccJeaSte.s:154    .text:00000000000000b0 .LVL8
+     /tmp/ccJeaSte.s:176    .text:00000000000000c4 .LVL11
+     /tmp/ccJeaSte.s:215    .text:00000000000000f8 .LVL14
+     /tmp/ccJeaSte.s:221    .text:0000000000000100 .LVL15
+     /tmp/ccJeaSte.s:231    .text:0000000000000104 .LVL16
+     /tmp/ccJeaSte.s:142    .text:00000000000000a4 .LVL7
+     /tmp/ccJeaSte.s:59     .text:0000000000000040 .LVL3
+     /tmp/ccJeaSte.s:133    .text:00000000000000a0 .LVL6
+     /tmp/ccJeaSte.s:167    .text:00000000000000b8 .LVL10
+     /tmp/ccJeaSte.s:189    .text:00000000000000d8 .LVL12
+     /tmp/ccJeaSte.s:198    .text:00000000000000e0 .LVL13
+     /tmp/ccJeaSte.s:305    .text:000000000000016c .LVL17
+     /tmp/ccJeaSte.s:313    .text:0000000000000174 .LVL18
+     /tmp/ccJeaSte.s:682    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccJeaSte.s:36     .text:0000000000000020 .LBB2
+     /tmp/ccJeaSte.s:111    .text:0000000000000088 .LBE2
+     /tmp/ccJeaSte.s:113    .text:0000000000000088 .LBB29
+     /tmp/ccJeaSte.s:145    .text:00000000000000a4 .LBE29
+     /tmp/ccJeaSte.s:157    .text:00000000000000b0 .LBB30
+GAS LISTING /tmp/ccJeaSte.s 			page 27
 
 
-     /tmp/ccOBrmoo.s:261    .text:000000000000012c .LBE30
-     /tmp/ccOBrmoo.s:263    .text:000000000000012c .LBB31
-     /tmp/ccOBrmoo.s:341    .text:0000000000000194 .LBE31
-     /tmp/ccOBrmoo.s:52     .text:0000000000000038 .LBB5
-     /tmp/ccOBrmoo.s:108    .text:0000000000000088 .LBE5
-     /tmp/ccOBrmoo.s:116    .text:0000000000000088 .LBB12
-     /tmp/ccOBrmoo.s:137    .text:00000000000000a0 .LBE12
-     /tmp/ccOBrmoo.s:171    .text:00000000000000b8 .LBB13
-     /tmp/ccOBrmoo.s:226    .text:0000000000000100 .LBE13
+     /tmp/ccJeaSte.s:261    .text:000000000000012c .LBE30
+     /tmp/ccJeaSte.s:263    .text:000000000000012c .LBB31
+     /tmp/ccJeaSte.s:341    .text:0000000000000194 .LBE31
+     /tmp/ccJeaSte.s:52     .text:0000000000000038 .LBB5
+     /tmp/ccJeaSte.s:108    .text:0000000000000088 .LBE5
+     /tmp/ccJeaSte.s:116    .text:0000000000000088 .LBB12
+     /tmp/ccJeaSte.s:137    .text:00000000000000a0 .LBE12
+     /tmp/ccJeaSte.s:171    .text:00000000000000b8 .LBB13
+     /tmp/ccJeaSte.s:226    .text:0000000000000100 .LBE13
 
 UNDEFINED SYMBOLS
 HEAP_START_ADDR

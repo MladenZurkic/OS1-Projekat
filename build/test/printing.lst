@@ -1,0 +1,886 @@
+GAS LISTING /tmp/ccMSDMms.s 			page 1
+
+
+   1              		.file	"printing.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.align	2
+   7              		.globl	_Z11printStringPKc
+   9              	_Z11printStringPKc:
+  10              	.LFB37:
+  11              		.file 1 "test/printing.cpp"
+   1:test/printing.cpp **** //
+   2:test/printing.cpp **** // Created by os on 5/18/22.
+   3:test/printing.cpp **** //
+   4:test/printing.cpp **** 
+   5:test/printing.cpp **** #include "printing.hpp"
+   6:test/printing.cpp **** 
+   7:test/printing.cpp **** uint64 lockPrint = 0;
+   8:test/printing.cpp **** 
+   9:test/printing.cpp **** #define LOCK() while(copy_and_swap(lockPrint, 0, 1)) thread_dispatch()
+  10:test/printing.cpp **** #define UNLOCK() while(copy_and_swap(lockPrint, 1, 0))
+  11:test/printing.cpp **** 
+  12:test/printing.cpp **** void printString(char const *string)
+  13:test/printing.cpp **** {
+  12              		.loc 1 13 1
+  13              		.cfi_startproc
+  14              	.LVL0:
+  15 0000 130101FE 		addi	sp,sp,-32
+  16              		.cfi_def_cfa_offset 32
+  17 0004 233C1100 		sd	ra,24(sp)
+  18 0008 23388100 		sd	s0,16(sp)
+  19 000c 23349100 		sd	s1,8(sp)
+  20              		.cfi_offset 1, -8
+  21              		.cfi_offset 8, -16
+  22              		.cfi_offset 9, -24
+  23 0010 13040102 		addi	s0,sp,32
+  24              		.cfi_def_cfa 8, 0
+  25 0014 93040500 		mv	s1,a0
+  26              	.LVL1:
+  27              	.L3:
+  14:test/printing.cpp ****     LOCK();
+  28              		.loc 1 14 5 discriminator 2
+  29              		.loc 1 14 5 discriminator 2
+  30 0018 13061000 		li	a2,1
+  31 001c 93050000 		li	a1,0
+  32 0020 17050000 		lla	a0,.LANCHOR0
+  32      13050500 
+  33 0028 97000000 		call	copy_and_swap@plt
+  33      E7800000 
+  34              	.LVL2:
+  35 0030 63080500 		beqz	a0,.L2
+  36              		.loc 1 14 5 discriminator 1
+  37 0034 97000000 		call	_Z15thread_dispatchv@plt
+  37      E7800000 
+  38              	.LVL3:
+  39 003c 6FF0DFFD 		j	.L3
+  40              	.L2:
+  15:test/printing.cpp ****     while (*string != '\0')
+GAS LISTING /tmp/ccMSDMms.s 			page 2
+
+
+  41              		.loc 1 15 5
+  42              		.loc 1 15 20
+  43              		.loc 1 15 12 is_stmt 0
+  44 0040 03C50400 		lbu	a0,0(s1)
+  45              		.loc 1 15 20
+  46 0044 630A0500 		beqz	a0,.L4
+  16:test/printing.cpp ****     {
+  17:test/printing.cpp ****         putc(*string);
+  47              		.loc 1 17 9 is_stmt 1
+  48              		.loc 1 17 13 is_stmt 0
+  49 0048 97000000 		call	_Z4putcc@plt
+  49      E7800000 
+  50              	.LVL4:
+  18:test/printing.cpp ****         string++;
+  51              		.loc 1 18 9 is_stmt 1
+  52              		.loc 1 18 15 is_stmt 0
+  53 0050 93841400 		addi	s1,s1,1
+  54              	.LVL5:
+  15:test/printing.cpp ****     while (*string != '\0')
+  55              		.loc 1 15 5
+  56 0054 6FF0DFFE 		j	.L2
+  57              	.L4:
+  19:test/printing.cpp ****     }
+  20:test/printing.cpp ****     UNLOCK();
+  58              		.loc 1 20 5 is_stmt 1
+  59              		.loc 1 20 5
+  60 0058 13060000 		li	a2,0
+  61 005c 93051000 		li	a1,1
+  62 0060 17050000 		lla	a0,.LANCHOR0
+  62      13050500 
+  63 0068 97000000 		call	copy_and_swap@plt
+  63      E7800000 
+  64              	.LVL6:
+  65 0070 E31405FE 		bnez	a0,.L4
+  21:test/printing.cpp **** }
+  66              		.loc 1 21 1 is_stmt 0
+  67 0074 83308101 		ld	ra,24(sp)
+  68              		.cfi_restore 1
+  69 0078 03340101 		ld	s0,16(sp)
+  70              		.cfi_restore 8
+  71              		.cfi_def_cfa 2, 32
+  72 007c 83348100 		ld	s1,8(sp)
+  73              		.cfi_restore 9
+  74              	.LVL7:
+  75 0080 13010102 		addi	sp,sp,32
+  76              		.cfi_def_cfa_offset 0
+  77 0084 67800000 		jr	ra
+  78              		.cfi_endproc
+  79              	.LFE37:
+  81              		.align	2
+  82              		.globl	_Z9getStringPci
+  84              	_Z9getStringPci:
+  85              	.LFB38:
+  22:test/printing.cpp **** 
+  23:test/printing.cpp **** char* getString(char *buf, int max) {
+  86              		.loc 1 23 37 is_stmt 1
+  87              		.cfi_startproc
+GAS LISTING /tmp/ccMSDMms.s 			page 3
+
+
+  88              	.LVL8:
+  89 0088 130101FD 		addi	sp,sp,-48
+  90              		.cfi_def_cfa_offset 48
+  91 008c 23341102 		sd	ra,40(sp)
+  92 0090 23308102 		sd	s0,32(sp)
+  93 0094 233C9100 		sd	s1,24(sp)
+  94 0098 23382101 		sd	s2,16(sp)
+  95 009c 23343101 		sd	s3,8(sp)
+  96 00a0 23304101 		sd	s4,0(sp)
+  97              		.cfi_offset 1, -8
+  98              		.cfi_offset 8, -16
+  99              		.cfi_offset 9, -24
+ 100              		.cfi_offset 18, -32
+ 101              		.cfi_offset 19, -40
+ 102              		.cfi_offset 20, -48
+ 103 00a4 13040103 		addi	s0,sp,48
+ 104              		.cfi_def_cfa 8, 0
+ 105 00a8 93090500 		mv	s3,a0
+ 106 00ac 138A0500 		mv	s4,a1
+ 107              	.LVL9:
+ 108              	.L8:
+  24:test/printing.cpp ****     LOCK();
+ 109              		.loc 1 24 5 discriminator 2
+ 110              		.loc 1 24 5 discriminator 2
+ 111 00b0 13061000 		li	a2,1
+ 112 00b4 93050000 		li	a1,0
+ 113 00b8 17050000 		lla	a0,.LANCHOR0
+ 113      13050500 
+ 114 00c0 97000000 		call	copy_and_swap@plt
+ 114      E7800000 
+ 115              	.LVL10:
+ 116 00c8 63080500 		beqz	a0,.L11
+ 117              		.loc 1 24 5 discriminator 1
+ 118 00cc 97000000 		call	_Z15thread_dispatchv@plt
+ 118      E7800000 
+ 119              	.LVL11:
+ 120 00d4 6FF0DFFD 		j	.L8
+ 121              	.L11:
+  25:test/printing.cpp ****     int i, cc;
+  26:test/printing.cpp ****     char c;
+  27:test/printing.cpp **** 
+  28:test/printing.cpp ****     for(i=0; i+1 < max; ){
+ 122              		.loc 1 28 10 is_stmt 0
+ 123 00d8 13090000 		li	s2,0
+ 124              	.L7:
+ 125              	.LVL12:
+ 126              		.loc 1 28 18 is_stmt 1 discriminator 1
+ 127 00dc 93040900 		mv	s1,s2
+ 128              		.loc 1 28 15 is_stmt 0 discriminator 1
+ 129 00e0 1B091900 		addiw	s2,s2,1
+ 130              	.LVL13:
+ 131              		.loc 1 28 18 discriminator 1
+ 132 00e4 635A4903 		bge	s2,s4,.L9
+  29:test/printing.cpp ****         cc = getc();
+ 133              		.loc 1 29 9 is_stmt 1
+ 134              		.loc 1 29 18 is_stmt 0
+ 135 00e8 97000000 		call	_Z4getcv@plt
+GAS LISTING /tmp/ccMSDMms.s 			page 4
+
+
+ 135      E7800000 
+ 136              	.LVL14:
+  30:test/printing.cpp ****         if(cc < 1)
+ 137              		.loc 1 30 9 is_stmt 1
+ 138 00f0 63040502 		beqz	a0,.L9
+  31:test/printing.cpp ****             break;
+  32:test/printing.cpp ****         c = cc;
+ 139              		.loc 1 32 9
+ 140              	.LVL15:
+  33:test/printing.cpp ****         buf[i++] = c;
+ 141              		.loc 1 33 9
+ 142              		.loc 1 33 16 is_stmt 0
+ 143 00f4 B3849900 		add	s1,s3,s1
+ 144              		.loc 1 33 18
+ 145 00f8 2380A400 		sb	a0,0(s1)
+  34:test/printing.cpp ****         if(c == '\n' || c == '\r')
+ 146              		.loc 1 34 9 is_stmt 1
+ 147 00fc 9307A000 		li	a5,10
+ 148 0100 630AF500 		beq	a0,a5,.L12
+ 149              		.loc 1 34 22 is_stmt 0 discriminator 1
+ 150 0104 9307D000 		li	a5,13
+ 151 0108 E31AF5FC 		bne	a0,a5,.L7
+  33:test/printing.cpp ****         buf[i++] = c;
+ 152              		.loc 1 33 14
+ 153 010c 93040900 		mv	s1,s2
+ 154 0110 6F008000 		j	.L9
+ 155              	.L12:
+ 156 0114 93040900 		mv	s1,s2
+ 157              	.LVL16:
+ 158              	.L9:
+  35:test/printing.cpp ****             break;
+  36:test/printing.cpp ****     }
+  37:test/printing.cpp ****     buf[i] = '\0';
+ 159              		.loc 1 37 5 is_stmt 1
+ 160              		.loc 1 37 10 is_stmt 0
+ 161 0118 B3849900 		add	s1,s3,s1
+ 162              	.LVL17:
+ 163              		.loc 1 37 12
+ 164 011c 23800400 		sb	zero,0(s1)
+ 165              	.L10:
+  38:test/printing.cpp **** 
+  39:test/printing.cpp ****     UNLOCK();
+ 166              		.loc 1 39 5 is_stmt 1
+ 167              		.loc 1 39 5
+ 168 0120 13060000 		li	a2,0
+ 169 0124 93051000 		li	a1,1
+ 170 0128 17050000 		lla	a0,.LANCHOR0
+ 170      13050500 
+ 171 0130 97000000 		call	copy_and_swap@plt
+ 171      E7800000 
+ 172              	.LVL18:
+ 173 0138 E31405FE 		bnez	a0,.L10
+  40:test/printing.cpp ****     return buf;
+ 174              		.loc 1 40 5
+  41:test/printing.cpp **** }
+ 175              		.loc 1 41 1 is_stmt 0
+ 176 013c 13850900 		mv	a0,s3
+GAS LISTING /tmp/ccMSDMms.s 			page 5
+
+
+ 177 0140 83308102 		ld	ra,40(sp)
+ 178              		.cfi_restore 1
+ 179 0144 03340102 		ld	s0,32(sp)
+ 180              		.cfi_restore 8
+ 181              		.cfi_def_cfa 2, 48
+ 182 0148 83348101 		ld	s1,24(sp)
+ 183              		.cfi_restore 9
+ 184 014c 03390101 		ld	s2,16(sp)
+ 185              		.cfi_restore 18
+ 186 0150 83398100 		ld	s3,8(sp)
+ 187              		.cfi_restore 19
+ 188              	.LVL19:
+ 189 0154 033A0100 		ld	s4,0(sp)
+ 190              		.cfi_restore 20
+ 191 0158 13010103 		addi	sp,sp,48
+ 192              		.cfi_def_cfa_offset 0
+ 193 015c 67800000 		jr	ra
+ 194              		.cfi_endproc
+ 195              	.LFE38:
+ 197              		.align	2
+ 198              		.globl	_Z11stringToIntPKc
+ 200              	_Z11stringToIntPKc:
+ 201              	.LFB39:
+  42:test/printing.cpp **** 
+  43:test/printing.cpp **** int stringToInt(const char *s) {
+ 202              		.loc 1 43 32 is_stmt 1
+ 203              		.cfi_startproc
+ 204              	.LVL20:
+ 205 0160 130101FF 		addi	sp,sp,-16
+ 206              		.cfi_def_cfa_offset 16
+ 207 0164 23348100 		sd	s0,8(sp)
+ 208              		.cfi_offset 8, -8
+ 209 0168 13040101 		addi	s0,sp,16
+ 210              		.cfi_def_cfa 8, 0
+ 211 016c 93060500 		mv	a3,a0
+  44:test/printing.cpp ****     int n;
+ 212              		.loc 1 44 5
+  45:test/printing.cpp **** 
+  46:test/printing.cpp ****     n = 0;
+ 213              		.loc 1 46 5
+ 214              	.LVL21:
+ 215              		.loc 1 46 7 is_stmt 0
+ 216 0170 13050000 		li	a0,0
+ 217              	.LVL22:
+ 218              	.L16:
+  47:test/printing.cpp ****     while ('0' <= *s && *s <= '9')
+ 219              		.loc 1 47 5 is_stmt 1
+ 220              		.loc 1 47 22
+ 221              		.loc 1 47 19 is_stmt 0
+ 222 0174 03C60600 		lbu	a2,0(a3)
+ 223              		.loc 1 47 22
+ 224 0178 1B0706FD 		addiw	a4,a2,-48
+ 225 017c 1377F70F 		andi	a4,a4,0xff
+ 226 0180 93079000 		li	a5,9
+ 227 0184 63E0E702 		bgtu	a4,a5,.L15
+  48:test/printing.cpp ****         n = n * 10 + *s++ - '0';
+ 228              		.loc 1 48 9 is_stmt 1
+GAS LISTING /tmp/ccMSDMms.s 			page 6
+
+
+ 229              		.loc 1 48 15 is_stmt 0
+ 230 0188 9B172500 		slliw	a5,a0,2
+ 231 018c BB87A700 		addw	a5,a5,a0
+ 232 0190 9B971700 		slliw	a5,a5,1
+ 233              		.loc 1 48 24
+ 234 0194 93861600 		addi	a3,a3,1
+ 235              	.LVL23:
+ 236              		.loc 1 48 20
+ 237 0198 BB87C700 		addw	a5,a5,a2
+ 238              		.loc 1 48 11
+ 239 019c 1B8507FD 		addiw	a0,a5,-48
+ 240              	.LVL24:
+  47:test/printing.cpp ****     while ('0' <= *s && *s <= '9')
+ 241              		.loc 1 47 5
+ 242 01a0 6FF05FFD 		j	.L16
+ 243              	.LVL25:
+ 244              	.L15:
+  49:test/printing.cpp ****     return n;
+ 245              		.loc 1 49 5 is_stmt 1
+  50:test/printing.cpp **** }
+ 246              		.loc 1 50 1 is_stmt 0
+ 247 01a4 03348100 		ld	s0,8(sp)
+ 248              		.cfi_restore 8
+ 249              		.cfi_def_cfa 2, 16
+ 250 01a8 13010101 		addi	sp,sp,16
+ 251              		.cfi_def_cfa_offset 0
+ 252 01ac 67800000 		jr	ra
+ 253              		.cfi_endproc
+ 254              	.LFE39:
+ 256              		.align	2
+ 257              		.globl	_Z8printIntiii
+ 259              	_Z8printIntiii:
+ 260              	.LFB40:
+  51:test/printing.cpp **** 
+  52:test/printing.cpp **** char digits[] = "0123456789ABCDEF";
+  53:test/printing.cpp **** 
+  54:test/printing.cpp **** void printInt(int xx, int base, int sgn)
+  55:test/printing.cpp **** {
+ 261              		.loc 1 55 1 is_stmt 1
+ 262              		.cfi_startproc
+ 263              	.LVL26:
+ 264 01b0 130101FC 		addi	sp,sp,-64
+ 265              		.cfi_def_cfa_offset 64
+ 266 01b4 233C1102 		sd	ra,56(sp)
+ 267 01b8 23388102 		sd	s0,48(sp)
+ 268 01bc 23349102 		sd	s1,40(sp)
+ 269 01c0 23302103 		sd	s2,32(sp)
+ 270 01c4 233C3101 		sd	s3,24(sp)
+ 271              		.cfi_offset 1, -8
+ 272              		.cfi_offset 8, -16
+ 273              		.cfi_offset 9, -24
+ 274              		.cfi_offset 18, -32
+ 275              		.cfi_offset 19, -40
+ 276 01c8 13040104 		addi	s0,sp,64
+ 277              		.cfi_def_cfa 8, 0
+ 278 01cc 93040500 		mv	s1,a0
+ 279 01d0 13890500 		mv	s2,a1
+GAS LISTING /tmp/ccMSDMms.s 			page 7
+
+
+ 280 01d4 93090600 		mv	s3,a2
+ 281              	.LVL27:
+ 282              	.L20:
+  56:test/printing.cpp ****     LOCK();
+ 283              		.loc 1 56 5
+ 284              		.loc 1 56 5
+ 285 01d8 13061000 		li	a2,1
+ 286 01dc 93050000 		li	a1,0
+ 287 01e0 17050000 		lla	a0,.LANCHOR0
+ 287      13050500 
+ 288 01e8 97000000 		call	copy_and_swap@plt
+ 288      E7800000 
+ 289              	.LVL28:
+ 290 01f0 63080500 		beqz	a0,.L19
+ 291              		.loc 1 56 5 discriminator 2
+ 292 01f4 97000000 		call	_Z15thread_dispatchv@plt
+ 292      E7800000 
+ 293              	.LVL29:
+ 294 01fc 6FF0DFFD 		j	.L20
+ 295              	.L19:
+  57:test/printing.cpp ****     char buf[16];
+ 296              		.loc 1 57 5
+  58:test/printing.cpp ****     int i, neg;
+ 297              		.loc 1 58 5
+  59:test/printing.cpp ****     uint x;
+ 298              		.loc 1 59 5
+  60:test/printing.cpp **** 
+  61:test/printing.cpp ****     neg = 0;
+ 299              		.loc 1 61 5
+ 300              	.LVL30:
+  62:test/printing.cpp ****     if(sgn && xx < 0){
+ 301              		.loc 1 62 5
+ 302 0200 63840900 		beqz	s3,.L21
+ 303              		.loc 1 62 12 is_stmt 0 discriminator 1
+ 304 0204 63C40408 		bltz	s1,.L28
+ 305              	.L21:
+  63:test/printing.cpp ****         neg = 1;
+  64:test/printing.cpp ****         x = -xx;
+  65:test/printing.cpp ****     } else {
+  66:test/printing.cpp ****         x = xx;
+ 306              		.loc 1 66 9 is_stmt 1
+ 307              		.loc 1 66 11 is_stmt 0
+ 308 0208 1B850400 		sext.w	a0,s1
+ 309              	.LVL31:
+  61:test/printing.cpp ****     if(sgn && xx < 0){
+ 310              		.loc 1 61 9
+ 311 020c 93050000 		li	a1,0
+ 312              	.LVL32:
+ 313              	.L22:
+  67:test/printing.cpp ****     }
+  68:test/printing.cpp **** 
+  69:test/printing.cpp ****     i = 0;
+ 314              		.loc 1 69 5 is_stmt 1
+ 315              		.loc 1 69 7 is_stmt 0
+ 316 0210 93040000 		li	s1,0
+ 317              	.LVL33:
+ 318              	.L23:
+GAS LISTING /tmp/ccMSDMms.s 			page 8
+
+
+  70:test/printing.cpp ****     do{
+ 319              		.loc 1 70 5 is_stmt 1
+  71:test/printing.cpp ****         buf[i++] = digits[x % base];
+ 320              		.loc 1 71 9
+ 321              		.loc 1 71 31 is_stmt 0
+ 322 0214 9B070900 		sext.w	a5,s2
+ 323              		.loc 1 71 29
+ 324 0218 3B772503 		remuw	a4,a0,s2
+ 325 021c 13860400 		mv	a2,s1
+ 326              		.loc 1 71 14
+ 327 0220 9B841400 		addiw	s1,s1,1
+ 328              	.LVL34:
+ 329              		.loc 1 71 35
+ 330 0224 93160702 		slli	a3,a4,32
+ 331 0228 93D60602 		srli	a3,a3,32
+ 332 022c 17070000 		lla	a4,.LANCHOR1
+ 332      13070700 
+ 333 0234 3307D700 		add	a4,a4,a3
+ 334 0238 83460700 		lbu	a3,0(a4)
+ 335              		.loc 1 71 18
+ 336 023c 130704FD 		addi	a4,s0,-48
+ 337 0240 3307C700 		add	a4,a4,a2
+ 338 0244 2308D7FE 		sb	a3,-16(a4)
+  72:test/printing.cpp ****     }while((x /= base) != 0);
+ 339              		.loc 1 72 24 is_stmt 1
+ 340 0248 1B070500 		sext.w	a4,a0
+ 341              		.loc 1 72 15 is_stmt 0
+ 342 024c 3B552503 		divuw	a0,a0,s2
+ 343              	.LVL35:
+ 344              		.loc 1 72 24
+ 345 0250 E372F7FC 		bleu	a5,a4,.L23
+  73:test/printing.cpp ****     if(neg)
+ 346              		.loc 1 73 5 is_stmt 1
+ 347 0254 638C0500 		beqz	a1,.L26
+  74:test/printing.cpp ****         buf[i++] = '-';
+ 348              		.loc 1 74 9
+ 349              	.LVL36:
+ 350              		.loc 1 74 18 is_stmt 0
+ 351 0258 930704FD 		addi	a5,s0,-48
+ 352 025c B3849700 		add	s1,a5,s1
+ 353 0260 9307D002 		li	a5,45
+ 354 0264 2388F4FE 		sb	a5,-16(s1)
+ 355              		.loc 1 74 14
+ 356 0268 9B042600 		addiw	s1,a2,2
+ 357              	.LVL37:
+ 358              	.L26:
+  75:test/printing.cpp **** 
+  76:test/printing.cpp ****     while(--i >= 0)
+ 359              		.loc 1 76 5 is_stmt 1
+ 360              		.loc 1 76 15
+ 361 026c 9B84F4FF 		addiw	s1,s1,-1
+ 362              	.LVL38:
+ 363 0270 63C40402 		bltz	s1,.L25
+  77:test/printing.cpp ****         putc(buf[i]);
+ 364              		.loc 1 77 9
+ 365              		.loc 1 77 13 is_stmt 0
+ 366 0274 930704FD 		addi	a5,s0,-48
+GAS LISTING /tmp/ccMSDMms.s 			page 9
+
+
+ 367 0278 B3879700 		add	a5,a5,s1
+ 368 027c 03C507FF 		lbu	a0,-16(a5)
+ 369 0280 97000000 		call	_Z4putcc@plt
+ 369      E7800000 
+ 370              	.LVL39:
+ 371 0288 6FF05FFE 		j	.L26
+ 372              	.LVL40:
+ 373              	.L28:
+  63:test/printing.cpp ****         x = -xx;
+ 374              		.loc 1 63 9 is_stmt 1
+  64:test/printing.cpp ****     } else {
+ 375              		.loc 1 64 9
+  64:test/printing.cpp ****     } else {
+ 376              		.loc 1 64 11 is_stmt 0
+ 377 028c 3B059040 		negw	a0,s1
+ 378              	.LVL41:
+  63:test/printing.cpp ****         x = -xx;
+ 379              		.loc 1 63 13
+ 380 0290 93051000 		li	a1,1
+  64:test/printing.cpp ****     } else {
+ 381              		.loc 1 64 11
+ 382 0294 6FF0DFF7 		j	.L22
+ 383              	.LVL42:
+ 384              	.L25:
+  78:test/printing.cpp **** 
+  79:test/printing.cpp ****     UNLOCK();
+ 385              		.loc 1 79 5 is_stmt 1
+ 386              		.loc 1 79 5
+ 387 0298 13060000 		li	a2,0
+ 388 029c 93051000 		li	a1,1
+ 389 02a0 17050000 		lla	a0,.LANCHOR0
+ 389      13050500 
+ 390 02a8 97000000 		call	copy_and_swap@plt
+ 390      E7800000 
+ 391              	.LVL43:
+ 392 02b0 E31405FE 		bnez	a0,.L25
+  80:test/printing.cpp **** }...
+ 393              		.loc 1 80 1 is_stmt 0
+ 394 02b4 83308103 		ld	ra,56(sp)
+ 395              		.cfi_restore 1
+ 396 02b8 03340103 		ld	s0,48(sp)
+ 397              		.cfi_restore 8
+ 398              		.cfi_def_cfa 2, 64
+ 399 02bc 83348102 		ld	s1,40(sp)
+ 400              		.cfi_restore 9
+ 401 02c0 03390102 		ld	s2,32(sp)
+ 402              		.cfi_restore 18
+ 403 02c4 83398101 		ld	s3,24(sp)
+ 404              		.cfi_restore 19
+ 405 02c8 13010104 		addi	sp,sp,64
+ 406              		.cfi_def_cfa_offset 0
+ 407 02cc 67800000 		jr	ra
+ 408              		.cfi_endproc
+ 409              	.LFE40:
+ 411              		.globl	digits
+ 412              		.globl	lockPrint
+ 413              		.data
+GAS LISTING /tmp/ccMSDMms.s 			page 10
+
+
+ 414              		.align	3
+ 415              		.set	.LANCHOR1,. + 0
+ 418              	digits:
+ 419 0000 30313233 		.string	"0123456789ABCDEF"
+ 419      34353637 
+ 419      38394142 
+ 419      43444546 
+ 419      00
+ 420              		.bss
+ 421              		.align	3
+ 422              		.set	.LANCHOR0,. + 0
+ 425              	lockPrint:
+ 426 0000 00000000 		.zero	8
+ 426      00000000 
+ 427              		.text
+ 428              	.Letext0:
+ 429              		.file 2 "test/../h/../lib/hw.h"
+ 430              		.file 3 "test/printing.hpp"
+ 431              		.file 4 "test/../h/syscall_c.hpp"
+GAS LISTING /tmp/ccMSDMms.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 printing.cpp
+     /tmp/ccMSDMms.s:9      .text:0000000000000000 _Z11printStringPKc
+     /tmp/ccMSDMms.s:13     .text:0000000000000000 .L0 
+     /tmp/ccMSDMms.s:15     .text:0000000000000000 .L0 
+     /tmp/ccMSDMms.s:16     .text:0000000000000004 .L0 
+     /tmp/ccMSDMms.s:20     .text:0000000000000010 .L0 
+     /tmp/ccMSDMms.s:21     .text:0000000000000010 .L0 
+     /tmp/ccMSDMms.s:22     .text:0000000000000010 .L0 
+     /tmp/ccMSDMms.s:24     .text:0000000000000014 .L0 
+     /tmp/ccMSDMms.s:29     .text:0000000000000018 .L0 
+     /tmp/ccMSDMms.s:30     .text:0000000000000018 .L0 
+     /tmp/ccMSDMms.s:37     .text:0000000000000034 .L0 
+     /tmp/ccMSDMms.s:42     .text:0000000000000040 .L0 
+     /tmp/ccMSDMms.s:43     .text:0000000000000040 .L0 
+     /tmp/ccMSDMms.s:44     .text:0000000000000040 .L0 
+     /tmp/ccMSDMms.s:46     .text:0000000000000044 .L0 
+     /tmp/ccMSDMms.s:48     .text:0000000000000048 .L0 
+     /tmp/ccMSDMms.s:49     .text:0000000000000048 .L0 
+     /tmp/ccMSDMms.s:52     .text:0000000000000050 .L0 
+     /tmp/ccMSDMms.s:53     .text:0000000000000050 .L0 
+     /tmp/ccMSDMms.s:56     .text:0000000000000054 .L0 
+     /tmp/ccMSDMms.s:59     .text:0000000000000058 .L0 
+     /tmp/ccMSDMms.s:60     .text:0000000000000058 .L0 
+     /tmp/ccMSDMms.s:67     .text:0000000000000074 .L0 
+     /tmp/ccMSDMms.s:68     .text:0000000000000078 .L0 
+     /tmp/ccMSDMms.s:70     .text:000000000000007c .L0 
+     /tmp/ccMSDMms.s:71     .text:000000000000007c .L0 
+     /tmp/ccMSDMms.s:73     .text:0000000000000080 .L0 
+     /tmp/ccMSDMms.s:76     .text:0000000000000084 .L0 
+     /tmp/ccMSDMms.s:78     .text:0000000000000088 .L0 
+     /tmp/ccMSDMms.s:84     .text:0000000000000088 _Z9getStringPci
+     /tmp/ccMSDMms.s:87     .text:0000000000000088 .L0 
+     /tmp/ccMSDMms.s:89     .text:0000000000000088 .L0 
+     /tmp/ccMSDMms.s:90     .text:000000000000008c .L0 
+     /tmp/ccMSDMms.s:97     .text:00000000000000a4 .L0 
+     /tmp/ccMSDMms.s:98     .text:00000000000000a4 .L0 
+     /tmp/ccMSDMms.s:99     .text:00000000000000a4 .L0 
+     /tmp/ccMSDMms.s:100    .text:00000000000000a4 .L0 
+     /tmp/ccMSDMms.s:101    .text:00000000000000a4 .L0 
+     /tmp/ccMSDMms.s:102    .text:00000000000000a4 .L0 
+     /tmp/ccMSDMms.s:104    .text:00000000000000a8 .L0 
+     /tmp/ccMSDMms.s:110    .text:00000000000000b0 .L0 
+     /tmp/ccMSDMms.s:111    .text:00000000000000b0 .L0 
+     /tmp/ccMSDMms.s:118    .text:00000000000000cc .L0 
+     /tmp/ccMSDMms.s:123    .text:00000000000000d8 .L0 
+     /tmp/ccMSDMms.s:127    .text:00000000000000dc .L0 
+     /tmp/ccMSDMms.s:129    .text:00000000000000e0 .L0 
+     /tmp/ccMSDMms.s:132    .text:00000000000000e4 .L0 
+     /tmp/ccMSDMms.s:134    .text:00000000000000e8 .L0 
+     /tmp/ccMSDMms.s:135    .text:00000000000000e8 .L0 
+     /tmp/ccMSDMms.s:138    .text:00000000000000f0 .L0 
+     /tmp/ccMSDMms.s:141    .text:00000000000000f4 .L0 
+     /tmp/ccMSDMms.s:142    .text:00000000000000f4 .L0 
+     /tmp/ccMSDMms.s:143    .text:00000000000000f4 .L0 
+     /tmp/ccMSDMms.s:145    .text:00000000000000f8 .L0 
+     /tmp/ccMSDMms.s:147    .text:00000000000000fc .L0 
+GAS LISTING /tmp/ccMSDMms.s 			page 12
+
+
+     /tmp/ccMSDMms.s:150    .text:0000000000000104 .L0 
+     /tmp/ccMSDMms.s:153    .text:000000000000010c .L0 
+     /tmp/ccMSDMms.s:160    .text:0000000000000118 .L0 
+     /tmp/ccMSDMms.s:161    .text:0000000000000118 .L0 
+     /tmp/ccMSDMms.s:164    .text:000000000000011c .L0 
+     /tmp/ccMSDMms.s:167    .text:0000000000000120 .L0 
+     /tmp/ccMSDMms.s:168    .text:0000000000000120 .L0 
+     /tmp/ccMSDMms.s:175    .text:000000000000013c .L0 
+     /tmp/ccMSDMms.s:176    .text:000000000000013c .L0 
+     /tmp/ccMSDMms.s:178    .text:0000000000000144 .L0 
+     /tmp/ccMSDMms.s:180    .text:0000000000000148 .L0 
+     /tmp/ccMSDMms.s:181    .text:0000000000000148 .L0 
+     /tmp/ccMSDMms.s:183    .text:000000000000014c .L0 
+     /tmp/ccMSDMms.s:185    .text:0000000000000150 .L0 
+     /tmp/ccMSDMms.s:187    .text:0000000000000154 .L0 
+     /tmp/ccMSDMms.s:190    .text:0000000000000158 .L0 
+     /tmp/ccMSDMms.s:192    .text:000000000000015c .L0 
+     /tmp/ccMSDMms.s:194    .text:0000000000000160 .L0 
+     /tmp/ccMSDMms.s:200    .text:0000000000000160 _Z11stringToIntPKc
+     /tmp/ccMSDMms.s:203    .text:0000000000000160 .L0 
+     /tmp/ccMSDMms.s:205    .text:0000000000000160 .L0 
+     /tmp/ccMSDMms.s:206    .text:0000000000000164 .L0 
+     /tmp/ccMSDMms.s:208    .text:0000000000000168 .L0 
+     /tmp/ccMSDMms.s:210    .text:000000000000016c .L0 
+     /tmp/ccMSDMms.s:213    .text:0000000000000170 .L0 
+     /tmp/ccMSDMms.s:215    .text:0000000000000170 .L0 
+     /tmp/ccMSDMms.s:216    .text:0000000000000170 .L0 
+     /tmp/ccMSDMms.s:220    .text:0000000000000174 .L0 
+     /tmp/ccMSDMms.s:221    .text:0000000000000174 .L0 
+     /tmp/ccMSDMms.s:222    .text:0000000000000174 .L0 
+     /tmp/ccMSDMms.s:224    .text:0000000000000178 .L0 
+     /tmp/ccMSDMms.s:229    .text:0000000000000188 .L0 
+     /tmp/ccMSDMms.s:230    .text:0000000000000188 .L0 
+     /tmp/ccMSDMms.s:234    .text:0000000000000194 .L0 
+     /tmp/ccMSDMms.s:237    .text:0000000000000198 .L0 
+     /tmp/ccMSDMms.s:239    .text:000000000000019c .L0 
+     /tmp/ccMSDMms.s:242    .text:00000000000001a0 .L0 
+     /tmp/ccMSDMms.s:246    .text:00000000000001a4 .L0 
+     /tmp/ccMSDMms.s:247    .text:00000000000001a4 .L0 
+     /tmp/ccMSDMms.s:248    .text:00000000000001a8 .L0 
+     /tmp/ccMSDMms.s:249    .text:00000000000001a8 .L0 
+     /tmp/ccMSDMms.s:251    .text:00000000000001ac .L0 
+     /tmp/ccMSDMms.s:253    .text:00000000000001b0 .L0 
+     /tmp/ccMSDMms.s:259    .text:00000000000001b0 _Z8printIntiii
+     /tmp/ccMSDMms.s:262    .text:00000000000001b0 .L0 
+     /tmp/ccMSDMms.s:264    .text:00000000000001b0 .L0 
+     /tmp/ccMSDMms.s:265    .text:00000000000001b4 .L0 
+     /tmp/ccMSDMms.s:271    .text:00000000000001c8 .L0 
+     /tmp/ccMSDMms.s:272    .text:00000000000001c8 .L0 
+     /tmp/ccMSDMms.s:273    .text:00000000000001c8 .L0 
+     /tmp/ccMSDMms.s:274    .text:00000000000001c8 .L0 
+     /tmp/ccMSDMms.s:275    .text:00000000000001c8 .L0 
+     /tmp/ccMSDMms.s:277    .text:00000000000001cc .L0 
+     /tmp/ccMSDMms.s:284    .text:00000000000001d8 .L0 
+     /tmp/ccMSDMms.s:285    .text:00000000000001d8 .L0 
+     /tmp/ccMSDMms.s:292    .text:00000000000001f4 .L0 
+     /tmp/ccMSDMms.s:297    .text:0000000000000200 .L0 
+GAS LISTING /tmp/ccMSDMms.s 			page 13
+
+
+     /tmp/ccMSDMms.s:298    .text:0000000000000200 .L0 
+     /tmp/ccMSDMms.s:299    .text:0000000000000200 .L0 
+     /tmp/ccMSDMms.s:301    .text:0000000000000200 .L0 
+     /tmp/ccMSDMms.s:302    .text:0000000000000200 .L0 
+     /tmp/ccMSDMms.s:304    .text:0000000000000204 .L0 
+     /tmp/ccMSDMms.s:307    .text:0000000000000208 .L0 
+     /tmp/ccMSDMms.s:308    .text:0000000000000208 .L0 
+     /tmp/ccMSDMms.s:311    .text:000000000000020c .L0 
+     /tmp/ccMSDMms.s:315    .text:0000000000000210 .L0 
+     /tmp/ccMSDMms.s:316    .text:0000000000000210 .L0 
+     /tmp/ccMSDMms.s:320    .text:0000000000000214 .L0 
+     /tmp/ccMSDMms.s:321    .text:0000000000000214 .L0 
+     /tmp/ccMSDMms.s:322    .text:0000000000000214 .L0 
+     /tmp/ccMSDMms.s:324    .text:0000000000000218 .L0 
+     /tmp/ccMSDMms.s:327    .text:0000000000000220 .L0 
+     /tmp/ccMSDMms.s:330    .text:0000000000000224 .L0 
+     /tmp/ccMSDMms.s:336    .text:000000000000023c .L0 
+     /tmp/ccMSDMms.s:340    .text:0000000000000248 .L0 
+     /tmp/ccMSDMms.s:342    .text:000000000000024c .L0 
+     /tmp/ccMSDMms.s:345    .text:0000000000000250 .L0 
+     /tmp/ccMSDMms.s:347    .text:0000000000000254 .L0 
+     /tmp/ccMSDMms.s:350    .text:0000000000000258 .L0 
+     /tmp/ccMSDMms.s:351    .text:0000000000000258 .L0 
+     /tmp/ccMSDMms.s:356    .text:0000000000000268 .L0 
+     /tmp/ccMSDMms.s:360    .text:000000000000026c .L0 
+     /tmp/ccMSDMms.s:361    .text:000000000000026c .L0 
+     /tmp/ccMSDMms.s:365    .text:0000000000000274 .L0 
+     /tmp/ccMSDMms.s:366    .text:0000000000000274 .L0 
+     /tmp/ccMSDMms.s:375    .text:000000000000028c .L0 
+     /tmp/ccMSDMms.s:376    .text:000000000000028c .L0 
+     /tmp/ccMSDMms.s:377    .text:000000000000028c .L0 
+     /tmp/ccMSDMms.s:380    .text:0000000000000290 .L0 
+     /tmp/ccMSDMms.s:382    .text:0000000000000294 .L0 
+     /tmp/ccMSDMms.s:386    .text:0000000000000298 .L0 
+     /tmp/ccMSDMms.s:387    .text:0000000000000298 .L0 
+     /tmp/ccMSDMms.s:394    .text:00000000000002b4 .L0 
+     /tmp/ccMSDMms.s:395    .text:00000000000002b8 .L0 
+     /tmp/ccMSDMms.s:397    .text:00000000000002bc .L0 
+     /tmp/ccMSDMms.s:398    .text:00000000000002bc .L0 
+     /tmp/ccMSDMms.s:400    .text:00000000000002c0 .L0 
+     /tmp/ccMSDMms.s:402    .text:00000000000002c4 .L0 
+     /tmp/ccMSDMms.s:404    .text:00000000000002c8 .L0 
+     /tmp/ccMSDMms.s:406    .text:00000000000002cc .L0 
+     /tmp/ccMSDMms.s:408    .text:00000000000002d0 .L0 
+     /tmp/ccMSDMms.s:418    .data:0000000000000000 digits
+     /tmp/ccMSDMms.s:425    .bss:0000000000000000 lockPrint
+     /tmp/ccMSDMms.s:415    .data:0000000000000000 .LANCHOR1
+     /tmp/ccMSDMms.s:422    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccMSDMms.s:432    .text:00000000000002d0 .L0 
+     /tmp/ccMSDMms.s:32     .text:0000000000000020 .L0 
+     /tmp/ccMSDMms.s:62     .text:0000000000000060 .L0 
+     /tmp/ccMSDMms.s:113    .text:00000000000000b8 .L0 
+     /tmp/ccMSDMms.s:170    .text:0000000000000128 .L0 
+     /tmp/ccMSDMms.s:287    .text:00000000000001e0 .L0 
+     /tmp/ccMSDMms.s:332    .text:000000000000022c .L0 
+     /tmp/ccMSDMms.s:389    .text:00000000000002a0 .L0 
+     /tmp/ccMSDMms.s:40     .text:0000000000000040 .L2
+GAS LISTING /tmp/ccMSDMms.s 			page 14
+
+
+     /tmp/ccMSDMms.s:27     .text:0000000000000018 .L3
+     /tmp/ccMSDMms.s:57     .text:0000000000000058 .L4
+     /tmp/ccMSDMms.s:121    .text:00000000000000d8 .L11
+     /tmp/ccMSDMms.s:108    .text:00000000000000b0 .L8
+     /tmp/ccMSDMms.s:158    .text:0000000000000118 .L9
+     /tmp/ccMSDMms.s:155    .text:0000000000000114 .L12
+     /tmp/ccMSDMms.s:124    .text:00000000000000dc .L7
+     /tmp/ccMSDMms.s:165    .text:0000000000000120 .L10
+     /tmp/ccMSDMms.s:244    .text:00000000000001a4 .L15
+     /tmp/ccMSDMms.s:218    .text:0000000000000174 .L16
+     /tmp/ccMSDMms.s:295    .text:0000000000000200 .L19
+     /tmp/ccMSDMms.s:282    .text:00000000000001d8 .L20
+     /tmp/ccMSDMms.s:305    .text:0000000000000208 .L21
+     /tmp/ccMSDMms.s:373    .text:000000000000028c .L28
+     /tmp/ccMSDMms.s:318    .text:0000000000000214 .L23
+     /tmp/ccMSDMms.s:358    .text:000000000000026c .L26
+     /tmp/ccMSDMms.s:384    .text:0000000000000298 .L25
+     /tmp/ccMSDMms.s:313    .text:0000000000000210 .L22
+     /tmp/ccMSDMms.s:952    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccMSDMms.s:1604   .debug_str:0000000000000202 .LASF39
+     /tmp/ccMSDMms.s:1600   .debug_str:00000000000001e7 .LASF40
+     /tmp/ccMSDMms.s:1574   .debug_str:00000000000000ec .LASF41
+     /tmp/ccMSDMms.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccMSDMms.s:428    .text:00000000000002d0 .Letext0
+     /tmp/ccMSDMms.s:1530   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccMSDMms.s:1580   .debug_str:0000000000000148 .LASF0
+     /tmp/ccMSDMms.s:1546   .debug_str:0000000000000048 .LASF3
+     /tmp/ccMSDMms.s:1586   .debug_str:0000000000000176 .LASF1
+     /tmp/ccMSDMms.s:1572   .debug_str:00000000000000de .LASF2
+     /tmp/ccMSDMms.s:1562   .debug_str:00000000000000aa .LASF4
+     /tmp/ccMSDMms.s:1598   .debug_str:00000000000001d5 .LASF5
+     /tmp/ccMSDMms.s:1538   .debug_str:000000000000001e .LASF6
+     /tmp/ccMSDMms.s:1590   .debug_str:0000000000000198 .LASF7
+     /tmp/ccMSDMms.s:1578   .debug_str:0000000000000135 .LASF8
+     /tmp/ccMSDMms.s:1608   .debug_str:00000000000002d5 .LASF9
+     /tmp/ccMSDMms.s:1558   .debug_str:0000000000000090 .LASF10
+     /tmp/ccMSDMms.s:1594   .debug_str:00000000000001b0 .LASF11
+     /tmp/ccMSDMms.s:1606   .debug_str:00000000000002c6 .LASF12
+     /tmp/ccMSDMms.s:1540   .debug_str:0000000000000025 .LASF13
+     /tmp/ccMSDMms.s:1532   .debug_str:0000000000000000 .LASF14
+     /tmp/ccMSDMms.s:1544   .debug_str:000000000000003c .LASF15
+     /tmp/ccMSDMms.s:1596   .debug_str:00000000000001bf .LASF16
+     /tmp/ccMSDMms.s:1548   .debug_str:000000000000004d .LASF17
+     /tmp/ccMSDMms.s:1552   .debug_str:000000000000006d .LASF18
+     /tmp/ccMSDMms.s:1564   .debug_str:00000000000000b1 .LASF19
+     /tmp/ccMSDMms.s:1592   .debug_str:00000000000001ab .LASF20
+     /tmp/ccMSDMms.s:1568   .debug_str:00000000000000c7 .LASF21
+     /tmp/ccMSDMms.s:1556   .debug_str:0000000000000087 .LASF27
+     /tmp/ccMSDMms.s:1588   .debug_str:0000000000000189 .LASF29
+     /tmp/ccMSDMms.s:260    .text:00000000000001b0 .LFB40
+     /tmp/ccMSDMms.s:409    .text:00000000000002d0 .LFE40
+     /tmp/ccMSDMms.s:1304   .debug_loc:0000000000000000 .LLST8
+     /tmp/ccMSDMms.s:1610   .debug_str:00000000000002e5 .LASF22
+     /tmp/ccMSDMms.s:1318   .debug_loc:0000000000000039 .LLST9
+     /tmp/ccMSDMms.s:1332   .debug_loc:0000000000000072 .LLST10
+     /tmp/ccMSDMms.s:1346   .debug_loc:00000000000000ab .LLST11
+     /tmp/ccMSDMms.s:1368   .debug_loc:000000000000010a .LLST12
+GAS LISTING /tmp/ccMSDMms.s 			page 15
+
+
+     /tmp/ccMSDMms.s:1385   .debug_loc:0000000000000155 .LLST13
+     /tmp/ccMSDMms.s:289    .text:00000000000001f0 .LVL28
+     /tmp/ccMSDMms.s:293    .text:00000000000001fc .LVL29
+     /tmp/ccMSDMms.s:370    .text:0000000000000288 .LVL39
+     /tmp/ccMSDMms.s:391    .text:00000000000002b0 .LVL43
+     /tmp/ccMSDMms.s:1560   .debug_str:000000000000009e .LASF23
+     /tmp/ccMSDMms.s:1584   .debug_str:0000000000000163 .LASF25
+     /tmp/ccMSDMms.s:201    .text:0000000000000160 .LFB39
+     /tmp/ccMSDMms.s:254    .text:00000000000001b0 .LFE39
+     /tmp/ccMSDMms.s:1414   .debug_loc:00000000000001ac .LLST6
+     /tmp/ccMSDMms.s:1425   .debug_loc:00000000000001e2 .LLST7
+     /tmp/ccMSDMms.s:1550   .debug_str:0000000000000063 .LASF24
+     /tmp/ccMSDMms.s:1614   .debug_str:00000000000002fd .LASF26
+     /tmp/ccMSDMms.s:85     .text:0000000000000088 .LFB38
+     /tmp/ccMSDMms.s:195    .text:0000000000000160 .LFE38
+     /tmp/ccMSDMms.s:1447   .debug_loc:0000000000000241 .LLST1
+     /tmp/ccMSDMms.s:1462   .debug_loc:000000000000028a .LLST2
+     /tmp/ccMSDMms.s:1476   .debug_loc:00000000000002c3 .LLST3
+     /tmp/ccMSDMms.s:1487   .debug_loc:00000000000002f9 .LLST4
+     /tmp/ccMSDMms.s:1499   .debug_loc:0000000000000321 .LLST5
+     /tmp/ccMSDMms.s:115    .text:00000000000000c8 .LVL10
+     /tmp/ccMSDMms.s:119    .text:00000000000000d4 .LVL11
+     /tmp/ccMSDMms.s:136    .text:00000000000000f0 .LVL14
+     /tmp/ccMSDMms.s:172    .text:0000000000000138 .LVL18
+     /tmp/ccMSDMms.s:1566   .debug_str:00000000000000bb .LASF28
+     /tmp/ccMSDMms.s:1612   .debug_str:00000000000002ea .LASF30
+     /tmp/ccMSDMms.s:10     .text:0000000000000000 .LFB37
+     /tmp/ccMSDMms.s:79     .text:0000000000000088 .LFE37
+     /tmp/ccMSDMms.s:1542   .debug_str:0000000000000035 .LASF31
+     /tmp/ccMSDMms.s:1506   .debug_loc:0000000000000344 .LLST0
+     /tmp/ccMSDMms.s:34     .text:0000000000000030 .LVL2
+     /tmp/ccMSDMms.s:38     .text:000000000000003c .LVL3
+     /tmp/ccMSDMms.s:50     .text:0000000000000050 .LVL4
+     /tmp/ccMSDMms.s:64     .text:0000000000000070 .LVL6
+     /tmp/ccMSDMms.s:1582   .debug_str:0000000000000155 .LASF32
+     /tmp/ccMSDMms.s:1554   .debug_str:0000000000000072 .LASF33
+     /tmp/ccMSDMms.s:1570   .debug_str:00000000000000ce .LASF34
+     /tmp/ccMSDMms.s:1602   .debug_str:00000000000001f9 .LASF35
+     /tmp/ccMSDMms.s:1576   .debug_str:0000000000000130 .LASF36
+     /tmp/ccMSDMms.s:1536   .debug_str:0000000000000015 .LASF37
+     /tmp/ccMSDMms.s:1534   .debug_str:0000000000000010 .LASF38
+     /tmp/ccMSDMms.s:263    .text:00000000000001b0 .LVL26
+     /tmp/ccMSDMms.s:281    .text:00000000000001d8 .LVL27
+     /tmp/ccMSDMms.s:312    .text:0000000000000210 .LVL32
+     /tmp/ccMSDMms.s:317    .text:0000000000000214 .LVL33
+     /tmp/ccMSDMms.s:328    .text:0000000000000224 .LVL34
+     /tmp/ccMSDMms.s:349    .text:0000000000000258 .LVL36
+     /tmp/ccMSDMms.s:357    .text:000000000000026c .LVL37
+     /tmp/ccMSDMms.s:362    .text:0000000000000270 .LVL38
+     /tmp/ccMSDMms.s:300    .text:0000000000000200 .LVL30
+     /tmp/ccMSDMms.s:372    .text:000000000000028c .LVL40
+     /tmp/ccMSDMms.s:383    .text:0000000000000298 .LVL42
+     /tmp/ccMSDMms.s:309    .text:000000000000020c .LVL31
+     /tmp/ccMSDMms.s:343    .text:0000000000000250 .LVL35
+     /tmp/ccMSDMms.s:378    .text:0000000000000290 .LVL41
+     /tmp/ccMSDMms.s:204    .text:0000000000000160 .LVL20
+     /tmp/ccMSDMms.s:217    .text:0000000000000174 .LVL22
+GAS LISTING /tmp/ccMSDMms.s 			page 16
+
+
+     /tmp/ccMSDMms.s:214    .text:0000000000000170 .LVL21
+     /tmp/ccMSDMms.s:240    .text:00000000000001a0 .LVL24
+     /tmp/ccMSDMms.s:243    .text:00000000000001a4 .LVL25
+     /tmp/ccMSDMms.s:88     .text:0000000000000088 .LVL8
+     /tmp/ccMSDMms.s:107    .text:00000000000000b0 .LVL9
+     /tmp/ccMSDMms.s:188    .text:0000000000000154 .LVL19
+     /tmp/ccMSDMms.s:125    .text:00000000000000dc .LVL12
+     /tmp/ccMSDMms.s:130    .text:00000000000000e4 .LVL13
+     /tmp/ccMSDMms.s:157    .text:0000000000000118 .LVL16
+     /tmp/ccMSDMms.s:162    .text:000000000000011c .LVL17
+     /tmp/ccMSDMms.s:140    .text:00000000000000f4 .LVL15
+     /tmp/ccMSDMms.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccMSDMms.s:26     .text:0000000000000018 .LVL1
+     /tmp/ccMSDMms.s:74     .text:0000000000000080 .LVL7
+     /tmp/ccMSDMms.s:433    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+copy_and_swap
+_Z15thread_dispatchv
+_Z4putcc
+_Z4getcv

@@ -4,8 +4,10 @@
 
 #include "../lib/hw.h"
 #include "../h/tcb.hpp"
-#include "../h/print.hpp"
+#include "../test/printing.hpp"
 #include "../h/syscall_c.hpp"
+
+
 
 static uint64 fibonacci(uint64 n)
 {
@@ -23,7 +25,7 @@ void workerBodyA(void* arg)
     for (; i < 3; i++)
     {
         printString("A: i=");
-        printInteger(i);
+        printInt(i);
         printString("\n");
     }
 
@@ -35,20 +37,20 @@ void workerBodyA(void* arg)
     __asm__ ("mv %[t1], t1" : [t1] "=r"(t1));
 
     printString("A: t1=");
-    printInteger(t1);
+    printInt(t1);
     printString("\n");
 
 
 
     uint64 result = fibonacci(20);
     printString("A: fibonaci=");
-    printInteger(result);
+    printInt(result);
     printString("\n");
 
     for (; i < 6; i++)
     {
         printString("A: i=");
-        printInteger(i);
+        printInt(i);
         printString("\n");
     }
 
@@ -62,7 +64,7 @@ void workerBodyB(void* arg)
     for (; i < 13; i++)
     {
         printString("B: i=");
-        printInteger(i);
+        printInt(i);
         printString("\n");
     }
 
@@ -73,13 +75,13 @@ void workerBodyB(void* arg)
 
     uint64 result = fibonacci(23);
     printString("B: fibonaci=");
-    printInteger(result);
+    printInt(result);
     printString("\n");
 
     for (; i < 16; i++)
     {
         printString("B: i=");
-        printInteger(i);
+        printInt(i);
         printString("\n");
     }
 
@@ -110,6 +112,7 @@ void workerBodyD(void *arg) {
     int returnValue = sem_wait((sem_t) arg);
 
     printString("D: rezultat: ");
-    printInteger(returnValue);
+    printInt(returnValue);
     printString("\nD: izlazim automatski, pozdrav!\n");
 }
+

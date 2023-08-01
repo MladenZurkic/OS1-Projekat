@@ -7,6 +7,7 @@
 
 #include "../lib/hw.h"
 #include "scheduler.hpp"
+#include "memoryAllocator.hpp"
 
 // Thread Control Block
 class TCB
@@ -22,6 +23,8 @@ public:
 
     void setBlocked(bool value) { this->blocked = value; }
 
+    bool isMain() const { return this->main; }
+
     //uint64 getTimeSlice() const { return timeSlice; }
 
     //static uint64 getTimeSliceTest() { return timeSliceCounterTest; }
@@ -30,9 +33,45 @@ public:
 
     static TCB *createThread(Body body, void* arg);
 
+    static TCB *createThreadWithoutStarting(Body body, void* arg);
+
+    static void startThread(TCB* tcbToStart) {
+        Scheduler::put(tcbToStart);
+    }
+
     static void yield();
 
     static TCB *running;
+
+    void* operator new(size_t size) {
+        size_t newSize;
+        if(size%MEM_BLOCK_SIZE != 0) {
+            newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
+        }
+        else {
+            newSize = size;
+        }
+
+        return MemoryAllocator::mem_alloc(newSize);
+    }
+    void* operator new[](size_t size) {
+        size_t newSize;
+        if(size%MEM_BLOCK_SIZE != 0) {
+            newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
+        }
+        else {
+            newSize = size;
+        }
+
+        return MemoryAllocator::mem_alloc(newSize);
+    }
+    void operator delete(void *ptr) {
+        MemoryAllocator::mem_free(ptr);
+    }
+    void operator delete[](void *ptr) {
+        MemoryAllocator::mem_free(ptr);
+    }
+
 
 private:
     TCB(Body body, void* arg) :
@@ -43,10 +82,11 @@ private:
                     }),
             finished(false),
             blocked(false),
+            main(body == nullptr),
             arg(arg)
 
     {
-        if (body != nullptr) { Scheduler::put(this); }
+        //if (body != nullptr) { Scheduler::put(this); }
     }
 
     struct Context
@@ -60,7 +100,9 @@ private:
     Context context;
     bool finished;
     bool blocked;
+    bool main;
     void* arg;
+
 
     friend class Riscv;
 

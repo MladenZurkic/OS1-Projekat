@@ -1,4 +1,4 @@
-GAS LISTING /tmp/cc8lsF4s.s 			page 1
+GAS LISTING /tmp/ccKO2ybi.s 			page 1
 
 
    1              		.file	"mySemaphore.cpp"
@@ -9,7 +9,7 @@ GAS LISTING /tmp/cc8lsF4s.s 			page 1
    6              		.align	2
    7              		.globl	_ZN11MySemaphore4waitEv
    9              	_ZN11MySemaphore4waitEv:
-  10              	.LFB22:
+  10              	.LFB37:
   11              		.file 1 "src/mySemaphore.cpp"
    1:src/mySemaphore.cpp **** #include "../h/mySemaphore.hpp"
    2:src/mySemaphore.cpp **** #include "../h/syscall_c.hpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/cc8lsF4s.s 			page 1
   12:src/mySemaphore.cpp ****         thread_dispatch();
   13:src/mySemaphore.cpp **** 
   14:src/mySemaphore.cpp ****         //Provera da li smo se vratili jer je bio signal() ili je bio close()
-GAS LISTING /tmp/cc8lsF4s.s 			page 2
+GAS LISTING /tmp/ccKO2ybi.s 			page 2
 
 
   15:src/mySemaphore.cpp ****         if(this->closed) {
@@ -97,9 +97,11 @@ GAS LISTING /tmp/cc8lsF4s.s 			page 1
   68      83B70700 
   69 005c 03B90700 		ld	s2,0(a5)
   70              	.LVL4:
-  71              	.LBB35:
-  72              	.LBB36:
-  73              		.file 2 "src/../h/list.hpp"
+  71              	.LBB47:
+  72              	.LBB48:
+  73              	.LBB49:
+  74              	.LBB50:
+  75              		.file 2 "src/../h/list.hpp"
    1:src/../h/list.hpp **** //
    2:src/../h/list.hpp **** // Created by marko on 20.4.22..
    3:src/../h/list.hpp **** //
@@ -107,84 +109,117 @@ GAS LISTING /tmp/cc8lsF4s.s 			page 1
    5:src/../h/list.hpp **** #ifndef OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_LIST_HPP
    6:src/../h/list.hpp **** #define OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_LIST_HPP
    7:src/../h/list.hpp **** 
-   8:src/../h/list.hpp **** template<typename T>
-   9:src/../h/list.hpp **** class List
-  10:src/../h/list.hpp **** {
-  11:src/../h/list.hpp **** private:
-  12:src/../h/list.hpp ****     struct Elem
-  13:src/../h/list.hpp ****     {
-  14:src/../h/list.hpp ****         T *data;
-  15:src/../h/list.hpp ****         Elem *next;
-  16:src/../h/list.hpp **** 
-  17:src/../h/list.hpp ****         Elem(T *data, Elem *next) : data(data), next(next) {}
-  18:src/../h/list.hpp ****     };
-GAS LISTING /tmp/cc8lsF4s.s 			page 3
+   8:src/../h/list.hpp **** #include "memoryAllocator.hpp"
+   9:src/../h/list.hpp **** 
+  10:src/../h/list.hpp **** template<typename T>
+  11:src/../h/list.hpp **** class List
+  12:src/../h/list.hpp **** {
+  13:src/../h/list.hpp **** private:
+  14:src/../h/list.hpp ****     struct Elem
+  15:src/../h/list.hpp ****     {
+  16:src/../h/list.hpp ****         T *data;
+GAS LISTING /tmp/ccKO2ybi.s 			page 3
 
 
+  17:src/../h/list.hpp ****         Elem *next;
+  18:src/../h/list.hpp **** 
+  19:src/../h/list.hpp ****         Elem(T *data, Elem *next) : data(data), next(next) {}
+  20:src/../h/list.hpp **** 
+  21:src/../h/list.hpp ****         void* operator new(size_t size) {
+  22:src/../h/list.hpp ****             size_t newSize;
+  23:src/../h/list.hpp ****             if(size%MEM_BLOCK_SIZE != 0) {
+  24:src/../h/list.hpp ****                 newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
+  25:src/../h/list.hpp ****             }
+  26:src/../h/list.hpp ****             else {
+  27:src/../h/list.hpp ****                 newSize = size;
+  28:src/../h/list.hpp ****             }
+  29:src/../h/list.hpp **** 
+  30:src/../h/list.hpp ****             return MemoryAllocator::mem_alloc(newSize);
+  76              		.loc 2 30 46
+  77 0060 13050004 		li	a0,64
+  78 0064 97000000 		call	_ZN15MemoryAllocator9mem_allocEm@plt
+  78      E7800000 
+  79              	.LVL5:
+  80              	.LBE50:
+  81              	.LBE49:
+  82              	.LBB51:
+  83              	.LBB52:
   19:src/../h/list.hpp **** 
-  20:src/../h/list.hpp ****     Elem *head, *tail;
-  21:src/../h/list.hpp **** 
-  22:src/../h/list.hpp **** public:
-  23:src/../h/list.hpp ****     List() : head(0), tail(0) {}
-  24:src/../h/list.hpp **** 
-  25:src/../h/list.hpp ****     List(const List<T> &) = delete;
-  26:src/../h/list.hpp **** 
-  27:src/../h/list.hpp ****     List<T> &operator=(const List<T> &) = delete;
-  28:src/../h/list.hpp **** 
-  29:src/../h/list.hpp ****     void addFirst(T *data)
-  30:src/../h/list.hpp ****     {
-  31:src/../h/list.hpp ****         Elem *elem = new Elem(data, head);
-  32:src/../h/list.hpp ****         head = elem;
-  33:src/../h/list.hpp ****         if (!tail) { tail = head; }
-  34:src/../h/list.hpp ****     }
-  35:src/../h/list.hpp **** 
-  36:src/../h/list.hpp ****     void addLast(T *data)
-  37:src/../h/list.hpp ****     {
-  38:src/../h/list.hpp ****         Elem *elem = new Elem(data, 0);
-  74              		.loc 2 38 22
-  75 0060 13050001 		li	a0,16
-  76 0064 97000000 		call	_Znwm@plt
-  76      E7800000 
-  77              	.LVL5:
-  78              	.LBB37:
-  79              	.LBB38:
-  17:src/../h/list.hpp ****     };
-  80              		.loc 2 17 58
-  81 006c 23302501 		sd	s2,0(a0)
-  82 0070 23340500 		sd	zero,8(a0)
-  83              	.LVL6:
-  84              	.LBE38:
-  85              	.LBE37:
-  39:src/../h/list.hpp ****         if (tail)
-  86              		.loc 2 39 13
-  87 0074 83B70401 		ld	a5,16(s1)
-  88              		.loc 2 39 9
-  89 0078 638C0702 		beqz	a5,.L3
-  40:src/../h/list.hpp ****         {
-  41:src/../h/list.hpp ****             tail->next = elem;
-  90              		.loc 2 41 13
-  91 007c 23B4A700 		sd	a0,8(a5)
-  42:src/../h/list.hpp ****             tail = elem;
-  92              		.loc 2 42 13
-  93 0080 23B8A400 		sd	a0,16(s1)
-  94              	.L4:
-  95              	.LVL7:
-  96              	.LBE36:
-  97              	.LBE35:
-  11:src/mySemaphore.cpp ****         thread_dispatch();
-  98              		.loc 1 11 9 is_stmt 1
-  11:src/mySemaphore.cpp ****         thread_dispatch();
-  99              		.loc 1 11 33 is_stmt 0
- 100 0084 97070000 		la	a5,_ZN3TCB7runningE
- 100      83B70700 
- 101 008c 83B70700 		ld	a5,0(a5)
-GAS LISTING /tmp/cc8lsF4s.s 			page 4
+  84              		.loc 2 19 58
+  85 006c 23302501 		sd	s2,0(a0)
+  86 0070 23340500 		sd	zero,8(a0)
+  87              	.LVL6:
+  88              	.LBE52:
+  89              	.LBE51:
+  31:src/../h/list.hpp ****         }
+  32:src/../h/list.hpp ****         void* operator new[](size_t size) {
+  33:src/../h/list.hpp ****             size_t newSize;
+  34:src/../h/list.hpp ****             if(size%MEM_BLOCK_SIZE != 0) {
+  35:src/../h/list.hpp ****                 newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
+  36:src/../h/list.hpp ****             }
+  37:src/../h/list.hpp ****             else {
+  38:src/../h/list.hpp ****                 newSize = size;
+  39:src/../h/list.hpp ****             }
+  40:src/../h/list.hpp **** 
+  41:src/../h/list.hpp ****             return MemoryAllocator::mem_alloc(newSize);
+  42:src/../h/list.hpp ****         }
+  43:src/../h/list.hpp ****         void operator delete(void *ptr) {
+  44:src/../h/list.hpp ****             MemoryAllocator::mem_free(ptr);
+  45:src/../h/list.hpp ****         }
+  46:src/../h/list.hpp ****         void operator delete[](void *ptr) {
+  47:src/../h/list.hpp ****             MemoryAllocator::mem_free(ptr);
+  48:src/../h/list.hpp ****         }
+  49:src/../h/list.hpp ****     };
+  50:src/../h/list.hpp **** 
+  51:src/../h/list.hpp ****     Elem *head, *tail;
+  52:src/../h/list.hpp **** 
+  53:src/../h/list.hpp **** public:
+  54:src/../h/list.hpp ****     List() : head(0), tail(0) {}
+  55:src/../h/list.hpp **** 
+  56:src/../h/list.hpp ****     List(const List<T> &) = delete;
+  57:src/../h/list.hpp **** 
+GAS LISTING /tmp/ccKO2ybi.s 			page 4
 
 
- 102              	.LVL8:
- 103              	.LBB40:
- 104              	.LBB41:
- 105              		.file 3 "src/../h/tcb.hpp"
+  58:src/../h/list.hpp ****     List<T> &operator=(const List<T> &) = delete;
+  59:src/../h/list.hpp **** 
+  60:src/../h/list.hpp ****     void addFirst(T *data)
+  61:src/../h/list.hpp ****     {
+  62:src/../h/list.hpp ****         Elem *elem = new Elem(data, head);
+  63:src/../h/list.hpp ****         head = elem;
+  64:src/../h/list.hpp ****         if (!tail) { tail = head; }
+  65:src/../h/list.hpp ****     }
+  66:src/../h/list.hpp **** 
+  67:src/../h/list.hpp ****     void addLast(T *data)
+  68:src/../h/list.hpp ****     {
+  69:src/../h/list.hpp ****         Elem *elem = new Elem(data, 0);
+  70:src/../h/list.hpp ****         if (tail)
+  90              		.loc 2 70 13
+  91 0074 83B70401 		ld	a5,16(s1)
+  92              		.loc 2 70 9
+  93 0078 638C0702 		beqz	a5,.L3
+  71:src/../h/list.hpp ****         {
+  72:src/../h/list.hpp ****             tail->next = elem;
+  94              		.loc 2 72 13
+  95 007c 23B4A700 		sd	a0,8(a5)
+  73:src/../h/list.hpp ****             tail = elem;
+  96              		.loc 2 73 13
+  97 0080 23B8A400 		sd	a0,16(s1)
+  98              	.L4:
+  99              	.LVL7:
+ 100              	.LBE48:
+ 101              	.LBE47:
+  11:src/mySemaphore.cpp ****         thread_dispatch();
+ 102              		.loc 1 11 9 is_stmt 1
+  11:src/mySemaphore.cpp ****         thread_dispatch();
+ 103              		.loc 1 11 33 is_stmt 0
+ 104 0084 97070000 		la	a5,_ZN3TCB7runningE
+ 104      83B70700 
+ 105 008c 83B70700 		ld	a5,0(a5)
+ 106              	.LVL8:
+ 107              	.LBB54:
+ 108              	.LBB55:
+ 109              		.file 3 "src/../h/tcb.hpp"
    1:src/../h/tcb.hpp **** //
    2:src/../h/tcb.hpp **** // Created by marko on 20.4.22..
    3:src/../h/tcb.hpp **** //
@@ -194,1014 +229,1120 @@ GAS LISTING /tmp/cc8lsF4s.s 			page 1
    7:src/../h/tcb.hpp **** 
    8:src/../h/tcb.hpp **** #include "../lib/hw.h"
    9:src/../h/tcb.hpp **** #include "scheduler.hpp"
-  10:src/../h/tcb.hpp **** 
-  11:src/../h/tcb.hpp **** // Thread Control Block
-  12:src/../h/tcb.hpp **** class TCB
-  13:src/../h/tcb.hpp **** {
-  14:src/../h/tcb.hpp **** public:
-  15:src/../h/tcb.hpp ****     ~TCB() { delete[] stack; }
-  16:src/../h/tcb.hpp **** 
-  17:src/../h/tcb.hpp ****     bool isFinished() const { return finished; }
-  18:src/../h/tcb.hpp **** 
-  19:src/../h/tcb.hpp ****     void setFinished(bool value) { finished = value; }
-  20:src/../h/tcb.hpp **** 
-  21:src/../h/tcb.hpp ****     bool isBlocked() const { return this->blocked; }
-  22:src/../h/tcb.hpp **** 
-  23:src/../h/tcb.hpp ****     void setBlocked(bool value) { this->blocked = value; }
- 106              		.loc 3 23 35 is_stmt 1
- 107              		.loc 3 23 49 is_stmt 0
- 108 0090 13071000 		li	a4,1
- 109 0094 A380E702 		sb	a4,33(a5)
- 110              	.LVL9:
- 111              	.LBE41:
- 112              	.LBE40:
+  10:src/../h/tcb.hpp **** #include "memoryAllocator.hpp"
+  11:src/../h/tcb.hpp **** 
+  12:src/../h/tcb.hpp **** // Thread Control Block
+  13:src/../h/tcb.hpp **** class TCB
+  14:src/../h/tcb.hpp **** {
+  15:src/../h/tcb.hpp **** public:
+  16:src/../h/tcb.hpp ****     ~TCB() { delete[] stack; }
+  17:src/../h/tcb.hpp **** 
+  18:src/../h/tcb.hpp ****     bool isFinished() const { return finished; }
+GAS LISTING /tmp/ccKO2ybi.s 			page 5
+
+
+  19:src/../h/tcb.hpp **** 
+  20:src/../h/tcb.hpp ****     void setFinished(bool value) { finished = value; }
+  21:src/../h/tcb.hpp **** 
+  22:src/../h/tcb.hpp ****     bool isBlocked() const { return this->blocked; }
+  23:src/../h/tcb.hpp **** 
+  24:src/../h/tcb.hpp ****     void setBlocked(bool value) { this->blocked = value; }
+ 110              		.loc 3 24 35 is_stmt 1
+ 111              		.loc 3 24 49 is_stmt 0
+ 112 0090 13071000 		li	a4,1
+ 113 0094 A380E702 		sb	a4,33(a5)
+ 114              	.LVL9:
+ 115              	.LBE55:
+ 116              	.LBE54:
   12:src/mySemaphore.cpp **** 
- 113              		.loc 1 12 9 is_stmt 1
+ 117              		.loc 1 12 9 is_stmt 1
   12:src/mySemaphore.cpp **** 
- 114              		.loc 1 12 24 is_stmt 0
- 115 0098 97000000 		call	_Z15thread_dispatchv@plt
- 115      E7800000 
- 116              	.LVL10:
+ 118              		.loc 1 12 24 is_stmt 0
+ 119 0098 97000000 		call	_Z15thread_dispatchv@plt
+ 119      E7800000 
+ 120              	.LVL10:
   15:src/mySemaphore.cpp ****             return -1;
- 117              		.loc 1 15 9 is_stmt 1
+ 121              		.loc 1 15 9 is_stmt 1
   15:src/mySemaphore.cpp ****             return -1;
- 118              		.loc 1 15 18 is_stmt 0
- 119 00a0 83C70400 		lbu	a5,0(s1)
+ 122              		.loc 1 15 18 is_stmt 0
+ 123 00a0 83C70400 		lbu	a5,0(s1)
   15:src/mySemaphore.cpp ****             return -1;
- 120              		.loc 1 15 9
- 121 00a4 63900702 		bnez	a5,.L7
+ 124              		.loc 1 15 9
+ 125 00a4 63900702 		bnez	a5,.L7
   19:src/mySemaphore.cpp **** }
- 122              		.loc 1 19 12
- 123 00a8 13050000 		li	a0,0
- 124 00ac 6FF01FF9 		j	.L2
- 125              	.LVL11:
- 126              	.L3:
- 127              	.LBB42:
- 128              	.LBB39:
-GAS LISTING /tmp/cc8lsF4s.s 			page 5
-
-
-  43:src/../h/list.hpp ****         } else
-  44:src/../h/list.hpp ****         {
-  45:src/../h/list.hpp ****             head = tail = elem;
- 129              		.loc 2 45 13
- 130 00b0 23B8A400 		sd	a0,16(s1)
- 131 00b4 23B4A400 		sd	a0,8(s1)
- 132 00b8 6FF0DFFC 		j	.L4
- 133              	.LVL12:
- 134              	.L5:
- 135              		.cfi_def_cfa_register 2
- 136              		.cfi_restore 1
- 137              		.cfi_restore 8
- 138              		.cfi_restore 9
- 139              		.cfi_restore 18
- 140              	.LBE39:
- 141              	.LBE42:
+ 126              		.loc 1 19 12
+ 127 00a8 13050000 		li	a0,0
+ 128 00ac 6FF01FF9 		j	.L2
+ 129              	.LVL11:
+ 130              	.L3:
+ 131              	.LBB56:
+ 132              	.LBB53:
+  74:src/../h/list.hpp ****         } else
+  75:src/../h/list.hpp ****         {
+  76:src/../h/list.hpp ****             head = tail = elem;
+ 133              		.loc 2 76 13
+ 134 00b0 23B8A400 		sd	a0,16(s1)
+ 135 00b4 23B4A400 		sd	a0,8(s1)
+ 136 00b8 6FF0DFFC 		j	.L4
+ 137              	.LVL12:
+ 138              	.L5:
+ 139              		.cfi_def_cfa_register 2
+ 140              		.cfi_restore 1
+ 141              		.cfi_restore 8
+ 142              		.cfi_restore 9
+ 143              		.cfi_restore 18
+ 144              	.LBE53:
+ 145              	.LBE56:
    6:src/mySemaphore.cpp ****     }
- 142              		.loc 1 6 17
- 143 00bc 1305F0FF 		li	a0,-1
- 144              	.LVL13:
- 145              		.loc 1 20 1
- 146 00c0 67800000 		ret
- 147              	.LVL14:
- 148              	.L7:
- 149              		.cfi_def_cfa_register 8
- 150              		.cfi_offset 1, -8
- 151              		.cfi_offset 8, -16
- 152              		.cfi_offset 9, -24
- 153              		.cfi_offset 18, -32
+ 146              		.loc 1 6 17
+ 147 00bc 1305F0FF 		li	a0,-1
+ 148              	.LVL13:
+ 149              		.loc 1 20 1
+GAS LISTING /tmp/ccKO2ybi.s 			page 6
+
+
+ 150 00c0 67800000 		ret
+ 151              	.LVL14:
+ 152              	.L7:
+ 153              		.cfi_def_cfa_register 8
+ 154              		.cfi_offset 1, -8
+ 155              		.cfi_offset 8, -16
+ 156              		.cfi_offset 9, -24
+ 157              		.cfi_offset 18, -32
   16:src/mySemaphore.cpp ****         }
- 154              		.loc 1 16 21
- 155 00c4 1305F0FF 		li	a0,-1
- 156 00c8 6FF05FF7 		j	.L2
- 157              		.cfi_endproc
- 158              	.LFE22:
- 160              		.align	2
- 161              		.globl	_ZN11MySemaphore6signalEv
- 163              	_ZN11MySemaphore6signalEv:
- 164              	.LFB23:
+ 158              		.loc 1 16 21
+ 159 00c4 1305F0FF 		li	a0,-1
+ 160 00c8 6FF05FF7 		j	.L2
+ 161              		.cfi_endproc
+ 162              	.LFE37:
+ 164              		.align	2
+ 165              		.globl	_ZN11MySemaphore6signalEv
+ 167              	_ZN11MySemaphore6signalEv:
+ 168              	.LFB38:
   21:src/mySemaphore.cpp **** 
   22:src/mySemaphore.cpp **** int MySemaphore::signal() {
- 165              		.loc 1 22 27 is_stmt 1
- 166              		.cfi_startproc
- 167              	.LVL15:
+ 169              		.loc 1 22 27 is_stmt 1
+ 170              		.cfi_startproc
+ 171              	.LVL15:
   23:src/mySemaphore.cpp ****     if(this->closed) {
- 168              		.loc 1 23 5
- 169              		.loc 1 23 14 is_stmt 0
- 170 00cc 83470500 		lbu	a5,0(a0)
- 171              		.loc 1 23 5
- 172 00d0 63980708 		bnez	a5,.L17
- 173 00d4 13070500 		mv	a4,a0
+ 172              		.loc 1 23 5
+ 173              		.loc 1 23 14 is_stmt 0
+ 174 00cc 83470500 		lbu	a5,0(a0)
+ 175              		.loc 1 23 5
+ 176 00d0 63980708 		bnez	a5,.L17
+ 177 00d4 13070500 		mv	a4,a0
   24:src/mySemaphore.cpp ****         return -1;
   25:src/mySemaphore.cpp ****     }
   26:src/mySemaphore.cpp ****     if((int)++this->value <= 0) {
- 174              		.loc 1 26 5 is_stmt 1
- 175              	.LBB43:
- 176              		.loc 1 26 21 is_stmt 0
-GAS LISTING /tmp/cc8lsF4s.s 			page 6
-
-
- 177 00d8 83274500 		lw	a5,4(a0)
- 178              		.loc 1 26 13
- 179 00dc 9B871700 		addiw	a5,a5,1
- 180              		.loc 1 26 27
- 181 00e0 2322F500 		sw	a5,4(a0)
- 182              		.loc 1 26 8
- 183 00e4 9B870700 		sext.w	a5,a5
- 184              		.loc 1 26 5
- 185 00e8 6356F000 		blez	a5,.L24
- 186              	.LBE43:
+ 178              		.loc 1 26 5 is_stmt 1
+ 179              	.LBB57:
+ 180              		.loc 1 26 21 is_stmt 0
+ 181 00d8 83274500 		lw	a5,4(a0)
+ 182              		.loc 1 26 13
+ 183 00dc 9B871700 		addiw	a5,a5,1
+ 184              		.loc 1 26 27
+ 185 00e0 2322F500 		sw	a5,4(a0)
+ 186              		.loc 1 26 8
+ 187 00e4 9B870700 		sext.w	a5,a5
+ 188              		.loc 1 26 5
+ 189 00e8 6356F000 		blez	a5,.L24
+ 190              	.LBE57:
   27:src/mySemaphore.cpp ****         TCB* tcb;
   28:src/mySemaphore.cpp ****         tcb = this->blocked.removeFirst();
   29:src/mySemaphore.cpp ****         tcb->setBlocked(false);
   30:src/mySemaphore.cpp ****         Scheduler::put(tcb);
   31:src/mySemaphore.cpp ****     }
   32:src/mySemaphore.cpp ****     return 0;
- 187              		.loc 1 32 12
- 188 00ec 13050000 		li	a0,0
- 189              	.LVL16:
+ 191              		.loc 1 32 12
+ 192 00ec 13050000 		li	a0,0
+ 193              	.LVL16:
   33:src/mySemaphore.cpp **** }
- 190              		.loc 1 33 1
- 191 00f0 67800000 		ret
- 192              	.LVL17:
- 193              	.L24:
+ 194              		.loc 1 33 1
+GAS LISTING /tmp/ccKO2ybi.s 			page 7
+
+
+ 195 00f0 67800000 		ret
+ 196              	.LVL17:
+ 197              	.L24:
   22:src/mySemaphore.cpp ****     if(this->closed) {
- 194              		.loc 1 22 27
- 195 00f4 130101FE 		addi	sp,sp,-32
- 196              		.cfi_def_cfa_offset 32
- 197 00f8 233C1100 		sd	ra,24(sp)
- 198 00fc 23388100 		sd	s0,16(sp)
- 199 0100 23349100 		sd	s1,8(sp)
- 200              		.cfi_offset 1, -8
- 201              		.cfi_offset 8, -16
- 202              		.cfi_offset 9, -24
- 203 0104 13040102 		addi	s0,sp,32
- 204              		.cfi_def_cfa 8, 0
- 205              	.LBB52:
- 206              	.LBB44:
+ 198              		.loc 1 22 27
+ 199 00f4 130101FE 		addi	sp,sp,-32
+ 200              		.cfi_def_cfa_offset 32
+ 201 00f8 233C1100 		sd	ra,24(sp)
+ 202 00fc 23388100 		sd	s0,16(sp)
+ 203 0100 23349100 		sd	s1,8(sp)
+ 204              		.cfi_offset 1, -8
+ 205              		.cfi_offset 8, -16
+ 206              		.cfi_offset 9, -24
+ 207 0104 13040102 		addi	s0,sp,32
+ 208              		.cfi_def_cfa 8, 0
+ 209              	.LBB68:
+ 210              	.LBB58:
   27:src/mySemaphore.cpp ****         TCB* tcb;
- 207              		.loc 1 27 9 is_stmt 1
+ 211              		.loc 1 27 9 is_stmt 1
   28:src/mySemaphore.cpp ****         tcb->setBlocked(false);
- 208              		.loc 1 28 9
- 209              	.LVL18:
- 210              	.LBB45:
- 211              	.LBB46:
-  46:src/../h/list.hpp ****         }
-  47:src/../h/list.hpp ****     }
-  48:src/../h/list.hpp **** 
-  49:src/../h/list.hpp ****     T *removeFirst()
-  50:src/../h/list.hpp ****     {
-  51:src/../h/list.hpp ****         if (!head) { return 0; }
- 212              		.loc 2 51 14 is_stmt 0
- 213 0108 03358500 		ld	a0,8(a0)
- 214              	.LVL19:
- 215              		.loc 2 51 9
- 216 010c 63060504 		beqz	a0,.L19
- 217              	.LVL20:
-GAS LISTING /tmp/cc8lsF4s.s 			page 7
+ 212              		.loc 1 28 9
+ 213              	.LVL18:
+ 214              	.LBB59:
+ 215              	.LBB60:
+  77:src/../h/list.hpp ****         }
+  78:src/../h/list.hpp ****     }
+  79:src/../h/list.hpp **** 
+  80:src/../h/list.hpp ****     T *removeFirst()
+  81:src/../h/list.hpp ****     {
+  82:src/../h/list.hpp ****         if (!head) { return 0; }
+ 216              		.loc 2 82 14 is_stmt 0
+ 217 0108 03358500 		ld	a0,8(a0)
+ 218              	.LVL19:
+ 219              		.loc 2 82 9
+ 220 010c 63060504 		beqz	a0,.L19
+ 221              	.LVL20:
+  83:src/../h/list.hpp **** 
+  84:src/../h/list.hpp ****         Elem *elem = head;
+  85:src/../h/list.hpp ****         head = head->next;
+ 222              		.loc 2 85 22
+ 223 0110 83378500 		ld	a5,8(a0)
+ 224              		.loc 2 85 9
+ 225 0114 2334F700 		sd	a5,8(a4)
+  86:src/../h/list.hpp ****         if (!head) { tail = 0; }
+ 226              		.loc 2 86 9
+ 227 0118 638C0702 		beqz	a5,.L25
+ 228              	.L16:
+  87:src/../h/list.hpp **** 
+  88:src/../h/list.hpp ****         T *ret = elem->data;
+ 229              		.loc 2 88 12
+ 230 011c 83340500 		ld	s1,0(a0)
+ 231              	.LVL21:
+ 232              	.LBB61:
+ 233              	.LBB62:
+  44:src/../h/list.hpp ****         }
+ 234              		.loc 2 44 38
+ 235 0120 97000000 		call	_ZN15MemoryAllocator8mem_freeEPv@plt
+GAS LISTING /tmp/ccKO2ybi.s 			page 8
 
 
-  52:src/../h/list.hpp **** 
-  53:src/../h/list.hpp ****         Elem *elem = head;
-  54:src/../h/list.hpp ****         head = head->next;
- 218              		.loc 2 54 22
- 219 0110 83378500 		ld	a5,8(a0)
- 220              		.loc 2 54 9
- 221 0114 2334F700 		sd	a5,8(a4)
-  55:src/../h/list.hpp ****         if (!head) { tail = 0; }
- 222              		.loc 2 55 9
- 223 0118 638C0702 		beqz	a5,.L25
- 224              	.L16:
-  56:src/../h/list.hpp **** 
-  57:src/../h/list.hpp ****         T *ret = elem->data;
- 225              		.loc 2 57 12
- 226 011c 83340500 		ld	s1,0(a0)
- 227              	.LVL21:
-  58:src/../h/list.hpp ****         delete elem;
- 228              		.loc 2 58 9
- 229 0120 97000000 		call	_ZdlPv@plt
- 229      E7800000 
- 230              	.LVL22:
- 231              	.L15:
- 232              	.LBE46:
- 233              	.LBE45:
+ 235      E7800000 
+ 236              	.LVL22:
+ 237              	.L15:
+ 238              	.LBE62:
+ 239              	.LBE61:
+ 240              	.LBE60:
+ 241              	.LBE59:
   29:src/mySemaphore.cpp ****         Scheduler::put(tcb);
- 234              		.loc 1 29 9 is_stmt 1
- 235              	.LBB48:
- 236              	.LBB49:
- 237              		.loc 3 23 35
- 238              		.loc 3 23 49 is_stmt 0
- 239 0128 A3800402 		sb	zero,33(s1)
- 240              	.LVL23:
- 241              	.LBE49:
- 242              	.LBE48:
+ 242              		.loc 1 29 9 is_stmt 1
+ 243              	.LBB64:
+ 244              	.LBB65:
+ 245              		.loc 3 24 35
+ 246              		.loc 3 24 49 is_stmt 0
+ 247 0128 A3800402 		sb	zero,33(s1)
+ 248              	.LVL23:
+ 249              	.LBE65:
+ 250              	.LBE64:
   30:src/mySemaphore.cpp ****     }
- 243              		.loc 1 30 9 is_stmt 1
+ 251              		.loc 1 30 9 is_stmt 1
   30:src/mySemaphore.cpp ****     }
- 244              		.loc 1 30 23 is_stmt 0
- 245 012c 13850400 		mv	a0,s1
- 246 0130 97000000 		call	_ZN9Scheduler3putEP3TCB@plt
- 246      E7800000 
- 247              	.LVL24:
- 248              	.LBE44:
- 249              	.LBE52:
+ 252              		.loc 1 30 23 is_stmt 0
+ 253 012c 13850400 		mv	a0,s1
+ 254 0130 97000000 		call	_ZN9Scheduler3putEP3TCB@plt
+ 254      E7800000 
+ 255              	.LVL24:
+ 256              	.LBE58:
+ 257              	.LBE68:
   32:src/mySemaphore.cpp **** }
- 250              		.loc 1 32 12
- 251 0138 13050000 		li	a0,0
- 252              		.loc 1 33 1
- 253 013c 83308101 		ld	ra,24(sp)
- 254              		.cfi_remember_state
- 255              		.cfi_restore 1
- 256 0140 03340101 		ld	s0,16(sp)
- 257              		.cfi_restore 8
- 258              		.cfi_def_cfa 2, 32
- 259 0144 83348100 		ld	s1,8(sp)
- 260              		.cfi_restore 9
- 261              	.LVL25:
-GAS LISTING /tmp/cc8lsF4s.s 			page 8
+ 258              		.loc 1 32 12
+ 259 0138 13050000 		li	a0,0
+ 260              		.loc 1 33 1
+ 261 013c 83308101 		ld	ra,24(sp)
+ 262              		.cfi_remember_state
+ 263              		.cfi_restore 1
+ 264 0140 03340101 		ld	s0,16(sp)
+ 265              		.cfi_restore 8
+ 266              		.cfi_def_cfa 2, 32
+ 267 0144 83348100 		ld	s1,8(sp)
+ 268              		.cfi_restore 9
+ 269              	.LVL25:
+ 270 0148 13010102 		addi	sp,sp,32
+ 271              		.cfi_def_cfa_offset 0
+ 272 014c 67800000 		jr	ra
+ 273              	.LVL26:
+ 274              	.L25:
+ 275              		.cfi_restore_state
+ 276              	.LBB69:
+ 277              	.LBB67:
+ 278              	.LBB66:
+ 279              	.LBB63:
+  86:src/../h/list.hpp **** 
+ 280              		.loc 2 86 22
+ 281 0150 23380700 		sd	zero,16(a4)
+ 282 0154 6FF09FFC 		j	.L16
+ 283              	.LVL27:
+ 284              	.L19:
+  82:src/../h/list.hpp **** 
+GAS LISTING /tmp/ccKO2ybi.s 			page 9
 
 
- 262 0148 13010102 		addi	sp,sp,32
- 263              		.cfi_def_cfa_offset 0
- 264 014c 67800000 		jr	ra
- 265              	.LVL26:
- 266              	.L25:
- 267              		.cfi_restore_state
- 268              	.LBB53:
- 269              	.LBB51:
- 270              	.LBB50:
- 271              	.LBB47:
-  55:src/../h/list.hpp **** 
- 272              		.loc 2 55 22
- 273 0150 23380700 		sd	zero,16(a4)
- 274 0154 6FF09FFC 		j	.L16
- 275              	.LVL27:
- 276              	.L19:
-  51:src/../h/list.hpp **** 
- 277              		.loc 2 51 29
- 278 0158 93040500 		mv	s1,a0
- 279 015c 6FF0DFFC 		j	.L15
- 280              	.LVL28:
- 281              	.L17:
- 282              		.cfi_def_cfa_register 2
- 283              		.cfi_restore 1
- 284              		.cfi_restore 8
- 285              		.cfi_restore 9
- 286              	.LBE47:
- 287              	.LBE50:
- 288              	.LBE51:
- 289              	.LBE53:
+ 285              		.loc 2 82 29
+ 286 0158 93040500 		mv	s1,a0
+ 287 015c 6FF0DFFC 		j	.L15
+ 288              	.LVL28:
+ 289              	.L17:
+ 290              		.cfi_def_cfa_register 2
+ 291              		.cfi_restore 1
+ 292              		.cfi_restore 8
+ 293              		.cfi_restore 9
+ 294              	.LBE63:
+ 295              	.LBE66:
+ 296              	.LBE67:
+ 297              	.LBE69:
   24:src/mySemaphore.cpp ****     }
- 290              		.loc 1 24 17
- 291 0160 1305F0FF 		li	a0,-1
- 292              	.LVL29:
- 293 0164 67800000 		ret
- 294              		.cfi_endproc
- 295              	.LFE23:
- 297              		.align	2
- 298              		.globl	_ZN11MySemaphore15createSemaphoreEj
- 300              	_ZN11MySemaphore15createSemaphoreEj:
- 301              	.LFB24:
+ 298              		.loc 1 24 17
+ 299 0160 1305F0FF 		li	a0,-1
+ 300              	.LVL29:
+ 301 0164 67800000 		ret
+ 302              		.cfi_endproc
+ 303              	.LFE38:
+ 305              		.align	2
+ 306              		.globl	_ZN11MySemaphore15createSemaphoreEj
+ 308              	_ZN11MySemaphore15createSemaphoreEj:
+ 309              	.LFB39:
   34:src/mySemaphore.cpp **** 
   35:src/mySemaphore.cpp **** MySemaphore *MySemaphore::createSemaphore(unsigned int init) {
- 302              		.loc 1 35 62 is_stmt 1
- 303              		.cfi_startproc
- 304              	.LVL30:
- 305 0168 130101FE 		addi	sp,sp,-32
- 306              		.cfi_def_cfa_offset 32
- 307 016c 233C1100 		sd	ra,24(sp)
- 308 0170 23388100 		sd	s0,16(sp)
- 309 0174 23349100 		sd	s1,8(sp)
- 310              		.cfi_offset 1, -8
- 311              		.cfi_offset 8, -16
- 312              		.cfi_offset 9, -24
- 313 0178 13040102 		addi	s0,sp,32
- 314              		.cfi_def_cfa 8, 0
- 315 017c 93040500 		mv	s1,a0
-GAS LISTING /tmp/cc8lsF4s.s 			page 9
-
-
+ 310              		.loc 1 35 62 is_stmt 1
+ 311              		.cfi_startproc
+ 312              	.LVL30:
+ 313 0168 130101FE 		addi	sp,sp,-32
+ 314              		.cfi_def_cfa_offset 32
+ 315 016c 233C1100 		sd	ra,24(sp)
+ 316 0170 23388100 		sd	s0,16(sp)
+ 317 0174 23349100 		sd	s1,8(sp)
+ 318              		.cfi_offset 1, -8
+ 319              		.cfi_offset 8, -16
+ 320              		.cfi_offset 9, -24
+ 321 0178 13040102 		addi	s0,sp,32
+ 322              		.cfi_def_cfa 8, 0
+ 323 017c 93040500 		mv	s1,a0
   36:src/mySemaphore.cpp ****     return new MySemaphore(init);
- 316              		.loc 1 36 5
- 317              		.loc 1 36 32 is_stmt 0
- 318 0180 13058001 		li	a0,24
- 319              	.LVL31:
- 320 0184 97000000 		call	_Znwm@plt
- 320      E7800000 
- 321              	.LVL32:
- 322              	.LBB54:
- 323              	.LBB55:
- 324              	.LBB56:
- 325              	.LBB57:
-  23:src/../h/list.hpp **** 
- 326              		.loc 2 23 29
- 327 018c 23340500 		sd	zero,8(a0)
- 328 0190 23380500 		sd	zero,16(a0)
- 329              	.LVL33:
- 330              	.LBE57:
- 331              	.LBE56:
- 332              		.file 4 "src/../h/mySemaphore.hpp"
+ 324              		.loc 1 36 5
+ 325              	.LVL31:
+ 326              	.LBB70:
+ 327              	.LBB71:
+ 328              		.file 4 "src/../h/mySemaphore.hpp"
    1:src/../h/mySemaphore.hpp **** #ifndef mySemaphore
    2:src/../h/mySemaphore.hpp **** #define mySemaphore
    3:src/../h/mySemaphore.hpp **** 
    4:src/../h/mySemaphore.hpp **** #include "list.hpp"
    5:src/../h/mySemaphore.hpp **** #include "tcb.hpp"
-   6:src/../h/mySemaphore.hpp **** 
-   7:src/../h/mySemaphore.hpp **** class MySemaphore {
-   8:src/../h/mySemaphore.hpp **** public:
-   9:src/../h/mySemaphore.hpp ****     //check this -> explicit
-  10:src/../h/mySemaphore.hpp ****     explicit MySemaphore(unsigned init = 1) {
-  11:src/../h/mySemaphore.hpp ****         this->value = init;
- 333              		.loc 4 11 9 is_stmt 1
- 334              		.loc 4 11 21 is_stmt 0
- 335 0194 23229500 		sw	s1,4(a0)
+   6:src/../h/mySemaphore.hpp **** #include "memoryAllocator.hpp"
+   7:src/../h/mySemaphore.hpp **** 
+   8:src/../h/mySemaphore.hpp **** class MySemaphore {
+   9:src/../h/mySemaphore.hpp **** public:
+  10:src/../h/mySemaphore.hpp ****     //check this -> explicit
+  11:src/../h/mySemaphore.hpp ****     explicit MySemaphore(unsigned init = 1) {
+GAS LISTING /tmp/ccKO2ybi.s 			page 10
+
+
+  12:src/../h/mySemaphore.hpp ****         this->value = init;
+  13:src/../h/mySemaphore.hpp ****         this->closed = false;
+  14:src/../h/mySemaphore.hpp ****     }
+  15:src/../h/mySemaphore.hpp **** 
+  16:src/../h/mySemaphore.hpp ****     int wait();
+  17:src/../h/mySemaphore.hpp ****     int signal();
+  18:src/../h/mySemaphore.hpp ****     static MySemaphore* createSemaphore(unsigned init = 1);
+  19:src/../h/mySemaphore.hpp ****     unsigned getValue() const { return value; }
+  20:src/../h/mySemaphore.hpp ****     int close();
+  21:src/../h/mySemaphore.hpp **** 
+  22:src/../h/mySemaphore.hpp ****     void* operator new(size_t size) {
+  23:src/../h/mySemaphore.hpp ****         size_t newSize;
+ 329              		.loc 4 23 9
+  24:src/../h/mySemaphore.hpp ****         if(size%MEM_BLOCK_SIZE != 0) {
+ 330              		.loc 4 24 9
+  25:src/../h/mySemaphore.hpp ****             newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
+ 331              		.loc 4 25 13
+  26:src/../h/mySemaphore.hpp ****         }
+  27:src/../h/mySemaphore.hpp ****         else {
+  28:src/../h/mySemaphore.hpp ****             newSize = size;
+  29:src/../h/mySemaphore.hpp ****         }
+  30:src/../h/mySemaphore.hpp **** 
+  31:src/../h/mySemaphore.hpp ****         return MemoryAllocator::mem_alloc(newSize);
+ 332              		.loc 4 31 9
+ 333              		.loc 4 31 42 is_stmt 0
+ 334 0180 13050004 		li	a0,64
+ 335              	.LVL32:
+ 336 0184 97000000 		call	_ZN15MemoryAllocator9mem_allocEm@plt
+ 336      E7800000 
+ 337              	.LVL33:
+ 338              	.LBE71:
+ 339              	.LBE70:
+ 340              	.LBB72:
+ 341              	.LBB73:
+ 342              	.LBB74:
+ 343              	.LBB75:
+  54:src/../h/list.hpp **** 
+ 344              		.loc 2 54 29
+ 345 018c 23340500 		sd	zero,8(a0)
+ 346 0190 23380500 		sd	zero,16(a0)
+ 347              	.LVL34:
+ 348              	.LBE75:
+ 349              	.LBE74:
   12:src/../h/mySemaphore.hpp ****         this->closed = false;
- 336              		.loc 4 12 9 is_stmt 1
- 337              		.loc 4 12 22 is_stmt 0
- 338 0198 23000500 		sb	zero,0(a0)
- 339              	.LVL34:
- 340              	.LBE55:
- 341              	.LBE54:
+ 350              		.loc 4 12 9 is_stmt 1
+  12:src/../h/mySemaphore.hpp ****         this->closed = false;
+ 351              		.loc 4 12 21 is_stmt 0
+ 352 0194 23229500 		sw	s1,4(a0)
+  13:src/../h/mySemaphore.hpp ****     }
+ 353              		.loc 4 13 9 is_stmt 1
+  13:src/../h/mySemaphore.hpp ****     }
+ 354              		.loc 4 13 22 is_stmt 0
+ 355 0198 23000500 		sb	zero,0(a0)
+ 356              	.LVL35:
+ 357              	.LBE73:
+ 358              	.LBE72:
   37:src/mySemaphore.cpp **** }
- 342              		.loc 1 37 1
- 343 019c 83308101 		ld	ra,24(sp)
- 344              		.cfi_restore 1
- 345 01a0 03340101 		ld	s0,16(sp)
- 346              		.cfi_restore 8
- 347              		.cfi_def_cfa 2, 32
- 348 01a4 83348100 		ld	s1,8(sp)
- 349              		.cfi_restore 9
- 350 01a8 13010102 		addi	sp,sp,32
- 351              		.cfi_def_cfa_offset 0
- 352 01ac 67800000 		jr	ra
- 353              		.cfi_endproc
- 354              	.LFE24:
- 356              		.align	2
- 357              		.globl	_ZN11MySemaphore5closeEv
-GAS LISTING /tmp/cc8lsF4s.s 			page 10
+GAS LISTING /tmp/ccKO2ybi.s 			page 11
 
 
- 359              	_ZN11MySemaphore5closeEv:
- 360              	.LFB25:
+ 359              		.loc 1 37 1
+ 360 019c 83308101 		ld	ra,24(sp)
+ 361              		.cfi_restore 1
+ 362 01a0 03340101 		ld	s0,16(sp)
+ 363              		.cfi_restore 8
+ 364              		.cfi_def_cfa 2, 32
+ 365 01a4 83348100 		ld	s1,8(sp)
+ 366              		.cfi_restore 9
+ 367 01a8 13010102 		addi	sp,sp,32
+ 368              		.cfi_def_cfa_offset 0
+ 369 01ac 67800000 		jr	ra
+ 370              		.cfi_endproc
+ 371              	.LFE39:
+ 373              		.align	2
+ 374              		.globl	_ZN11MySemaphore5closeEv
+ 376              	_ZN11MySemaphore5closeEv:
+ 377              	.LFB40:
   38:src/mySemaphore.cpp **** 
   39:src/mySemaphore.cpp **** int MySemaphore::close() {
- 361              		.loc 1 39 26 is_stmt 1
- 362              		.cfi_startproc
- 363              	.LVL35:
+ 378              		.loc 1 39 26 is_stmt 1
+ 379              		.cfi_startproc
+ 380              	.LVL36:
   40:src/mySemaphore.cpp ****     if (closed) {
- 364              		.loc 1 40 5
- 365              		.loc 1 40 9 is_stmt 0
- 366 01b0 83470500 		lbu	a5,0(a0)
- 367              		.loc 1 40 5
- 368 01b4 63960706 		bnez	a5,.L32
+ 381              		.loc 1 40 5
+ 382              		.loc 1 40 9 is_stmt 0
+ 383 01b0 83470500 		lbu	a5,0(a0)
+ 384              		.loc 1 40 5
+ 385 01b4 63960706 		bnez	a5,.L32
   39:src/mySemaphore.cpp ****     if (closed) {
- 369              		.loc 1 39 26
- 370 01b8 130101FE 		addi	sp,sp,-32
- 371              		.cfi_def_cfa_offset 32
- 372 01bc 233C1100 		sd	ra,24(sp)
- 373 01c0 23388100 		sd	s0,16(sp)
- 374 01c4 23349100 		sd	s1,8(sp)
- 375 01c8 23302101 		sd	s2,0(sp)
- 376              		.cfi_offset 1, -8
- 377              		.cfi_offset 8, -16
- 378              		.cfi_offset 9, -24
- 379              		.cfi_offset 18, -32
- 380 01cc 13040102 		addi	s0,sp,32
- 381              		.cfi_def_cfa 8, 0
- 382 01d0 93040500 		mv	s1,a0
+ 386              		.loc 1 39 26
+ 387 01b8 130101FE 		addi	sp,sp,-32
+ 388              		.cfi_def_cfa_offset 32
+ 389 01bc 233C1100 		sd	ra,24(sp)
+ 390 01c0 23388100 		sd	s0,16(sp)
+ 391 01c4 23349100 		sd	s1,8(sp)
+ 392 01c8 23302101 		sd	s2,0(sp)
+ 393              		.cfi_offset 1, -8
+ 394              		.cfi_offset 8, -16
+ 395              		.cfi_offset 9, -24
+ 396              		.cfi_offset 18, -32
+ 397 01cc 13040102 		addi	s0,sp,32
+ 398              		.cfi_def_cfa 8, 0
+ 399 01d0 93040500 		mv	s1,a0
   41:src/mySemaphore.cpp ****         return -1;
   42:src/mySemaphore.cpp ****     }
   43:src/mySemaphore.cpp ****     closed = true;
- 383              		.loc 1 43 5 is_stmt 1
- 384              		.loc 1 43 12 is_stmt 0
- 385 01d4 93071000 		li	a5,1
- 386 01d8 2300F500 		sb	a5,0(a0)
- 387 01dc 6F004002 		j	.L31
- 388              	.LVL36:
- 389              	.L39:
- 390              	.LBB58:
- 391              	.LBB59:
- 392              	.LBB60:
-  55:src/../h/list.hpp **** 
- 393              		.loc 2 55 22
- 394 01e0 23B80400 		sd	zero,16(s1)
- 395              	.L30:
-  57:src/../h/list.hpp ****         delete elem;
- 396              		.loc 2 57 12
- 397 01e4 03390500 		ld	s2,0(a0)
- 398              	.LVL37:
- 399              		.loc 2 58 9
- 400 01e8 97000000 		call	_ZdlPv@plt
- 400      E7800000 
- 401              	.LVL38:
- 402              	.LBE60:
- 403              	.LBE59:
+ 400              		.loc 1 43 5 is_stmt 1
+ 401              		.loc 1 43 12 is_stmt 0
+ 402 01d4 93071000 		li	a5,1
+ 403 01d8 2300F500 		sb	a5,0(a0)
+ 404 01dc 6F004002 		j	.L31
+ 405              	.LVL37:
+ 406              	.L39:
+ 407              	.LBB76:
+ 408              	.LBB77:
+ 409              	.LBB78:
+  86:src/../h/list.hpp **** 
+GAS LISTING /tmp/ccKO2ybi.s 			page 12
+
+
+ 410              		.loc 2 86 22
+ 411 01e0 23B80400 		sd	zero,16(s1)
+ 412              	.L30:
+ 413              		.loc 2 88 12
+ 414 01e4 03390500 		ld	s2,0(a0)
+ 415              	.LVL38:
+ 416              	.LBB79:
+ 417              	.LBB80:
+  44:src/../h/list.hpp ****         }
+ 418              		.loc 2 44 38
+ 419 01e8 97000000 		call	_ZN15MemoryAllocator8mem_freeEPv@plt
+ 419      E7800000 
+ 420              	.LVL39:
+ 421              	.LBE80:
+ 422              	.LBE79:
+ 423              	.LBE78:
+ 424              	.LBE77:
   44:src/mySemaphore.cpp **** 
   45:src/mySemaphore.cpp ****     while (this->blocked.peekFirst()) {
-GAS LISTING /tmp/cc8lsF4s.s 			page 11
-
-
   46:src/mySemaphore.cpp ****         TCB* tcb = this->blocked.removeFirst();
   47:src/mySemaphore.cpp ****         tcb->setBlocked(false);
- 404              		.loc 1 47 9 is_stmt 1
- 405              	.LBB62:
- 406              	.LBB63:
- 407              		.loc 3 23 35
- 408              		.loc 3 23 49 is_stmt 0
- 409 01f0 A3000902 		sb	zero,33(s2)
- 410              	.LVL39:
- 411              	.LBE63:
- 412              	.LBE62:
+ 425              		.loc 1 47 9 is_stmt 1
+ 426              	.LBB82:
+ 427              	.LBB83:
+ 428              		.loc 3 24 35
+ 429              		.loc 3 24 49 is_stmt 0
+ 430 01f0 A3000902 		sb	zero,33(s2)
+ 431              	.LVL40:
+ 432              	.LBE83:
+ 433              	.LBE82:
   48:src/mySemaphore.cpp ****         Scheduler::put(tcb);
- 413              		.loc 1 48 9 is_stmt 1
- 414              		.loc 1 48 23 is_stmt 0
- 415 01f4 13050900 		mv	a0,s2
- 416 01f8 97000000 		call	_ZN9Scheduler3putEP3TCB@plt
- 416      E7800000 
- 417              	.LVL40:
- 418              	.L31:
- 419              	.LBE58:
+ 434              		.loc 1 48 9 is_stmt 1
+ 435              		.loc 1 48 23 is_stmt 0
+ 436 01f4 13050900 		mv	a0,s2
+ 437 01f8 97000000 		call	_ZN9Scheduler3putEP3TCB@plt
+ 437      E7800000 
+ 438              	.LVL41:
+ 439              	.L31:
+ 440              	.LBE76:
   45:src/mySemaphore.cpp ****         TCB* tcb = this->blocked.removeFirst();
- 420              		.loc 1 45 5 is_stmt 1
+ 441              		.loc 1 45 5 is_stmt 1
   45:src/mySemaphore.cpp ****         TCB* tcb = this->blocked.removeFirst();
- 421              		.loc 1 45 36
- 422              	.LBB65:
- 423              	.LBB66:
-  59:src/../h/list.hpp ****         return ret;
-  60:src/../h/list.hpp ****     }
-  61:src/../h/list.hpp **** 
-  62:src/../h/list.hpp ****     T *peekFirst()
-  63:src/../h/list.hpp ****     {
-  64:src/../h/list.hpp ****         if (!head) { return 0; }
- 424              		.loc 2 64 14 is_stmt 0
- 425 0200 03B58400 		ld	a0,8(s1)
- 426              		.loc 2 64 9
- 427 0204 63020502 		beqz	a0,.L33
-  65:src/../h/list.hpp ****         return head->data;
- 428              		.loc 2 65 22
- 429 0208 83370500 		ld	a5,0(a0)
- 430              	.LVL41:
- 431              	.LBE66:
- 432              	.LBE65:
+ 442              		.loc 1 45 36
+ 443              	.LBB85:
+ 444              	.LBB86:
+  89:src/../h/list.hpp ****         delete elem;
+  90:src/../h/list.hpp ****         return ret;
+  91:src/../h/list.hpp ****     }
+  92:src/../h/list.hpp **** 
+  93:src/../h/list.hpp ****     T *peekFirst()
+  94:src/../h/list.hpp ****     {
+  95:src/../h/list.hpp ****         if (!head) { return 0; }
+ 445              		.loc 2 95 14 is_stmt 0
+ 446 0200 03B58400 		ld	a0,8(s1)
+ 447              		.loc 2 95 9
+ 448 0204 63020502 		beqz	a0,.L33
+  96:src/../h/list.hpp ****         return head->data;
+GAS LISTING /tmp/ccKO2ybi.s 			page 13
+
+
+ 449              		.loc 2 96 22
+ 450 0208 83370500 		ld	a5,0(a0)
+ 451              	.LVL42:
+ 452              	.LBE86:
+ 453              	.LBE85:
   45:src/mySemaphore.cpp ****         TCB* tcb = this->blocked.removeFirst();
- 433              		.loc 1 45 36
- 434 020c 638C0702 		beqz	a5,.L34
- 435              	.LBB67:
+ 454              		.loc 1 45 36
+ 455 020c 638C0702 		beqz	a5,.L34
+ 456              	.LBB87:
   46:src/mySemaphore.cpp ****         tcb->setBlocked(false);
- 436              		.loc 1 46 9 is_stmt 1
- 437              	.LVL42:
- 438              	.LBB64:
- 439              	.LBB61:
-  54:src/../h/list.hpp ****         if (!head) { tail = 0; }
- 440              		.loc 2 54 22 is_stmt 0
- 441 0210 83378500 		ld	a5,8(a0)
-  54:src/../h/list.hpp ****         if (!head) { tail = 0; }
- 442              		.loc 2 54 9
- 443 0214 23B4F400 		sd	a5,8(s1)
-GAS LISTING /tmp/cc8lsF4s.s 			page 12
-
-
-  55:src/../h/list.hpp **** 
- 444              		.loc 2 55 9
- 445 0218 E39607FC 		bnez	a5,.L30
- 446 021c 6FF05FFC 		j	.L39
- 447              	.LVL43:
- 448              	.L32:
- 449              		.cfi_def_cfa_register 2
- 450              		.cfi_restore 1
- 451              		.cfi_restore 8
- 452              		.cfi_restore 9
- 453              		.cfi_restore 18
- 454              	.LBE61:
- 455              	.LBE64:
- 456              	.LBE67:
+ 457              		.loc 1 46 9 is_stmt 1
+ 458              	.LVL43:
+ 459              	.LBB84:
+ 460              	.LBB81:
+  85:src/../h/list.hpp ****         if (!head) { tail = 0; }
+ 461              		.loc 2 85 22 is_stmt 0
+ 462 0210 83378500 		ld	a5,8(a0)
+  85:src/../h/list.hpp ****         if (!head) { tail = 0; }
+ 463              		.loc 2 85 9
+ 464 0214 23B4F400 		sd	a5,8(s1)
+  86:src/../h/list.hpp **** 
+ 465              		.loc 2 86 9
+ 466 0218 E39607FC 		bnez	a5,.L30
+ 467 021c 6FF05FFC 		j	.L39
+ 468              	.LVL44:
+ 469              	.L32:
+ 470              		.cfi_def_cfa_register 2
+ 471              		.cfi_restore 1
+ 472              		.cfi_restore 8
+ 473              		.cfi_restore 9
+ 474              		.cfi_restore 18
+ 475              	.LBE81:
+ 476              	.LBE84:
+ 477              	.LBE87:
   41:src/mySemaphore.cpp ****     }
- 457              		.loc 1 41 17
- 458 0220 1305F0FF 		li	a0,-1
- 459              	.LVL44:
+ 478              		.loc 1 41 17
+ 479 0220 1305F0FF 		li	a0,-1
+ 480              	.LVL45:
   49:src/mySemaphore.cpp ****     }
   50:src/mySemaphore.cpp ****     return 0;
   51:src/mySemaphore.cpp **** }
- 460              		.loc 1 51 1
- 461 0224 67800000 		ret
- 462              	.LVL45:
- 463              	.L33:
- 464              		.cfi_def_cfa_register 8
- 465              		.cfi_offset 1, -8
- 466              		.cfi_offset 8, -16
- 467              		.cfi_offset 9, -24
- 468              		.cfi_offset 18, -32
+ 481              		.loc 1 51 1
+ 482 0224 67800000 		ret
+ 483              	.LVL46:
+ 484              	.L33:
+ 485              		.cfi_def_cfa_register 8
+ 486              		.cfi_offset 1, -8
+ 487              		.cfi_offset 8, -16
+ 488              		.cfi_offset 9, -24
+ 489              		.cfi_offset 18, -32
   50:src/mySemaphore.cpp **** }
- 469              		.loc 1 50 12
- 470 0228 13050000 		li	a0,0
- 471              	.LVL46:
- 472              	.L29:
- 473              		.loc 1 51 1
- 474 022c 83308101 		ld	ra,24(sp)
- 475              		.cfi_remember_state
- 476              		.cfi_restore 1
- 477 0230 03340101 		ld	s0,16(sp)
- 478              		.cfi_restore 8
- 479              		.cfi_def_cfa 2, 32
- 480 0234 83348100 		ld	s1,8(sp)
- 481              		.cfi_restore 9
- 482              	.LVL47:
- 483 0238 03390100 		ld	s2,0(sp)
- 484              		.cfi_restore 18
- 485 023c 13010102 		addi	sp,sp,32
- 486              		.cfi_def_cfa_offset 0
- 487 0240 67800000 		jr	ra
- 488              	.LVL48:
- 489              	.L34:
- 490              		.cfi_restore_state
-  50:src/mySemaphore.cpp **** }
- 491              		.loc 1 50 12
- 492 0244 13050000 		li	a0,0
- 493 0248 6FF05FFE 		j	.L29
-GAS LISTING /tmp/cc8lsF4s.s 			page 13
+ 490              		.loc 1 50 12
+ 491 0228 13050000 		li	a0,0
+ 492              	.LVL47:
+ 493              	.L29:
+ 494              		.loc 1 51 1
+ 495 022c 83308101 		ld	ra,24(sp)
+GAS LISTING /tmp/ccKO2ybi.s 			page 14
 
 
- 494              		.cfi_endproc
- 495              	.LFE25:
- 497              	.Letext0:
- 498              		.file 5 "src/../h/../lib/hw.h"
- 499              		.file 6 "src/../h/scheduler.hpp"
- 500              		.file 7 "src/../h/syscall_c.hpp"
-GAS LISTING /tmp/cc8lsF4s.s 			page 14
+ 496              		.cfi_remember_state
+ 497              		.cfi_restore 1
+ 498 0230 03340101 		ld	s0,16(sp)
+ 499              		.cfi_restore 8
+ 500              		.cfi_def_cfa 2, 32
+ 501 0234 83348100 		ld	s1,8(sp)
+ 502              		.cfi_restore 9
+ 503              	.LVL48:
+ 504 0238 03390100 		ld	s2,0(sp)
+ 505              		.cfi_restore 18
+ 506 023c 13010102 		addi	sp,sp,32
+ 507              		.cfi_def_cfa_offset 0
+ 508 0240 67800000 		jr	ra
+ 509              	.LVL49:
+ 510              	.L34:
+ 511              		.cfi_restore_state
+  50:src/mySemaphore.cpp **** }
+ 512              		.loc 1 50 12
+ 513 0244 13050000 		li	a0,0
+ 514 0248 6FF05FFE 		j	.L29
+ 515              		.cfi_endproc
+ 516              	.LFE40:
+ 518              	.Letext0:
+ 519              		.file 5 "src/../h/../lib/hw.h"
+ 520              		.file 6 "src/../h/memoryAllocator.hpp"
+ 521              		.file 7 "src/../h/scheduler.hpp"
+ 522              		.file 8 "src/../h/syscall_c.hpp"
+GAS LISTING /tmp/ccKO2ybi.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 mySemaphore.cpp
-     /tmp/cc8lsF4s.s:9      .text:0000000000000000 _ZN11MySemaphore4waitEv
-     /tmp/cc8lsF4s.s:13     .text:0000000000000000 .L0 
-     /tmp/cc8lsF4s.s:15     .text:0000000000000000 .L0 
-     /tmp/cc8lsF4s.s:16     .text:0000000000000000 .L0 
-     /tmp/cc8lsF4s.s:17     .text:0000000000000000 .L0 
-     /tmp/cc8lsF4s.s:19     .text:0000000000000004 .L0 
-     /tmp/cc8lsF4s.s:21     .text:0000000000000008 .L0 
-     /tmp/cc8lsF4s.s:22     .text:000000000000000c .L0 
-     /tmp/cc8lsF4s.s:27     .text:000000000000001c .L0 
-     /tmp/cc8lsF4s.s:28     .text:000000000000001c .L0 
-     /tmp/cc8lsF4s.s:29     .text:000000000000001c .L0 
-     /tmp/cc8lsF4s.s:30     .text:000000000000001c .L0 
-     /tmp/cc8lsF4s.s:32     .text:0000000000000020 .L0 
-     /tmp/cc8lsF4s.s:35     .text:0000000000000024 .L0 
-     /tmp/cc8lsF4s.s:36     .text:0000000000000024 .L0 
-     /tmp/cc8lsF4s.s:38     .text:0000000000000028 .L0 
-     /tmp/cc8lsF4s.s:40     .text:000000000000002c .L0 
-     /tmp/cc8lsF4s.s:42     .text:0000000000000030 .L0 
-     /tmp/cc8lsF4s.s:45     .text:0000000000000038 .L0 
-     /tmp/cc8lsF4s.s:49     .text:000000000000003c .L0 
-     /tmp/cc8lsF4s.s:50     .text:0000000000000040 .L0 
-     /tmp/cc8lsF4s.s:51     .text:0000000000000040 .L0 
-     /tmp/cc8lsF4s.s:53     .text:0000000000000044 .L0 
-     /tmp/cc8lsF4s.s:54     .text:0000000000000044 .L0 
-     /tmp/cc8lsF4s.s:56     .text:0000000000000048 .L0 
-     /tmp/cc8lsF4s.s:59     .text:000000000000004c .L0 
-     /tmp/cc8lsF4s.s:61     .text:0000000000000050 .L0 
-     /tmp/cc8lsF4s.s:65     .text:0000000000000054 .L0 
-     /tmp/cc8lsF4s.s:67     .text:0000000000000054 .L0 
-     /tmp/cc8lsF4s.s:68     .text:0000000000000054 .L0 
-     /tmp/cc8lsF4s.s:75     .text:0000000000000060 .L0 
-     /tmp/cc8lsF4s.s:81     .text:000000000000006c .L0 
-     /tmp/cc8lsF4s.s:87     .text:0000000000000074 .L0 
-     /tmp/cc8lsF4s.s:89     .text:0000000000000078 .L0 
-     /tmp/cc8lsF4s.s:91     .text:000000000000007c .L0 
-     /tmp/cc8lsF4s.s:93     .text:0000000000000080 .L0 
-     /tmp/cc8lsF4s.s:99     .text:0000000000000084 .L0 
-     /tmp/cc8lsF4s.s:100    .text:0000000000000084 .L0 
-     /tmp/cc8lsF4s.s:107    .text:0000000000000090 .L0 
-     /tmp/cc8lsF4s.s:108    .text:0000000000000090 .L0 
-     /tmp/cc8lsF4s.s:114    .text:0000000000000098 .L0 
-     /tmp/cc8lsF4s.s:115    .text:0000000000000098 .L0 
-     /tmp/cc8lsF4s.s:118    .text:00000000000000a0 .L0 
-     /tmp/cc8lsF4s.s:119    .text:00000000000000a0 .L0 
-     /tmp/cc8lsF4s.s:121    .text:00000000000000a4 .L0 
-     /tmp/cc8lsF4s.s:123    .text:00000000000000a8 .L0 
-     /tmp/cc8lsF4s.s:130    .text:00000000000000b0 .L0 
-     /tmp/cc8lsF4s.s:135    .text:00000000000000bc .L0 
-     /tmp/cc8lsF4s.s:136    .text:00000000000000bc .L0 
-     /tmp/cc8lsF4s.s:137    .text:00000000000000bc .L0 
-     /tmp/cc8lsF4s.s:138    .text:00000000000000bc .L0 
-     /tmp/cc8lsF4s.s:139    .text:00000000000000bc .L0 
-     /tmp/cc8lsF4s.s:143    .text:00000000000000bc .L0 
-     /tmp/cc8lsF4s.s:146    .text:00000000000000c0 .L0 
-     /tmp/cc8lsF4s.s:149    .text:00000000000000c4 .L0 
-GAS LISTING /tmp/cc8lsF4s.s 			page 15
+     /tmp/ccKO2ybi.s:9      .text:0000000000000000 _ZN11MySemaphore4waitEv
+     /tmp/ccKO2ybi.s:13     .text:0000000000000000 .L0 
+     /tmp/ccKO2ybi.s:15     .text:0000000000000000 .L0 
+     /tmp/ccKO2ybi.s:16     .text:0000000000000000 .L0 
+     /tmp/ccKO2ybi.s:17     .text:0000000000000000 .L0 
+     /tmp/ccKO2ybi.s:19     .text:0000000000000004 .L0 
+     /tmp/ccKO2ybi.s:21     .text:0000000000000008 .L0 
+     /tmp/ccKO2ybi.s:22     .text:000000000000000c .L0 
+     /tmp/ccKO2ybi.s:27     .text:000000000000001c .L0 
+     /tmp/ccKO2ybi.s:28     .text:000000000000001c .L0 
+     /tmp/ccKO2ybi.s:29     .text:000000000000001c .L0 
+     /tmp/ccKO2ybi.s:30     .text:000000000000001c .L0 
+     /tmp/ccKO2ybi.s:32     .text:0000000000000020 .L0 
+     /tmp/ccKO2ybi.s:35     .text:0000000000000024 .L0 
+     /tmp/ccKO2ybi.s:36     .text:0000000000000024 .L0 
+     /tmp/ccKO2ybi.s:38     .text:0000000000000028 .L0 
+     /tmp/ccKO2ybi.s:40     .text:000000000000002c .L0 
+     /tmp/ccKO2ybi.s:42     .text:0000000000000030 .L0 
+     /tmp/ccKO2ybi.s:45     .text:0000000000000038 .L0 
+     /tmp/ccKO2ybi.s:49     .text:000000000000003c .L0 
+     /tmp/ccKO2ybi.s:50     .text:0000000000000040 .L0 
+     /tmp/ccKO2ybi.s:51     .text:0000000000000040 .L0 
+     /tmp/ccKO2ybi.s:53     .text:0000000000000044 .L0 
+     /tmp/ccKO2ybi.s:54     .text:0000000000000044 .L0 
+     /tmp/ccKO2ybi.s:56     .text:0000000000000048 .L0 
+     /tmp/ccKO2ybi.s:59     .text:000000000000004c .L0 
+     /tmp/ccKO2ybi.s:61     .text:0000000000000050 .L0 
+     /tmp/ccKO2ybi.s:65     .text:0000000000000054 .L0 
+     /tmp/ccKO2ybi.s:67     .text:0000000000000054 .L0 
+     /tmp/ccKO2ybi.s:68     .text:0000000000000054 .L0 
+     /tmp/ccKO2ybi.s:77     .text:0000000000000060 .L0 
+     /tmp/ccKO2ybi.s:85     .text:000000000000006c .L0 
+     /tmp/ccKO2ybi.s:91     .text:0000000000000074 .L0 
+     /tmp/ccKO2ybi.s:93     .text:0000000000000078 .L0 
+     /tmp/ccKO2ybi.s:95     .text:000000000000007c .L0 
+     /tmp/ccKO2ybi.s:97     .text:0000000000000080 .L0 
+     /tmp/ccKO2ybi.s:103    .text:0000000000000084 .L0 
+     /tmp/ccKO2ybi.s:104    .text:0000000000000084 .L0 
+     /tmp/ccKO2ybi.s:111    .text:0000000000000090 .L0 
+     /tmp/ccKO2ybi.s:112    .text:0000000000000090 .L0 
+     /tmp/ccKO2ybi.s:118    .text:0000000000000098 .L0 
+     /tmp/ccKO2ybi.s:119    .text:0000000000000098 .L0 
+     /tmp/ccKO2ybi.s:122    .text:00000000000000a0 .L0 
+     /tmp/ccKO2ybi.s:123    .text:00000000000000a0 .L0 
+     /tmp/ccKO2ybi.s:125    .text:00000000000000a4 .L0 
+     /tmp/ccKO2ybi.s:127    .text:00000000000000a8 .L0 
+     /tmp/ccKO2ybi.s:134    .text:00000000000000b0 .L0 
+     /tmp/ccKO2ybi.s:139    .text:00000000000000bc .L0 
+     /tmp/ccKO2ybi.s:140    .text:00000000000000bc .L0 
+     /tmp/ccKO2ybi.s:141    .text:00000000000000bc .L0 
+     /tmp/ccKO2ybi.s:142    .text:00000000000000bc .L0 
+     /tmp/ccKO2ybi.s:143    .text:00000000000000bc .L0 
+     /tmp/ccKO2ybi.s:147    .text:00000000000000bc .L0 
+     /tmp/ccKO2ybi.s:150    .text:00000000000000c0 .L0 
+     /tmp/ccKO2ybi.s:153    .text:00000000000000c4 .L0 
+GAS LISTING /tmp/ccKO2ybi.s 			page 16
 
 
-     /tmp/cc8lsF4s.s:150    .text:00000000000000c4 .L0 
-     /tmp/cc8lsF4s.s:151    .text:00000000000000c4 .L0 
-     /tmp/cc8lsF4s.s:152    .text:00000000000000c4 .L0 
-     /tmp/cc8lsF4s.s:153    .text:00000000000000c4 .L0 
-     /tmp/cc8lsF4s.s:155    .text:00000000000000c4 .L0 
-     /tmp/cc8lsF4s.s:157    .text:00000000000000cc .L0 
-     /tmp/cc8lsF4s.s:163    .text:00000000000000cc _ZN11MySemaphore6signalEv
-     /tmp/cc8lsF4s.s:166    .text:00000000000000cc .L0 
-     /tmp/cc8lsF4s.s:168    .text:00000000000000cc .L0 
-     /tmp/cc8lsF4s.s:169    .text:00000000000000cc .L0 
-     /tmp/cc8lsF4s.s:170    .text:00000000000000cc .L0 
-     /tmp/cc8lsF4s.s:172    .text:00000000000000d0 .L0 
-     /tmp/cc8lsF4s.s:176    .text:00000000000000d8 .L0 
-     /tmp/cc8lsF4s.s:177    .text:00000000000000d8 .L0 
-     /tmp/cc8lsF4s.s:179    .text:00000000000000dc .L0 
-     /tmp/cc8lsF4s.s:181    .text:00000000000000e0 .L0 
-     /tmp/cc8lsF4s.s:183    .text:00000000000000e4 .L0 
-     /tmp/cc8lsF4s.s:185    .text:00000000000000e8 .L0 
-     /tmp/cc8lsF4s.s:188    .text:00000000000000ec .L0 
-     /tmp/cc8lsF4s.s:191    .text:00000000000000f0 .L0 
-     /tmp/cc8lsF4s.s:195    .text:00000000000000f4 .L0 
-     /tmp/cc8lsF4s.s:196    .text:00000000000000f8 .L0 
-     /tmp/cc8lsF4s.s:200    .text:0000000000000104 .L0 
-     /tmp/cc8lsF4s.s:201    .text:0000000000000104 .L0 
-     /tmp/cc8lsF4s.s:202    .text:0000000000000104 .L0 
-     /tmp/cc8lsF4s.s:204    .text:0000000000000108 .L0 
-     /tmp/cc8lsF4s.s:208    .text:0000000000000108 .L0 
-     /tmp/cc8lsF4s.s:212    .text:0000000000000108 .L0 
-     /tmp/cc8lsF4s.s:213    .text:0000000000000108 .L0 
-     /tmp/cc8lsF4s.s:216    .text:000000000000010c .L0 
-     /tmp/cc8lsF4s.s:219    .text:0000000000000110 .L0 
-     /tmp/cc8lsF4s.s:221    .text:0000000000000114 .L0 
-     /tmp/cc8lsF4s.s:223    .text:0000000000000118 .L0 
-     /tmp/cc8lsF4s.s:226    .text:000000000000011c .L0 
-     /tmp/cc8lsF4s.s:229    .text:0000000000000120 .L0 
-     /tmp/cc8lsF4s.s:237    .text:0000000000000128 .L0 
-     /tmp/cc8lsF4s.s:238    .text:0000000000000128 .L0 
-     /tmp/cc8lsF4s.s:239    .text:0000000000000128 .L0 
-     /tmp/cc8lsF4s.s:244    .text:000000000000012c .L0 
-     /tmp/cc8lsF4s.s:245    .text:000000000000012c .L0 
-     /tmp/cc8lsF4s.s:251    .text:0000000000000138 .L0 
-     /tmp/cc8lsF4s.s:253    .text:000000000000013c .L0 
-     /tmp/cc8lsF4s.s:254    .text:0000000000000140 .L0 
-     /tmp/cc8lsF4s.s:255    .text:0000000000000140 .L0 
-     /tmp/cc8lsF4s.s:257    .text:0000000000000144 .L0 
-     /tmp/cc8lsF4s.s:258    .text:0000000000000144 .L0 
-     /tmp/cc8lsF4s.s:260    .text:0000000000000148 .L0 
-     /tmp/cc8lsF4s.s:263    .text:000000000000014c .L0 
-     /tmp/cc8lsF4s.s:267    .text:0000000000000150 .L0 
-     /tmp/cc8lsF4s.s:273    .text:0000000000000150 .L0 
-     /tmp/cc8lsF4s.s:278    .text:0000000000000158 .L0 
-     /tmp/cc8lsF4s.s:282    .text:0000000000000160 .L0 
-     /tmp/cc8lsF4s.s:283    .text:0000000000000160 .L0 
-     /tmp/cc8lsF4s.s:284    .text:0000000000000160 .L0 
-     /tmp/cc8lsF4s.s:285    .text:0000000000000160 .L0 
-     /tmp/cc8lsF4s.s:291    .text:0000000000000160 .L0 
-     /tmp/cc8lsF4s.s:294    .text:0000000000000168 .L0 
-GAS LISTING /tmp/cc8lsF4s.s 			page 16
+     /tmp/ccKO2ybi.s:154    .text:00000000000000c4 .L0 
+     /tmp/ccKO2ybi.s:155    .text:00000000000000c4 .L0 
+     /tmp/ccKO2ybi.s:156    .text:00000000000000c4 .L0 
+     /tmp/ccKO2ybi.s:157    .text:00000000000000c4 .L0 
+     /tmp/ccKO2ybi.s:159    .text:00000000000000c4 .L0 
+     /tmp/ccKO2ybi.s:161    .text:00000000000000cc .L0 
+     /tmp/ccKO2ybi.s:167    .text:00000000000000cc _ZN11MySemaphore6signalEv
+     /tmp/ccKO2ybi.s:170    .text:00000000000000cc .L0 
+     /tmp/ccKO2ybi.s:172    .text:00000000000000cc .L0 
+     /tmp/ccKO2ybi.s:173    .text:00000000000000cc .L0 
+     /tmp/ccKO2ybi.s:174    .text:00000000000000cc .L0 
+     /tmp/ccKO2ybi.s:176    .text:00000000000000d0 .L0 
+     /tmp/ccKO2ybi.s:180    .text:00000000000000d8 .L0 
+     /tmp/ccKO2ybi.s:181    .text:00000000000000d8 .L0 
+     /tmp/ccKO2ybi.s:183    .text:00000000000000dc .L0 
+     /tmp/ccKO2ybi.s:185    .text:00000000000000e0 .L0 
+     /tmp/ccKO2ybi.s:187    .text:00000000000000e4 .L0 
+     /tmp/ccKO2ybi.s:189    .text:00000000000000e8 .L0 
+     /tmp/ccKO2ybi.s:192    .text:00000000000000ec .L0 
+     /tmp/ccKO2ybi.s:195    .text:00000000000000f0 .L0 
+     /tmp/ccKO2ybi.s:199    .text:00000000000000f4 .L0 
+     /tmp/ccKO2ybi.s:200    .text:00000000000000f8 .L0 
+     /tmp/ccKO2ybi.s:204    .text:0000000000000104 .L0 
+     /tmp/ccKO2ybi.s:205    .text:0000000000000104 .L0 
+     /tmp/ccKO2ybi.s:206    .text:0000000000000104 .L0 
+     /tmp/ccKO2ybi.s:208    .text:0000000000000108 .L0 
+     /tmp/ccKO2ybi.s:212    .text:0000000000000108 .L0 
+     /tmp/ccKO2ybi.s:216    .text:0000000000000108 .L0 
+     /tmp/ccKO2ybi.s:217    .text:0000000000000108 .L0 
+     /tmp/ccKO2ybi.s:220    .text:000000000000010c .L0 
+     /tmp/ccKO2ybi.s:223    .text:0000000000000110 .L0 
+     /tmp/ccKO2ybi.s:225    .text:0000000000000114 .L0 
+     /tmp/ccKO2ybi.s:227    .text:0000000000000118 .L0 
+     /tmp/ccKO2ybi.s:230    .text:000000000000011c .L0 
+     /tmp/ccKO2ybi.s:235    .text:0000000000000120 .L0 
+     /tmp/ccKO2ybi.s:245    .text:0000000000000128 .L0 
+     /tmp/ccKO2ybi.s:246    .text:0000000000000128 .L0 
+     /tmp/ccKO2ybi.s:247    .text:0000000000000128 .L0 
+     /tmp/ccKO2ybi.s:252    .text:000000000000012c .L0 
+     /tmp/ccKO2ybi.s:253    .text:000000000000012c .L0 
+     /tmp/ccKO2ybi.s:259    .text:0000000000000138 .L0 
+     /tmp/ccKO2ybi.s:261    .text:000000000000013c .L0 
+     /tmp/ccKO2ybi.s:262    .text:0000000000000140 .L0 
+     /tmp/ccKO2ybi.s:263    .text:0000000000000140 .L0 
+     /tmp/ccKO2ybi.s:265    .text:0000000000000144 .L0 
+     /tmp/ccKO2ybi.s:266    .text:0000000000000144 .L0 
+     /tmp/ccKO2ybi.s:268    .text:0000000000000148 .L0 
+     /tmp/ccKO2ybi.s:271    .text:000000000000014c .L0 
+     /tmp/ccKO2ybi.s:275    .text:0000000000000150 .L0 
+     /tmp/ccKO2ybi.s:281    .text:0000000000000150 .L0 
+     /tmp/ccKO2ybi.s:286    .text:0000000000000158 .L0 
+     /tmp/ccKO2ybi.s:290    .text:0000000000000160 .L0 
+     /tmp/ccKO2ybi.s:291    .text:0000000000000160 .L0 
+     /tmp/ccKO2ybi.s:292    .text:0000000000000160 .L0 
+     /tmp/ccKO2ybi.s:293    .text:0000000000000160 .L0 
+     /tmp/ccKO2ybi.s:299    .text:0000000000000160 .L0 
+     /tmp/ccKO2ybi.s:302    .text:0000000000000168 .L0 
+GAS LISTING /tmp/ccKO2ybi.s 			page 17
 
 
-     /tmp/cc8lsF4s.s:300    .text:0000000000000168 _ZN11MySemaphore15createSemaphoreEj
-     /tmp/cc8lsF4s.s:303    .text:0000000000000168 .L0 
-     /tmp/cc8lsF4s.s:305    .text:0000000000000168 .L0 
-     /tmp/cc8lsF4s.s:306    .text:000000000000016c .L0 
-     /tmp/cc8lsF4s.s:310    .text:0000000000000178 .L0 
-     /tmp/cc8lsF4s.s:311    .text:0000000000000178 .L0 
-     /tmp/cc8lsF4s.s:312    .text:0000000000000178 .L0 
-     /tmp/cc8lsF4s.s:314    .text:000000000000017c .L0 
-     /tmp/cc8lsF4s.s:317    .text:0000000000000180 .L0 
-     /tmp/cc8lsF4s.s:318    .text:0000000000000180 .L0 
-     /tmp/cc8lsF4s.s:327    .text:000000000000018c .L0 
-     /tmp/cc8lsF4s.s:334    .text:0000000000000194 .L0 
-     /tmp/cc8lsF4s.s:335    .text:0000000000000194 .L0 
-     /tmp/cc8lsF4s.s:337    .text:0000000000000198 .L0 
-     /tmp/cc8lsF4s.s:338    .text:0000000000000198 .L0 
-     /tmp/cc8lsF4s.s:343    .text:000000000000019c .L0 
-     /tmp/cc8lsF4s.s:344    .text:00000000000001a0 .L0 
-     /tmp/cc8lsF4s.s:346    .text:00000000000001a4 .L0 
-     /tmp/cc8lsF4s.s:347    .text:00000000000001a4 .L0 
-     /tmp/cc8lsF4s.s:349    .text:00000000000001a8 .L0 
-     /tmp/cc8lsF4s.s:351    .text:00000000000001ac .L0 
-     /tmp/cc8lsF4s.s:353    .text:00000000000001b0 .L0 
-     /tmp/cc8lsF4s.s:359    .text:00000000000001b0 _ZN11MySemaphore5closeEv
-     /tmp/cc8lsF4s.s:362    .text:00000000000001b0 .L0 
-     /tmp/cc8lsF4s.s:364    .text:00000000000001b0 .L0 
-     /tmp/cc8lsF4s.s:365    .text:00000000000001b0 .L0 
-     /tmp/cc8lsF4s.s:366    .text:00000000000001b0 .L0 
-     /tmp/cc8lsF4s.s:368    .text:00000000000001b4 .L0 
-     /tmp/cc8lsF4s.s:370    .text:00000000000001b8 .L0 
-     /tmp/cc8lsF4s.s:371    .text:00000000000001bc .L0 
-     /tmp/cc8lsF4s.s:376    .text:00000000000001cc .L0 
-     /tmp/cc8lsF4s.s:377    .text:00000000000001cc .L0 
-     /tmp/cc8lsF4s.s:378    .text:00000000000001cc .L0 
-     /tmp/cc8lsF4s.s:379    .text:00000000000001cc .L0 
-     /tmp/cc8lsF4s.s:381    .text:00000000000001d0 .L0 
-     /tmp/cc8lsF4s.s:384    .text:00000000000001d4 .L0 
-     /tmp/cc8lsF4s.s:385    .text:00000000000001d4 .L0 
-     /tmp/cc8lsF4s.s:394    .text:00000000000001e0 .L0 
-     /tmp/cc8lsF4s.s:397    .text:00000000000001e4 .L0 
-     /tmp/cc8lsF4s.s:400    .text:00000000000001e8 .L0 
-     /tmp/cc8lsF4s.s:407    .text:00000000000001f0 .L0 
-     /tmp/cc8lsF4s.s:408    .text:00000000000001f0 .L0 
-     /tmp/cc8lsF4s.s:409    .text:00000000000001f0 .L0 
-     /tmp/cc8lsF4s.s:414    .text:00000000000001f4 .L0 
-     /tmp/cc8lsF4s.s:415    .text:00000000000001f4 .L0 
-     /tmp/cc8lsF4s.s:421    .text:0000000000000200 .L0 
-     /tmp/cc8lsF4s.s:424    .text:0000000000000200 .L0 
-     /tmp/cc8lsF4s.s:425    .text:0000000000000200 .L0 
-     /tmp/cc8lsF4s.s:427    .text:0000000000000204 .L0 
-     /tmp/cc8lsF4s.s:429    .text:0000000000000208 .L0 
-     /tmp/cc8lsF4s.s:434    .text:000000000000020c .L0 
-     /tmp/cc8lsF4s.s:440    .text:0000000000000210 .L0 
-     /tmp/cc8lsF4s.s:441    .text:0000000000000210 .L0 
-     /tmp/cc8lsF4s.s:443    .text:0000000000000214 .L0 
-     /tmp/cc8lsF4s.s:445    .text:0000000000000218 .L0 
-     /tmp/cc8lsF4s.s:449    .text:0000000000000220 .L0 
-     /tmp/cc8lsF4s.s:450    .text:0000000000000220 .L0 
-GAS LISTING /tmp/cc8lsF4s.s 			page 17
+     /tmp/ccKO2ybi.s:308    .text:0000000000000168 _ZN11MySemaphore15createSemaphoreEj
+     /tmp/ccKO2ybi.s:311    .text:0000000000000168 .L0 
+     /tmp/ccKO2ybi.s:313    .text:0000000000000168 .L0 
+     /tmp/ccKO2ybi.s:314    .text:000000000000016c .L0 
+     /tmp/ccKO2ybi.s:318    .text:0000000000000178 .L0 
+     /tmp/ccKO2ybi.s:319    .text:0000000000000178 .L0 
+     /tmp/ccKO2ybi.s:320    .text:0000000000000178 .L0 
+     /tmp/ccKO2ybi.s:322    .text:000000000000017c .L0 
+     /tmp/ccKO2ybi.s:329    .text:0000000000000180 .L0 
+     /tmp/ccKO2ybi.s:330    .text:0000000000000180 .L0 
+     /tmp/ccKO2ybi.s:331    .text:0000000000000180 .L0 
+     /tmp/ccKO2ybi.s:332    .text:0000000000000180 .L0 
+     /tmp/ccKO2ybi.s:333    .text:0000000000000180 .L0 
+     /tmp/ccKO2ybi.s:334    .text:0000000000000180 .L0 
+     /tmp/ccKO2ybi.s:345    .text:000000000000018c .L0 
+     /tmp/ccKO2ybi.s:351    .text:0000000000000194 .L0 
+     /tmp/ccKO2ybi.s:352    .text:0000000000000194 .L0 
+     /tmp/ccKO2ybi.s:354    .text:0000000000000198 .L0 
+     /tmp/ccKO2ybi.s:355    .text:0000000000000198 .L0 
+     /tmp/ccKO2ybi.s:360    .text:000000000000019c .L0 
+     /tmp/ccKO2ybi.s:361    .text:00000000000001a0 .L0 
+     /tmp/ccKO2ybi.s:363    .text:00000000000001a4 .L0 
+     /tmp/ccKO2ybi.s:364    .text:00000000000001a4 .L0 
+     /tmp/ccKO2ybi.s:366    .text:00000000000001a8 .L0 
+     /tmp/ccKO2ybi.s:368    .text:00000000000001ac .L0 
+     /tmp/ccKO2ybi.s:370    .text:00000000000001b0 .L0 
+     /tmp/ccKO2ybi.s:376    .text:00000000000001b0 _ZN11MySemaphore5closeEv
+     /tmp/ccKO2ybi.s:379    .text:00000000000001b0 .L0 
+     /tmp/ccKO2ybi.s:381    .text:00000000000001b0 .L0 
+     /tmp/ccKO2ybi.s:382    .text:00000000000001b0 .L0 
+     /tmp/ccKO2ybi.s:383    .text:00000000000001b0 .L0 
+     /tmp/ccKO2ybi.s:385    .text:00000000000001b4 .L0 
+     /tmp/ccKO2ybi.s:387    .text:00000000000001b8 .L0 
+     /tmp/ccKO2ybi.s:388    .text:00000000000001bc .L0 
+     /tmp/ccKO2ybi.s:393    .text:00000000000001cc .L0 
+     /tmp/ccKO2ybi.s:394    .text:00000000000001cc .L0 
+     /tmp/ccKO2ybi.s:395    .text:00000000000001cc .L0 
+     /tmp/ccKO2ybi.s:396    .text:00000000000001cc .L0 
+     /tmp/ccKO2ybi.s:398    .text:00000000000001d0 .L0 
+     /tmp/ccKO2ybi.s:401    .text:00000000000001d4 .L0 
+     /tmp/ccKO2ybi.s:402    .text:00000000000001d4 .L0 
+     /tmp/ccKO2ybi.s:411    .text:00000000000001e0 .L0 
+     /tmp/ccKO2ybi.s:414    .text:00000000000001e4 .L0 
+     /tmp/ccKO2ybi.s:419    .text:00000000000001e8 .L0 
+     /tmp/ccKO2ybi.s:428    .text:00000000000001f0 .L0 
+     /tmp/ccKO2ybi.s:429    .text:00000000000001f0 .L0 
+     /tmp/ccKO2ybi.s:430    .text:00000000000001f0 .L0 
+     /tmp/ccKO2ybi.s:435    .text:00000000000001f4 .L0 
+     /tmp/ccKO2ybi.s:436    .text:00000000000001f4 .L0 
+     /tmp/ccKO2ybi.s:442    .text:0000000000000200 .L0 
+     /tmp/ccKO2ybi.s:445    .text:0000000000000200 .L0 
+     /tmp/ccKO2ybi.s:446    .text:0000000000000200 .L0 
+     /tmp/ccKO2ybi.s:448    .text:0000000000000204 .L0 
+     /tmp/ccKO2ybi.s:450    .text:0000000000000208 .L0 
+     /tmp/ccKO2ybi.s:455    .text:000000000000020c .L0 
+     /tmp/ccKO2ybi.s:461    .text:0000000000000210 .L0 
+     /tmp/ccKO2ybi.s:462    .text:0000000000000210 .L0 
+GAS LISTING /tmp/ccKO2ybi.s 			page 18
 
 
-     /tmp/cc8lsF4s.s:451    .text:0000000000000220 .L0 
-     /tmp/cc8lsF4s.s:452    .text:0000000000000220 .L0 
-     /tmp/cc8lsF4s.s:453    .text:0000000000000220 .L0 
-     /tmp/cc8lsF4s.s:458    .text:0000000000000220 .L0 
-     /tmp/cc8lsF4s.s:461    .text:0000000000000224 .L0 
-     /tmp/cc8lsF4s.s:464    .text:0000000000000228 .L0 
-     /tmp/cc8lsF4s.s:465    .text:0000000000000228 .L0 
-     /tmp/cc8lsF4s.s:466    .text:0000000000000228 .L0 
-     /tmp/cc8lsF4s.s:467    .text:0000000000000228 .L0 
-     /tmp/cc8lsF4s.s:468    .text:0000000000000228 .L0 
-     /tmp/cc8lsF4s.s:470    .text:0000000000000228 .L0 
-     /tmp/cc8lsF4s.s:474    .text:000000000000022c .L0 
-     /tmp/cc8lsF4s.s:475    .text:0000000000000230 .L0 
-     /tmp/cc8lsF4s.s:476    .text:0000000000000230 .L0 
-     /tmp/cc8lsF4s.s:478    .text:0000000000000234 .L0 
-     /tmp/cc8lsF4s.s:479    .text:0000000000000234 .L0 
-     /tmp/cc8lsF4s.s:481    .text:0000000000000238 .L0 
-     /tmp/cc8lsF4s.s:484    .text:000000000000023c .L0 
-     /tmp/cc8lsF4s.s:486    .text:0000000000000240 .L0 
-     /tmp/cc8lsF4s.s:490    .text:0000000000000244 .L0 
-     /tmp/cc8lsF4s.s:492    .text:0000000000000244 .L0 
-     /tmp/cc8lsF4s.s:494    .text:000000000000024c .L0 
-     /tmp/cc8lsF4s.s:501    .text:000000000000024c .L0 
-     /tmp/cc8lsF4s.s:68     .text:0000000000000054 .L0 
-     /tmp/cc8lsF4s.s:100    .text:0000000000000084 .L0 
-     /tmp/cc8lsF4s.s:134    .text:00000000000000bc .L5
-     /tmp/cc8lsF4s.s:64     .text:0000000000000054 .L12
-     /tmp/cc8lsF4s.s:126    .text:00000000000000b0 .L3
-     /tmp/cc8lsF4s.s:148    .text:00000000000000c4 .L7
-     /tmp/cc8lsF4s.s:47     .text:000000000000003c .L2
-     /tmp/cc8lsF4s.s:94     .text:0000000000000084 .L4
-     /tmp/cc8lsF4s.s:281    .text:0000000000000160 .L17
-     /tmp/cc8lsF4s.s:193    .text:00000000000000f4 .L24
-     /tmp/cc8lsF4s.s:276    .text:0000000000000158 .L19
-     /tmp/cc8lsF4s.s:266    .text:0000000000000150 .L25
-     /tmp/cc8lsF4s.s:224    .text:000000000000011c .L16
-     /tmp/cc8lsF4s.s:231    .text:0000000000000128 .L15
-     /tmp/cc8lsF4s.s:448    .text:0000000000000220 .L32
-     /tmp/cc8lsF4s.s:418    .text:0000000000000200 .L31
-     /tmp/cc8lsF4s.s:463    .text:0000000000000228 .L33
-     /tmp/cc8lsF4s.s:489    .text:0000000000000244 .L34
-     /tmp/cc8lsF4s.s:395    .text:00000000000001e4 .L30
-     /tmp/cc8lsF4s.s:389    .text:00000000000001e0 .L39
-     /tmp/cc8lsF4s.s:472    .text:000000000000022c .L29
-     /tmp/cc8lsF4s.s:1690   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/cc8lsF4s.s:3250   .debug_str:0000000000000568 .LASF93
-     /tmp/cc8lsF4s.s:3190   .debug_str:00000000000003ad .LASF94
-     /tmp/cc8lsF4s.s:3112   .debug_str:000000000000013c .LASF95
-     /tmp/cc8lsF4s.s:5      .text:0000000000000000 .Ltext0
-     /tmp/cc8lsF4s.s:497    .text:000000000000024c .Letext0
-     /tmp/cc8lsF4s.s:3070   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/cc8lsF4s.s:3194   .debug_str:00000000000003d4 .LASF0
-     /tmp/cc8lsF4s.s:3204   .debug_str:000000000000041b .LASF1
-     /tmp/cc8lsF4s.s:3180   .debug_str:000000000000035a .LASF2
-     /tmp/cc8lsF4s.s:3152   .debug_str:00000000000002c1 .LASF4
-     /tmp/cc8lsF4s.s:3238   .debug_str:0000000000000508 .LASF3
-     /tmp/cc8lsF4s.s:3086   .debug_str:000000000000007a .LASF5
-GAS LISTING /tmp/cc8lsF4s.s 			page 18
+     /tmp/ccKO2ybi.s:464    .text:0000000000000214 .L0 
+     /tmp/ccKO2ybi.s:466    .text:0000000000000218 .L0 
+     /tmp/ccKO2ybi.s:470    .text:0000000000000220 .L0 
+     /tmp/ccKO2ybi.s:471    .text:0000000000000220 .L0 
+     /tmp/ccKO2ybi.s:472    .text:0000000000000220 .L0 
+     /tmp/ccKO2ybi.s:473    .text:0000000000000220 .L0 
+     /tmp/ccKO2ybi.s:474    .text:0000000000000220 .L0 
+     /tmp/ccKO2ybi.s:479    .text:0000000000000220 .L0 
+     /tmp/ccKO2ybi.s:482    .text:0000000000000224 .L0 
+     /tmp/ccKO2ybi.s:485    .text:0000000000000228 .L0 
+     /tmp/ccKO2ybi.s:486    .text:0000000000000228 .L0 
+     /tmp/ccKO2ybi.s:487    .text:0000000000000228 .L0 
+     /tmp/ccKO2ybi.s:488    .text:0000000000000228 .L0 
+     /tmp/ccKO2ybi.s:489    .text:0000000000000228 .L0 
+     /tmp/ccKO2ybi.s:491    .text:0000000000000228 .L0 
+     /tmp/ccKO2ybi.s:495    .text:000000000000022c .L0 
+     /tmp/ccKO2ybi.s:496    .text:0000000000000230 .L0 
+     /tmp/ccKO2ybi.s:497    .text:0000000000000230 .L0 
+     /tmp/ccKO2ybi.s:499    .text:0000000000000234 .L0 
+     /tmp/ccKO2ybi.s:500    .text:0000000000000234 .L0 
+     /tmp/ccKO2ybi.s:502    .text:0000000000000238 .L0 
+     /tmp/ccKO2ybi.s:505    .text:000000000000023c .L0 
+     /tmp/ccKO2ybi.s:507    .text:0000000000000240 .L0 
+     /tmp/ccKO2ybi.s:511    .text:0000000000000244 .L0 
+     /tmp/ccKO2ybi.s:513    .text:0000000000000244 .L0 
+     /tmp/ccKO2ybi.s:515    .text:000000000000024c .L0 
+     /tmp/ccKO2ybi.s:523    .text:000000000000024c .L0 
+     /tmp/ccKO2ybi.s:68     .text:0000000000000054 .L0 
+     /tmp/ccKO2ybi.s:104    .text:0000000000000084 .L0 
+     /tmp/ccKO2ybi.s:138    .text:00000000000000bc .L5
+     /tmp/ccKO2ybi.s:64     .text:0000000000000054 .L12
+     /tmp/ccKO2ybi.s:130    .text:00000000000000b0 .L3
+     /tmp/ccKO2ybi.s:152    .text:00000000000000c4 .L7
+     /tmp/ccKO2ybi.s:47     .text:000000000000003c .L2
+     /tmp/ccKO2ybi.s:98     .text:0000000000000084 .L4
+     /tmp/ccKO2ybi.s:289    .text:0000000000000160 .L17
+     /tmp/ccKO2ybi.s:197    .text:00000000000000f4 .L24
+     /tmp/ccKO2ybi.s:284    .text:0000000000000158 .L19
+     /tmp/ccKO2ybi.s:274    .text:0000000000000150 .L25
+     /tmp/ccKO2ybi.s:228    .text:000000000000011c .L16
+     /tmp/ccKO2ybi.s:237    .text:0000000000000128 .L15
+     /tmp/ccKO2ybi.s:469    .text:0000000000000220 .L32
+     /tmp/ccKO2ybi.s:439    .text:0000000000000200 .L31
+     /tmp/ccKO2ybi.s:484    .text:0000000000000228 .L33
+     /tmp/ccKO2ybi.s:510    .text:0000000000000244 .L34
+     /tmp/ccKO2ybi.s:412    .text:00000000000001e4 .L30
+     /tmp/ccKO2ybi.s:406    .text:00000000000001e0 .L39
+     /tmp/ccKO2ybi.s:493    .text:000000000000022c .L29
+     /tmp/ccKO2ybi.s:2118   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccKO2ybi.s:3894   .debug_str:00000000000007a5 .LASF132
+     /tmp/ccKO2ybi.s:3814   .debug_str:000000000000055a .LASF133
+     /tmp/ccKO2ybi.s:3802   .debug_str:00000000000004cb .LASF134
+     /tmp/ccKO2ybi.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccKO2ybi.s:518    .text:000000000000024c .Letext0
+     /tmp/ccKO2ybi.s:3648   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccKO2ybi.s:3818   .debug_str:0000000000000581 .LASF0
+     /tmp/ccKO2ybi.s:3832   .debug_str:00000000000005f2 .LASF1
+GAS LISTING /tmp/ccKO2ybi.s 			page 19
 
 
-     /tmp/cc8lsF4s.s:3206   .debug_str:000000000000042e .LASF6
-     /tmp/cc8lsF4s.s:3192   .debug_str:00000000000003c1 .LASF7
-     /tmp/cc8lsF4s.s:3264   .debug_str:000000000000068c .LASF8
-     /tmp/cc8lsF4s.s:3138   .debug_str:000000000000022e .LASF9
-     /tmp/cc8lsF4s.s:3214   .debug_str:000000000000046e .LASF10
-     /tmp/cc8lsF4s.s:3254   .debug_str:0000000000000638 .LASF11
-     /tmp/cc8lsF4s.s:3090   .debug_str:000000000000008c .LASF12
-     /tmp/cc8lsF4s.s:3076   .debug_str:0000000000000026 .LASF13
-     /tmp/cc8lsF4s.s:3100   .debug_str:00000000000000d0 .LASF14
-     /tmp/cc8lsF4s.s:3230   .debug_str:00000000000004e1 .LASF15
-     /tmp/cc8lsF4s.s:3114   .debug_str:0000000000000172 .LASF16
-     /tmp/cc8lsF4s.s:3212   .debug_str:0000000000000464 .LASF17
-     /tmp/cc8lsF4s.s:3134   .debug_str:0000000000000215 .LASF52
-     /tmp/cc8lsF4s.s:3146   .debug_str:0000000000000280 .LASF96
-     /tmp/cc8lsF4s.s:3098   .debug_str:00000000000000b8 .LASF97
-     /tmp/cc8lsF4s.s:3172   .debug_str:000000000000033d .LASF18
-     /tmp/cc8lsF4s.s:3256   .debug_str:0000000000000647 .LASF21
-     /tmp/cc8lsF4s.s:3226   .debug_str:00000000000004c5 .LASF19
-     /tmp/cc8lsF4s.s:3280   .debug_str:0000000000000701 .LASF20
-     /tmp/cc8lsF4s.s:3186   .debug_str:0000000000000384 .LASF60
-     /tmp/cc8lsF4s.s:3118   .debug_str:000000000000018e .LASF22
-     /tmp/cc8lsF4s.s:3174   .debug_str:0000000000000347 .LASF23
-     /tmp/cc8lsF4s.s:3150   .debug_str:00000000000002bc .LASF24
-     /tmp/cc8lsF4s.s:3246   .debug_str:000000000000054c .LASF26
-     /tmp/cc8lsF4s.s:3228   .debug_str:00000000000004ca .LASF31
-     /tmp/cc8lsF4s.s:3188   .debug_str:00000000000003a3 .LASF98
-     /tmp/cc8lsF4s.s:3142   .debug_str:0000000000000250 .LASF99
-     /tmp/cc8lsF4s.s:3248   .debug_str:000000000000055f .LASF25
-     /tmp/cc8lsF4s.s:3122   .debug_str:00000000000001af .LASF27
-     /tmp/cc8lsF4s.s:3136   .debug_str:0000000000000226 .LASF28
-     /tmp/cc8lsF4s.s:3120   .debug_str:0000000000000193 .LASF29
-     /tmp/cc8lsF4s.s:3252   .debug_str:000000000000062c .LASF30
-     /tmp/cc8lsF4s.s:3074   .debug_str:0000000000000008 .LASF32
-     /tmp/cc8lsF4s.s:3096   .debug_str:00000000000000ae .LASF33
-     /tmp/cc8lsF4s.s:3164   .debug_str:00000000000002f6 .LASF34
-     /tmp/cc8lsF4s.s:3200   .debug_str:00000000000003f0 .LASF35
-     /tmp/cc8lsF4s.s:3084   .debug_str:000000000000005d .LASF36
-     /tmp/cc8lsF4s.s:3168   .debug_str:0000000000000326 .LASF37
-     /tmp/cc8lsF4s.s:3274   .debug_str:00000000000006d2 .LASF38
-     /tmp/cc8lsF4s.s:3080   .debug_str:0000000000000040 .LASF39
-     /tmp/cc8lsF4s.s:3124   .debug_str:00000000000001cc .LASF40
-     /tmp/cc8lsF4s.s:3222   .debug_str:00000000000004b4 .LASF41
-     /tmp/cc8lsF4s.s:3208   .debug_str:0000000000000441 .LASF42
-     /tmp/cc8lsF4s.s:3108   .debug_str:000000000000011e .LASF43
-     /tmp/cc8lsF4s.s:3182   .debug_str:0000000000000368 .LASF44
-     /tmp/cc8lsF4s.s:3282   .debug_str:0000000000000706 .LASF45
-     /tmp/cc8lsF4s.s:3078   .debug_str:0000000000000036 .LASF46
-     /tmp/cc8lsF4s.s:3166   .debug_str:0000000000000311 .LASF47
-     /tmp/cc8lsF4s.s:3154   .debug_str:00000000000002c8 .LASF48
-     /tmp/cc8lsF4s.s:3258   .debug_str:000000000000064c .LASF49
-     /tmp/cc8lsF4s.s:3162   .debug_str:00000000000002e9 .LASF50
-     /tmp/cc8lsF4s.s:3202   .debug_str:00000000000003fb .LASF51
-     /tmp/cc8lsF4s.s:3224   .debug_str:00000000000004c0 .LASF100
-     /tmp/cc8lsF4s.s:3232   .debug_str:00000000000004f7 .LASF101
-     /tmp/cc8lsF4s.s:3184   .debug_str:0000000000000374 .LASF102
-     /tmp/cc8lsF4s.s:3126   .debug_str:00000000000001d1 .LASF53
-     /tmp/cc8lsF4s.s:3140   .debug_str:000000000000023c .LASF103
-GAS LISTING /tmp/cc8lsF4s.s 			page 19
+     /tmp/ccKO2ybi.s:3794   .debug_str:00000000000004a4 .LASF2
+     /tmp/ccKO2ybi.s:3762   .debug_str:00000000000003bb .LASF4
+     /tmp/ccKO2ybi.s:3878   .debug_str:000000000000072f .LASF3
+     /tmp/ccKO2ybi.s:3678   .debug_str:00000000000000b8 .LASF5
+     /tmp/ccKO2ybi.s:3834   .debug_str:0000000000000605 .LASF6
+     /tmp/ccKO2ybi.s:3816   .debug_str:000000000000056e .LASF7
+     /tmp/ccKO2ybi.s:3912   .debug_str:00000000000008e4 .LASF8
+     /tmp/ccKO2ybi.s:3746   .debug_str:000000000000032b .LASF9
+     /tmp/ccKO2ybi.s:3846   .debug_str:000000000000065d .LASF10
+     /tmp/ccKO2ybi.s:3898   .debug_str:0000000000000875 .LASF11
+     /tmp/ccKO2ybi.s:3682   .debug_str:00000000000000ca .LASF12
+     /tmp/ccKO2ybi.s:3656   .debug_str:000000000000002b .LASF13
+     /tmp/ccKO2ybi.s:3692   .debug_str:000000000000012e .LASF14
+     /tmp/ccKO2ybi.s:3870   .debug_str:00000000000006fb .LASF15
+     /tmp/ccKO2ybi.s:3706   .debug_str:00000000000001ab .LASF16
+     /tmp/ccKO2ybi.s:3892   .debug_str:000000000000079b .LASF34
+     /tmp/ccKO2ybi.s:3934   .debug_str:00000000000009b5 .LASF17
+     /tmp/ccKO2ybi.s:3926   .debug_str:0000000000000970 .LASF18
+     /tmp/ccKO2ybi.s:3888   .debug_str:0000000000000788 .LASF19
+     /tmp/ccKO2ybi.s:3790   .debug_str:000000000000048d .LASF30
+     /tmp/ccKO2ybi.s:3728   .debug_str:000000000000027c .LASF20
+     /tmp/ccKO2ybi.s:3908   .debug_str:00000000000008ca .LASF21
+     /tmp/ccKO2ybi.s:3876   .debug_str:0000000000000725 .LASF22
+     /tmp/ccKO2ybi.s:3672   .debug_str:0000000000000094 .LASF23
+     /tmp/ccKO2ybi.s:3810   .debug_str:0000000000000548 .LASF24
+     /tmp/ccKO2ybi.s:3904   .debug_str:00000000000008a2 .LASF25
+     /tmp/ccKO2ybi.s:3880   .debug_str:0000000000000741 .LASF26
+     /tmp/ccKO2ybi.s:3886   .debug_str:0000000000000767 .LASF28
+     /tmp/ccKO2ybi.s:3850   .debug_str:000000000000067d .LASF27
+     /tmp/ccKO2ybi.s:3744   .debug_str:000000000000030a .LASF29
+     /tmp/ccKO2ybi.s:3724   .debug_str:000000000000024c .LASF37
+     /tmp/ccKO2ybi.s:3928   .debug_str:0000000000000975 .LASF38
+     /tmp/ccKO2ybi.s:3890   .debug_str:000000000000078d .LASF81
+     /tmp/ccKO2ybi.s:3726   .debug_str:0000000000000256 .LASF83
+     /tmp/ccKO2ybi.s:3844   .debug_str:0000000000000653 .LASF31
+     /tmp/ccKO2ybi.s:3736   .debug_str:00000000000002c3 .LASF32
+     /tmp/ccKO2ybi.s:3756   .debug_str:000000000000037a .LASF135
+     /tmp/ccKO2ybi.s:3690   .debug_str:0000000000000116 .LASF136
+     /tmp/ccKO2ybi.s:3786   .debug_str:0000000000000476 .LASF33
+     /tmp/ccKO2ybi.s:3900   .debug_str:0000000000000884 .LASF35
+     /tmp/ccKO2ybi.s:3862   .debug_str:00000000000006bc .LASF36
+     /tmp/ccKO2ybi.s:3806   .debug_str:000000000000051f .LASF39
+     /tmp/ccKO2ybi.s:3922   .debug_str:0000000000000934 .LASF40
+     /tmp/ccKO2ybi.s:3710   .debug_str:00000000000001c7 .LASF41
+     /tmp/ccKO2ybi.s:3742   .debug_str:00000000000002fa .LASF42
+     /tmp/ccKO2ybi.s:3684   .debug_str:00000000000000da .LASF43
+     /tmp/ccKO2ybi.s:3884   .debug_str:0000000000000757 .LASF44
+     /tmp/ccKO2ybi.s:3902   .debug_str:0000000000000889 .LASF98
+     /tmp/ccKO2ybi.s:3764   .debug_str:00000000000003c2 .LASF89
+     /tmp/ccKO2ybi.s:3938   .debug_str:00000000000009d1 .LASF137
+     /tmp/ccKO2ybi.s:3714   .debug_str:00000000000001f4 .LASF45
+     /tmp/ccKO2ybi.s:3800   .debug_str:00000000000004c6 .LASF46
+     /tmp/ccKO2ybi.s:3760   .debug_str:00000000000003b6 .LASF47
+     /tmp/ccKO2ybi.s:3822   .debug_str:0000000000000597 .LASF48
+     /tmp/ccKO2ybi.s:3868   .debug_str:00000000000006e4 .LASF54
+     /tmp/ccKO2ybi.s:3808   .debug_str:000000000000053e .LASF138
+     /tmp/ccKO2ybi.s:3752   .debug_str:000000000000034a .LASF139
+GAS LISTING /tmp/ccKO2ybi.s 			page 20
 
 
-     /tmp/cc8lsF4s.s:3158   .debug_str:00000000000002dc .LASF54
-     /tmp/cc8lsF4s.s:3198   .debug_str:00000000000003ea .LASF55
-     /tmp/cc8lsF4s.s:3160   .debug_str:00000000000002e1 .LASF56
-     /tmp/cc8lsF4s.s:3156   .debug_str:00000000000002d3 .LASF57
-     /tmp/cc8lsF4s.s:3072   .debug_str:0000000000000000 .LASF58
-     /tmp/cc8lsF4s.s:3170   .debug_str:000000000000032f .LASF62
-     /tmp/cc8lsF4s.s:3144   .debug_str:0000000000000267 .LASF64
-     /tmp/cc8lsF4s.s:3270   .debug_str:00000000000006bb .LASF59
-     /tmp/cc8lsF4s.s:3148   .debug_str:0000000000000294 .LASF61
-     /tmp/cc8lsF4s.s:3196   .debug_str:00000000000003e1 .LASF63
-     /tmp/cc8lsF4s.s:3128   .debug_str:00000000000001d9 .LASF65
-     /tmp/cc8lsF4s.s:3240   .debug_str:000000000000051a .LASF66
-     /tmp/cc8lsF4s.s:3216   .debug_str:000000000000047d .LASF67
-     /tmp/cc8lsF4s.s:3088   .debug_str:0000000000000081 .LASF104
-     /tmp/cc8lsF4s.s:3130   .debug_str:00000000000001ec .LASF68
-     /tmp/cc8lsF4s.s:3220   .debug_str:00000000000004a8 .LASF69
-     /tmp/cc8lsF4s.s:3262   .debug_str:0000000000000677 .LASF70
-     /tmp/cc8lsF4s.s:3092   .debug_str:000000000000009c .LASF71
-     /tmp/cc8lsF4s.s:3210   .debug_str:000000000000044c .LASF72
-     /tmp/cc8lsF4s.s:3110   .debug_str:0000000000000135 .LASF73
-     /tmp/cc8lsF4s.s:3218   .debug_str:000000000000048e .LASF74
-     /tmp/cc8lsF4s.s:3276   .debug_str:00000000000006ec .LASF75
-     /tmp/cc8lsF4s.s:3132   .debug_str:00000000000001f1 .LASF76
-     /tmp/cc8lsF4s.s:3272   .debug_str:00000000000006c9 .LASF77
-     /tmp/cc8lsF4s.s:3242   .debug_str:000000000000051f .LASF78
-     /tmp/cc8lsF4s.s:3268   .debug_str:00000000000006b5 .LASF79
-     /tmp/cc8lsF4s.s:3266   .debug_str:000000000000069c .LASF80
-     /tmp/cc8lsF4s.s:3178   .debug_str:0000000000000353 .LASF81
-     /tmp/cc8lsF4s.s:3116   .debug_str:0000000000000188 .LASF82
-     /tmp/cc8lsF4s.s:3278   .debug_str:00000000000006fc .LASF83
-     /tmp/cc8lsF4s.s:3106   .debug_str:00000000000000ff .LASF85
-     /tmp/cc8lsF4s.s:3234   .debug_str:00000000000004fd .LASF84
-     /tmp/cc8lsF4s.s:3102   .debug_str:00000000000000dc .LASF86
-     /tmp/cc8lsF4s.s:360    .text:00000000000001b0 .LFB25
-     /tmp/cc8lsF4s.s:495    .text:000000000000024c .LFE25
-     /tmp/cc8lsF4s.s:2659   .debug_loc:0000000000000000 .LLST20
-     /tmp/cc8lsF4s.s:3038   .debug_ranges:0000000000000000 .Ldebug_ranges0
-     /tmp/cc8lsF4s.s:2696   .debug_loc:000000000000009b .LLST21
-     /tmp/cc8lsF4s.s:391    .text:00000000000001e0 .LBB59
-     /tmp/cc8lsF4s.s:2703   .debug_loc:00000000000000be .LLST22
-     /tmp/cc8lsF4s.s:2718   .debug_loc:00000000000000f8 .LLST23
-     /tmp/cc8lsF4s.s:2729   .debug_loc:000000000000012e .LLST24
-     /tmp/cc8lsF4s.s:401    .text:00000000000001f0 .LVL38
-     /tmp/cc8lsF4s.s:405    .text:00000000000001f0 .LBB62
-     /tmp/cc8lsF4s.s:412    .text:00000000000001f4 .LBE62
-     /tmp/cc8lsF4s.s:2736   .debug_loc:0000000000000151 .LLST25
-     /tmp/cc8lsF4s.s:2744   .debug_loc:0000000000000175 .LLST26
-     /tmp/cc8lsF4s.s:417    .text:0000000000000200 .LVL40
-     /tmp/cc8lsF4s.s:422    .text:0000000000000200 .LBB65
-     /tmp/cc8lsF4s.s:432    .text:000000000000020c .LBE65
-     /tmp/cc8lsF4s.s:2751   .debug_loc:0000000000000198 .LLST27
-     /tmp/cc8lsF4s.s:301    .text:0000000000000168 .LFB24
-     /tmp/cc8lsF4s.s:354    .text:00000000000001b0 .LFE24
-     /tmp/cc8lsF4s.s:3284   .debug_str:000000000000071d .LASF87
-     /tmp/cc8lsF4s.s:2766   .debug_loc:00000000000001d2 .LLST16
-     /tmp/cc8lsF4s.s:322    .text:000000000000018c .LBB54
-     /tmp/cc8lsF4s.s:341    .text:000000000000019c .LBE54
-GAS LISTING /tmp/cc8lsF4s.s 			page 20
+     /tmp/ccKO2ybi.s:3674   .debug_str:00000000000000a3 .LASF49
+     /tmp/ccKO2ybi.s:3720   .debug_str:000000000000022a .LASF50
+     /tmp/ccKO2ybi.s:3798   .debug_str:00000000000004be .LASF51
+     /tmp/ccKO2ybi.s:3718   .debug_str:000000000000020e .LASF52
+     /tmp/ccKO2ybi.s:3896   .debug_str:0000000000000869 .LASF53
+     /tmp/ccKO2ybi.s:3654   .debug_str:000000000000000d .LASF55
+     /tmp/ccKO2ybi.s:3688   .debug_str:000000000000010c .LASF56
+     /tmp/ccKO2ybi.s:3778   .debug_str:000000000000042f .LASF57
+     /tmp/ccKO2ybi.s:3824   .debug_str:00000000000005aa .LASF58
+     /tmp/ccKO2ybi.s:3670   .debug_str:0000000000000077 .LASF59
+     /tmp/ccKO2ybi.s:3782   .debug_str:000000000000045f .LASF60
+     /tmp/ccKO2ybi.s:3772   .debug_str:00000000000003eb .LASF61
+     /tmp/ccKO2ybi.s:3664   .debug_str:0000000000000060 .LASF62
+     /tmp/ccKO2ybi.s:3722   .debug_str:0000000000000247 .LASF63
+     /tmp/ccKO2ybi.s:3856   .debug_str:00000000000006a6 .LASF64
+     /tmp/ccKO2ybi.s:3836   .debug_str:0000000000000618 .LASF65
+     /tmp/ccKO2ybi.s:3700   .debug_str:000000000000017b .LASF66
+     /tmp/ccKO2ybi.s:3796   .debug_str:00000000000004b2 .LASF67
+     /tmp/ccKO2ybi.s:3936   .debug_str:00000000000009ba .LASF68
+     /tmp/ccKO2ybi.s:3662   .debug_str:0000000000000056 .LASF69
+     /tmp/ccKO2ybi.s:3780   .debug_str:000000000000044a .LASF70
+     /tmp/ccKO2ybi.s:3872   .debug_str:0000000000000711 .LASF71
+     /tmp/ccKO2ybi.s:3906   .debug_str:00000000000008b4 .LASF72
+     /tmp/ccKO2ybi.s:3666   .debug_str:0000000000000068 .LASF73
+     /tmp/ccKO2ybi.s:3704   .debug_str:0000000000000199 .LASF74
+     /tmp/ccKO2ybi.s:3776   .debug_str:0000000000000422 .LASF75
+     /tmp/ccKO2ybi.s:3830   .debug_str:00000000000005d2 .LASF76
+     /tmp/ccKO2ybi.s:3860   .debug_str:00000000000006b7 .LASF140
+     /tmp/ccKO2ybi.s:3696   .debug_str:0000000000000140 .LASF77
+     /tmp/ccKO2ybi.s:3924   .debug_str:0000000000000941 .LASF78
+     /tmp/ccKO2ybi.s:3882   .debug_str:000000000000074b .LASF79
+     /tmp/ccKO2ybi.s:3730   .debug_str:0000000000000281 .LASF80
+     /tmp/ccKO2ybi.s:3660   .debug_str:0000000000000050 .LASF82
+     /tmp/ccKO2ybi.s:3804   .debug_str:000000000000050f .LASF84
+     /tmp/ccKO2ybi.s:3828   .debug_str:00000000000005ca .LASF85
+     /tmp/ccKO2ybi.s:3676   .debug_str:00000000000000ac .LASF86
+     /tmp/ccKO2ybi.s:3748   .debug_str:0000000000000339 .LASF87
+     /tmp/ccKO2ybi.s:3864   .debug_str:00000000000006c1 .LASF88
+     /tmp/ccKO2ybi.s:3788   .debug_str:0000000000000480 .LASF90
+     /tmp/ccKO2ybi.s:3854   .debug_str:0000000000000692 .LASF141
+     /tmp/ccKO2ybi.s:3768   .debug_str:00000000000003de .LASF91
+     /tmp/ccKO2ybi.s:3694   .debug_str:000000000000013a .LASF92
+     /tmp/ccKO2ybi.s:3770   .debug_str:00000000000003e3 .LASF93
+     /tmp/ccKO2ybi.s:3766   .debug_str:00000000000003d5 .LASF94
+     /tmp/ccKO2ybi.s:3652   .debug_str:0000000000000005 .LASF95
+     /tmp/ccKO2ybi.s:3840   .debug_str:000000000000063b .LASF96
+     /tmp/ccKO2ybi.s:3784   .debug_str:0000000000000468 .LASF100
+     /tmp/ccKO2ybi.s:3754   .debug_str:0000000000000361 .LASF102
+     /tmp/ccKO2ybi.s:3920   .debug_str:0000000000000926 .LASF97
+     /tmp/ccKO2ybi.s:3758   .debug_str:000000000000038e .LASF99
+     /tmp/ccKO2ybi.s:3820   .debug_str:000000000000058e .LASF101
+     /tmp/ccKO2ybi.s:3842   .debug_str:0000000000000640 .LASF103
+     /tmp/ccKO2ybi.s:3650   .debug_str:0000000000000000 .LASF104
+     /tmp/ccKO2ybi.s:3848   .debug_str:000000000000066c .LASF105
+     /tmp/ccKO2ybi.s:3680   .debug_str:00000000000000bf .LASF142
+     /tmp/ccKO2ybi.s:3732   .debug_str:000000000000029a .LASF106
+     /tmp/ccKO2ybi.s:3852   .debug_str:0000000000000686 .LASF107
+GAS LISTING /tmp/ccKO2ybi.s 			page 21
 
 
-     /tmp/cc8lsF4s.s:2780   .debug_loc:000000000000020b .LLST17
-     /tmp/cc8lsF4s.s:2787   .debug_loc:000000000000022e .LLST18
-     /tmp/cc8lsF4s.s:324    .text:000000000000018c .LBB56
-     /tmp/cc8lsF4s.s:331    .text:0000000000000194 .LBE56
-     /tmp/cc8lsF4s.s:2794   .debug_loc:0000000000000251 .LLST19
-     /tmp/cc8lsF4s.s:321    .text:000000000000018c .LVL32
-     /tmp/cc8lsF4s.s:164    .text:00000000000000cc .LFB23
-     /tmp/cc8lsF4s.s:295    .text:0000000000000168 .LFE23
-     /tmp/cc8lsF4s.s:2803   .debug_loc:0000000000000276 .LLST9
-     /tmp/cc8lsF4s.s:2844   .debug_loc:0000000000000324 .LLST10
-     /tmp/cc8lsF4s.s:210    .text:0000000000000108 .LBB45
-     /tmp/cc8lsF4s.s:2851   .debug_loc:0000000000000347 .LLST11
-     /tmp/cc8lsF4s.s:2881   .debug_loc:00000000000003ae .LLST12
-     /tmp/cc8lsF4s.s:2892   .debug_loc:00000000000003e4 .LLST13
-     /tmp/cc8lsF4s.s:230    .text:0000000000000128 .LVL22
-     /tmp/cc8lsF4s.s:235    .text:0000000000000128 .LBB48
-     /tmp/cc8lsF4s.s:242    .text:000000000000012c .LBE48
-     /tmp/cc8lsF4s.s:2899   .debug_loc:0000000000000407 .LLST14
-     /tmp/cc8lsF4s.s:2907   .debug_loc:000000000000042b .LLST15
-     /tmp/cc8lsF4s.s:247    .text:0000000000000138 .LVL24
-     /tmp/cc8lsF4s.s:10     .text:0000000000000000 .LFB22
-     /tmp/cc8lsF4s.s:158    .text:00000000000000cc .LFE22
-     /tmp/cc8lsF4s.s:2914   .debug_loc:000000000000044e .LLST0
-     /tmp/cc8lsF4s.s:71     .text:0000000000000060 .LBB35
-     /tmp/cc8lsF4s.s:2951   .debug_loc:00000000000004e9 .LLST1
-     /tmp/cc8lsF4s.s:2962   .debug_loc:000000000000051f .LLST2
-     /tmp/cc8lsF4s.s:2977   .debug_loc:0000000000000559 .LLST3
-     /tmp/cc8lsF4s.s:78     .text:000000000000006c .LBB37
-     /tmp/cc8lsF4s.s:85     .text:0000000000000074 .LBE37
-     /tmp/cc8lsF4s.s:2988   .debug_loc:000000000000058f .LLST4
-     /tmp/cc8lsF4s.s:2996   .debug_loc:00000000000005b3 .LLST5
-     /tmp/cc8lsF4s.s:3003   .debug_loc:00000000000005d6 .LLST6
-     /tmp/cc8lsF4s.s:77     .text:000000000000006c .LVL5
-     /tmp/cc8lsF4s.s:103    .text:0000000000000090 .LBB40
-     /tmp/cc8lsF4s.s:112    .text:0000000000000098 .LBE40
-     /tmp/cc8lsF4s.s:3010   .debug_loc:00000000000005f9 .LLST7
-     /tmp/cc8lsF4s.s:3018   .debug_loc:000000000000061d .LLST8
-     /tmp/cc8lsF4s.s:116    .text:00000000000000a0 .LVL10
-     /tmp/cc8lsF4s.s:3260   .debug_str:0000000000000662 .LASF88
-     /tmp/cc8lsF4s.s:3176   .debug_str:000000000000034c .LASF89
-     /tmp/cc8lsF4s.s:3244   .debug_str:000000000000053c .LASF91
-     /tmp/cc8lsF4s.s:3236   .debug_str:0000000000000502 .LASF90
-     /tmp/cc8lsF4s.s:3094   .debug_str:00000000000000a1 .LASF92
-     /tmp/cc8lsF4s.s:3082   .debug_str:0000000000000048 .LASF105
-     /tmp/cc8lsF4s.s:3104   .debug_str:00000000000000ef .LASF106
-     /tmp/cc8lsF4s.s:363    .text:00000000000001b0 .LVL35
-     /tmp/cc8lsF4s.s:388    .text:00000000000001e0 .LVL36
-     /tmp/cc8lsF4s.s:447    .text:0000000000000220 .LVL43
-     /tmp/cc8lsF4s.s:459    .text:0000000000000224 .LVL44
-     /tmp/cc8lsF4s.s:462    .text:0000000000000228 .LVL45
-     /tmp/cc8lsF4s.s:482    .text:0000000000000238 .LVL47
-     /tmp/cc8lsF4s.s:488    .text:0000000000000244 .LVL48
-     /tmp/cc8lsF4s.s:437    .text:0000000000000210 .LVL42
-     /tmp/cc8lsF4s.s:398    .text:00000000000001e8 .LVL37
-     /tmp/cc8lsF4s.s:410    .text:00000000000001f4 .LVL39
-     /tmp/cc8lsF4s.s:430    .text:000000000000020c .LVL41
-     /tmp/cc8lsF4s.s:471    .text:000000000000022c .LVL46
-GAS LISTING /tmp/cc8lsF4s.s 			page 21
+     /tmp/ccKO2ybi.s:3910   .debug_str:00000000000008cf .LASF108
+     /tmp/ccKO2ybi.s:3812   .debug_str:0000000000000555 .LASF109
+     /tmp/ccKO2ybi.s:3838   .debug_str:0000000000000623 .LASF110
+     /tmp/ccKO2ybi.s:3702   .debug_str:0000000000000192 .LASF111
+     /tmp/ccKO2ybi.s:3686   .debug_str:00000000000000f2 .LASF112
+     /tmp/ccKO2ybi.s:3930   .debug_str:00000000000009a0 .LASF113
+     /tmp/ccKO2ybi.s:3734   .debug_str:000000000000029f .LASF114
+     /tmp/ccKO2ybi.s:3874   .debug_str:000000000000071c .LASF115
+     /tmp/ccKO2ybi.s:3774   .debug_str:0000000000000405 .LASF116
+     /tmp/ccKO2ybi.s:3918   .debug_str:0000000000000920 .LASF117
+     /tmp/ccKO2ybi.s:3916   .debug_str:0000000000000907 .LASF118
+     /tmp/ccKO2ybi.s:3658   .debug_str:000000000000003b .LASF119
+     /tmp/ccKO2ybi.s:3826   .debug_str:00000000000005b5 .LASF120
+     /tmp/ccKO2ybi.s:3738   .debug_str:00000000000002d4 .LASF121
+     /tmp/ccKO2ybi.s:3866   .debug_str:00000000000006ce .LASF122
+     /tmp/ccKO2ybi.s:3792   .debug_str:000000000000049d .LASF123
+     /tmp/ccKO2ybi.s:3708   .debug_str:00000000000001c1 .LASF124
+     /tmp/ccKO2ybi.s:3932   .debug_str:00000000000009b0 .LASF125
+     /tmp/ccKO2ybi.s:3698   .debug_str:000000000000015c .LASF128
+     /tmp/ccKO2ybi.s:3668   .debug_str:000000000000006f .LASF126
+     /tmp/ccKO2ybi.s:3858   .debug_str:00000000000006b2 .LASF127
+     /tmp/ccKO2ybi.s:3914   .debug_str:00000000000008f4 .LASF129
+     /tmp/ccKO2ybi.s:377    .text:00000000000001b0 .LFB40
+     /tmp/ccKO2ybi.s:516    .text:000000000000024c .LFE40
+     /tmp/ccKO2ybi.s:3189   .debug_loc:0000000000000000 .LLST25
+     /tmp/ccKO2ybi.s:3616   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/ccKO2ybi.s:3226   .debug_loc:000000000000009b .LLST26
+     /tmp/ccKO2ybi.s:408    .text:00000000000001e0 .LBB77
+     /tmp/ccKO2ybi.s:3233   .debug_loc:00000000000000be .LLST27
+     /tmp/ccKO2ybi.s:3248   .debug_loc:00000000000000f8 .LLST28
+     /tmp/ccKO2ybi.s:3259   .debug_loc:000000000000012e .LLST29
+     /tmp/ccKO2ybi.s:416    .text:00000000000001e8 .LBB79
+     /tmp/ccKO2ybi.s:422    .text:00000000000001f0 .LBE79
+     /tmp/ccKO2ybi.s:3266   .debug_loc:0000000000000151 .LLST30
+     /tmp/ccKO2ybi.s:420    .text:00000000000001f0 .LVL39
+     /tmp/ccKO2ybi.s:426    .text:00000000000001f0 .LBB82
+     /tmp/ccKO2ybi.s:433    .text:00000000000001f4 .LBE82
+     /tmp/ccKO2ybi.s:3273   .debug_loc:0000000000000174 .LLST31
+     /tmp/ccKO2ybi.s:3281   .debug_loc:0000000000000198 .LLST32
+     /tmp/ccKO2ybi.s:438    .text:0000000000000200 .LVL41
+     /tmp/ccKO2ybi.s:443    .text:0000000000000200 .LBB85
+     /tmp/ccKO2ybi.s:453    .text:000000000000020c .LBE85
+     /tmp/ccKO2ybi.s:3288   .debug_loc:00000000000001bb .LLST33
+     /tmp/ccKO2ybi.s:309    .text:0000000000000168 .LFB39
+     /tmp/ccKO2ybi.s:371    .text:00000000000001b0 .LFE39
+     /tmp/ccKO2ybi.s:3750   .debug_str:0000000000000345 .LASF130
+     /tmp/ccKO2ybi.s:3303   .debug_loc:00000000000001f5 .LLST19
+     /tmp/ccKO2ybi.s:326    .text:0000000000000180 .LBB70
+     /tmp/ccKO2ybi.s:339    .text:000000000000018c .LBE70
+     /tmp/ccKO2ybi.s:3317   .debug_loc:000000000000022e .LLST20
+     /tmp/ccKO2ybi.s:3325   .debug_loc:0000000000000252 .LLST21
+     /tmp/ccKO2ybi.s:337    .text:000000000000018c .LVL33
+     /tmp/ccKO2ybi.s:340    .text:000000000000018c .LBB72
+     /tmp/ccKO2ybi.s:358    .text:000000000000019c .LBE72
+     /tmp/ccKO2ybi.s:3334   .debug_loc:0000000000000277 .LLST22
+     /tmp/ccKO2ybi.s:3341   .debug_loc:000000000000029a .LLST23
+     /tmp/ccKO2ybi.s:342    .text:000000000000018c .LBB74
+GAS LISTING /tmp/ccKO2ybi.s 			page 22
 
 
-     /tmp/cc8lsF4s.s:304    .text:0000000000000168 .LVL30
-     /tmp/cc8lsF4s.s:319    .text:0000000000000184 .LVL31
-     /tmp/cc8lsF4s.s:339    .text:000000000000019c .LVL34
-     /tmp/cc8lsF4s.s:329    .text:0000000000000194 .LVL33
-     /tmp/cc8lsF4s.s:167    .text:00000000000000cc .LVL15
-     /tmp/cc8lsF4s.s:189    .text:00000000000000f0 .LVL16
-     /tmp/cc8lsF4s.s:192    .text:00000000000000f4 .LVL17
-     /tmp/cc8lsF4s.s:214    .text:000000000000010c .LVL19
-     /tmp/cc8lsF4s.s:265    .text:0000000000000150 .LVL26
-     /tmp/cc8lsF4s.s:280    .text:0000000000000160 .LVL28
-     /tmp/cc8lsF4s.s:292    .text:0000000000000164 .LVL29
-     /tmp/cc8lsF4s.s:261    .text:0000000000000148 .LVL25
-     /tmp/cc8lsF4s.s:209    .text:0000000000000108 .LVL18
-     /tmp/cc8lsF4s.s:217    .text:0000000000000110 .LVL20
-     /tmp/cc8lsF4s.s:275    .text:0000000000000158 .LVL27
-     /tmp/cc8lsF4s.s:227    .text:0000000000000120 .LVL21
-     /tmp/cc8lsF4s.s:240    .text:000000000000012c .LVL23
-     /tmp/cc8lsF4s.s:14     .text:0000000000000000 .LVL0
-     /tmp/cc8lsF4s.s:46     .text:000000000000003c .LVL1
-     /tmp/cc8lsF4s.s:57     .text:0000000000000048 .LVL2
-     /tmp/cc8lsF4s.s:63     .text:0000000000000054 .LVL3
-     /tmp/cc8lsF4s.s:133    .text:00000000000000bc .LVL12
-     /tmp/cc8lsF4s.s:144    .text:00000000000000c0 .LVL13
-     /tmp/cc8lsF4s.s:147    .text:00000000000000c4 .LVL14
-     /tmp/cc8lsF4s.s:70     .text:0000000000000060 .LVL4
-     /tmp/cc8lsF4s.s:95     .text:0000000000000084 .LVL7
-     /tmp/cc8lsF4s.s:125    .text:00000000000000b0 .LVL11
-     /tmp/cc8lsF4s.s:83     .text:0000000000000074 .LVL6
-     /tmp/cc8lsF4s.s:102    .text:0000000000000090 .LVL8
-     /tmp/cc8lsF4s.s:110    .text:0000000000000098 .LVL9
-     /tmp/cc8lsF4s.s:502    .debug_info:0000000000000000 .Ldebug_info0
-     /tmp/cc8lsF4s.s:97     .text:0000000000000084 .LBE35
-     /tmp/cc8lsF4s.s:127    .text:00000000000000b0 .LBB42
-     /tmp/cc8lsF4s.s:141    .text:00000000000000bc .LBE42
-     /tmp/cc8lsF4s.s:206    .text:0000000000000108 .LBB44
-     /tmp/cc8lsF4s.s:248    .text:0000000000000138 .LBE44
-     /tmp/cc8lsF4s.s:269    .text:0000000000000150 .LBB51
-     /tmp/cc8lsF4s.s:288    .text:0000000000000160 .LBE51
-     /tmp/cc8lsF4s.s:233    .text:0000000000000128 .LBE45
-     /tmp/cc8lsF4s.s:270    .text:0000000000000150 .LBB50
-     /tmp/cc8lsF4s.s:287    .text:0000000000000160 .LBE50
-     /tmp/cc8lsF4s.s:390    .text:00000000000001e0 .LBB58
-     /tmp/cc8lsF4s.s:419    .text:0000000000000200 .LBE58
-     /tmp/cc8lsF4s.s:435    .text:0000000000000210 .LBB67
-     /tmp/cc8lsF4s.s:456    .text:0000000000000220 .LBE67
-     /tmp/cc8lsF4s.s:403    .text:00000000000001f0 .LBE59
-     /tmp/cc8lsF4s.s:438    .text:0000000000000210 .LBB64
-     /tmp/cc8lsF4s.s:455    .text:0000000000000220 .LBE64
+     /tmp/ccKO2ybi.s:349    .text:0000000000000194 .LBE74
+     /tmp/ccKO2ybi.s:3348   .debug_loc:00000000000002bd .LLST24
+     /tmp/ccKO2ybi.s:168    .text:00000000000000cc .LFB38
+     /tmp/ccKO2ybi.s:303    .text:0000000000000168 .LFE38
+     /tmp/ccKO2ybi.s:3357   .debug_loc:00000000000002e2 .LLST11
+     /tmp/ccKO2ybi.s:3398   .debug_loc:0000000000000390 .LLST12
+     /tmp/ccKO2ybi.s:214    .text:0000000000000108 .LBB59
+     /tmp/ccKO2ybi.s:3405   .debug_loc:00000000000003b3 .LLST13
+     /tmp/ccKO2ybi.s:3435   .debug_loc:000000000000041a .LLST14
+     /tmp/ccKO2ybi.s:3446   .debug_loc:0000000000000450 .LLST15
+     /tmp/ccKO2ybi.s:232    .text:0000000000000120 .LBB61
+     /tmp/ccKO2ybi.s:239    .text:0000000000000128 .LBE61
+     /tmp/ccKO2ybi.s:3453   .debug_loc:0000000000000473 .LLST16
+     /tmp/ccKO2ybi.s:236    .text:0000000000000128 .LVL22
+     /tmp/ccKO2ybi.s:243    .text:0000000000000128 .LBB64
+     /tmp/ccKO2ybi.s:250    .text:000000000000012c .LBE64
+     /tmp/ccKO2ybi.s:3460   .debug_loc:0000000000000496 .LLST17
+     /tmp/ccKO2ybi.s:3468   .debug_loc:00000000000004ba .LLST18
+     /tmp/ccKO2ybi.s:255    .text:0000000000000138 .LVL24
+     /tmp/ccKO2ybi.s:10     .text:0000000000000000 .LFB37
+     /tmp/ccKO2ybi.s:162    .text:00000000000000cc .LFE37
+     /tmp/ccKO2ybi.s:3475   .debug_loc:00000000000004dd .LLST0
+     /tmp/ccKO2ybi.s:71     .text:0000000000000060 .LBB47
+     /tmp/ccKO2ybi.s:3512   .debug_loc:0000000000000578 .LLST1
+     /tmp/ccKO2ybi.s:3523   .debug_loc:00000000000005ae .LLST2
+     /tmp/ccKO2ybi.s:3538   .debug_loc:00000000000005e8 .LLST3
+     /tmp/ccKO2ybi.s:73     .text:0000000000000060 .LBB49
+     /tmp/ccKO2ybi.s:81     .text:000000000000006c .LBE49
+     /tmp/ccKO2ybi.s:3549   .debug_loc:000000000000061e .LLST4
+     /tmp/ccKO2ybi.s:3557   .debug_loc:0000000000000642 .LLST5
+     /tmp/ccKO2ybi.s:79     .text:000000000000006c .LVL5
+     /tmp/ccKO2ybi.s:82     .text:000000000000006c .LBB51
+     /tmp/ccKO2ybi.s:89     .text:0000000000000074 .LBE51
+     /tmp/ccKO2ybi.s:3566   .debug_loc:0000000000000667 .LLST6
+     /tmp/ccKO2ybi.s:3574   .debug_loc:000000000000068b .LLST7
+     /tmp/ccKO2ybi.s:3581   .debug_loc:00000000000006ae .LLST8
+     /tmp/ccKO2ybi.s:107    .text:0000000000000090 .LBB54
+     /tmp/ccKO2ybi.s:116    .text:0000000000000098 .LBE54
+     /tmp/ccKO2ybi.s:3588   .debug_loc:00000000000006d1 .LLST9
+     /tmp/ccKO2ybi.s:3596   .debug_loc:00000000000006f5 .LLST10
+     /tmp/ccKO2ybi.s:120    .text:00000000000000a0 .LVL10
+     /tmp/ccKO2ybi.s:3712   .debug_str:00000000000001df .LASF131
+     /tmp/ccKO2ybi.s:3716   .debug_str:00000000000001f9 .LASF143
+     /tmp/ccKO2ybi.s:3740   .debug_str:00000000000002ea .LASF144
+     /tmp/ccKO2ybi.s:380    .text:00000000000001b0 .LVL36
+     /tmp/ccKO2ybi.s:405    .text:00000000000001e0 .LVL37
+     /tmp/ccKO2ybi.s:468    .text:0000000000000220 .LVL44
+     /tmp/ccKO2ybi.s:480    .text:0000000000000224 .LVL45
+     /tmp/ccKO2ybi.s:483    .text:0000000000000228 .LVL46
+     /tmp/ccKO2ybi.s:503    .text:0000000000000238 .LVL48
+     /tmp/ccKO2ybi.s:509    .text:0000000000000244 .LVL49
+     /tmp/ccKO2ybi.s:458    .text:0000000000000210 .LVL43
+     /tmp/ccKO2ybi.s:415    .text:00000000000001e8 .LVL38
+     /tmp/ccKO2ybi.s:431    .text:00000000000001f4 .LVL40
+     /tmp/ccKO2ybi.s:451    .text:000000000000020c .LVL42
+     /tmp/ccKO2ybi.s:492    .text:000000000000022c .LVL47
+     /tmp/ccKO2ybi.s:312    .text:0000000000000168 .LVL30
+GAS LISTING /tmp/ccKO2ybi.s 			page 23
+
+
+     /tmp/ccKO2ybi.s:335    .text:0000000000000184 .LVL32
+     /tmp/ccKO2ybi.s:325    .text:0000000000000180 .LVL31
+     /tmp/ccKO2ybi.s:356    .text:000000000000019c .LVL35
+     /tmp/ccKO2ybi.s:347    .text:0000000000000194 .LVL34
+     /tmp/ccKO2ybi.s:171    .text:00000000000000cc .LVL15
+     /tmp/ccKO2ybi.s:193    .text:00000000000000f0 .LVL16
+     /tmp/ccKO2ybi.s:196    .text:00000000000000f4 .LVL17
+     /tmp/ccKO2ybi.s:218    .text:000000000000010c .LVL19
+     /tmp/ccKO2ybi.s:273    .text:0000000000000150 .LVL26
+     /tmp/ccKO2ybi.s:288    .text:0000000000000160 .LVL28
+     /tmp/ccKO2ybi.s:300    .text:0000000000000164 .LVL29
+     /tmp/ccKO2ybi.s:269    .text:0000000000000148 .LVL25
+     /tmp/ccKO2ybi.s:213    .text:0000000000000108 .LVL18
+     /tmp/ccKO2ybi.s:221    .text:0000000000000110 .LVL20
+     /tmp/ccKO2ybi.s:283    .text:0000000000000158 .LVL27
+     /tmp/ccKO2ybi.s:231    .text:0000000000000120 .LVL21
+     /tmp/ccKO2ybi.s:248    .text:000000000000012c .LVL23
+     /tmp/ccKO2ybi.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccKO2ybi.s:46     .text:000000000000003c .LVL1
+     /tmp/ccKO2ybi.s:57     .text:0000000000000048 .LVL2
+     /tmp/ccKO2ybi.s:63     .text:0000000000000054 .LVL3
+     /tmp/ccKO2ybi.s:137    .text:00000000000000bc .LVL12
+     /tmp/ccKO2ybi.s:148    .text:00000000000000c0 .LVL13
+     /tmp/ccKO2ybi.s:151    .text:00000000000000c4 .LVL14
+     /tmp/ccKO2ybi.s:70     .text:0000000000000060 .LVL4
+     /tmp/ccKO2ybi.s:99     .text:0000000000000084 .LVL7
+     /tmp/ccKO2ybi.s:129    .text:00000000000000b0 .LVL11
+     /tmp/ccKO2ybi.s:87     .text:0000000000000074 .LVL6
+     /tmp/ccKO2ybi.s:106    .text:0000000000000090 .LVL8
+     /tmp/ccKO2ybi.s:114    .text:0000000000000098 .LVL9
+     /tmp/ccKO2ybi.s:524    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccKO2ybi.s:101    .text:0000000000000084 .LBE47
+     /tmp/ccKO2ybi.s:131    .text:00000000000000b0 .LBB56
+     /tmp/ccKO2ybi.s:145    .text:00000000000000bc .LBE56
+     /tmp/ccKO2ybi.s:210    .text:0000000000000108 .LBB58
+     /tmp/ccKO2ybi.s:256    .text:0000000000000138 .LBE58
+     /tmp/ccKO2ybi.s:277    .text:0000000000000150 .LBB67
+     /tmp/ccKO2ybi.s:296    .text:0000000000000160 .LBE67
+     /tmp/ccKO2ybi.s:241    .text:0000000000000128 .LBE59
+     /tmp/ccKO2ybi.s:278    .text:0000000000000150 .LBB66
+     /tmp/ccKO2ybi.s:295    .text:0000000000000160 .LBE66
+     /tmp/ccKO2ybi.s:407    .text:00000000000001e0 .LBB76
+     /tmp/ccKO2ybi.s:440    .text:0000000000000200 .LBE76
+     /tmp/ccKO2ybi.s:456    .text:0000000000000210 .LBB87
+     /tmp/ccKO2ybi.s:477    .text:0000000000000220 .LBE87
+     /tmp/ccKO2ybi.s:424    .text:00000000000001f0 .LBE77
+     /tmp/ccKO2ybi.s:459    .text:0000000000000210 .LBB84
+     /tmp/ccKO2ybi.s:476    .text:0000000000000220 .LBE84
 
 UNDEFINED SYMBOLS
 _ZN3TCB7runningE
-_Znwm
+_ZN15MemoryAllocator9mem_allocEm
 _Z15thread_dispatchv
-_ZdlPv
+_ZN15MemoryAllocator8mem_freeEPv
 _ZN9Scheduler3putEP3TCB
