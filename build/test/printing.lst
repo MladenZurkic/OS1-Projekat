@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccMSDMms.s 			page 1
+GAS LISTING /tmp/ccwvgm64.s 			page 1
 
 
    1              		.file	"printing.cpp"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
   39 003c 6FF0DFFD 		j	.L3
   40              	.L2:
   15:test/printing.cpp ****     while (*string != '\0')
-GAS LISTING /tmp/ccMSDMms.s 			page 2
+GAS LISTING /tmp/ccwvgm64.s 			page 2
 
 
   41              		.loc 1 15 5
@@ -118,7 +118,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
   23:test/printing.cpp **** char* getString(char *buf, int max) {
   86              		.loc 1 23 37 is_stmt 1
   87              		.cfi_startproc
-GAS LISTING /tmp/ccMSDMms.s 			page 3
+GAS LISTING /tmp/ccwvgm64.s 			page 3
 
 
   88              	.LVL8:
@@ -178,7 +178,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
  133              		.loc 1 29 9 is_stmt 1
  134              		.loc 1 29 18 is_stmt 0
  135 00e8 97000000 		call	_Z4getcv@plt
-GAS LISTING /tmp/ccMSDMms.s 			page 4
+GAS LISTING /tmp/ccwvgm64.s 			page 4
 
 
  135      E7800000 
@@ -238,7 +238,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
   41:test/printing.cpp **** }
  175              		.loc 1 41 1 is_stmt 0
  176 013c 13850900 		mv	a0,s3
-GAS LISTING /tmp/ccMSDMms.s 			page 5
+GAS LISTING /tmp/ccwvgm64.s 			page 5
 
 
  177 0140 83308102 		ld	ra,40(sp)
@@ -298,7 +298,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
  227 0184 63E0E702 		bgtu	a4,a5,.L15
   48:test/printing.cpp ****         n = n * 10 + *s++ - '0';
  228              		.loc 1 48 9 is_stmt 1
-GAS LISTING /tmp/ccMSDMms.s 			page 6
+GAS LISTING /tmp/ccwvgm64.s 			page 6
 
 
  229              		.loc 1 48 15 is_stmt 0
@@ -358,7 +358,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
  277              		.cfi_def_cfa 8, 0
  278 01cc 93040500 		mv	s1,a0
  279 01d0 13890500 		mv	s2,a1
-GAS LISTING /tmp/ccMSDMms.s 			page 7
+GAS LISTING /tmp/ccwvgm64.s 			page 7
 
 
  280 01d4 93090600 		mv	s3,a2
@@ -418,7 +418,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
  316 0210 93040000 		li	s1,0
  317              	.LVL33:
  318              	.L23:
-GAS LISTING /tmp/ccMSDMms.s 			page 8
+GAS LISTING /tmp/ccwvgm64.s 			page 8
 
 
   70:test/printing.cpp ****     do{
@@ -478,7 +478,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
  364              		.loc 1 77 9
  365              		.loc 1 77 13 is_stmt 0
  366 0274 930704FD 		addi	a5,s0,-48
-GAS LISTING /tmp/ccMSDMms.s 			page 9
+GAS LISTING /tmp/ccwvgm64.s 			page 9
 
 
  367 0278 B3879700 		add	a5,a5,s1
@@ -538,7 +538,7 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
  411              		.globl	digits
  412              		.globl	lockPrint
  413              		.data
-GAS LISTING /tmp/ccMSDMms.s 			page 10
+GAS LISTING /tmp/ccwvgm64.s 			page 10
 
 
  414              		.align	3
@@ -560,324 +560,324 @@ GAS LISTING /tmp/ccMSDMms.s 			page 1
  429              		.file 2 "test/../h/../lib/hw.h"
  430              		.file 3 "test/printing.hpp"
  431              		.file 4 "test/../h/syscall_c.hpp"
-GAS LISTING /tmp/ccMSDMms.s 			page 11
+GAS LISTING /tmp/ccwvgm64.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 printing.cpp
-     /tmp/ccMSDMms.s:9      .text:0000000000000000 _Z11printStringPKc
-     /tmp/ccMSDMms.s:13     .text:0000000000000000 .L0 
-     /tmp/ccMSDMms.s:15     .text:0000000000000000 .L0 
-     /tmp/ccMSDMms.s:16     .text:0000000000000004 .L0 
-     /tmp/ccMSDMms.s:20     .text:0000000000000010 .L0 
-     /tmp/ccMSDMms.s:21     .text:0000000000000010 .L0 
-     /tmp/ccMSDMms.s:22     .text:0000000000000010 .L0 
-     /tmp/ccMSDMms.s:24     .text:0000000000000014 .L0 
-     /tmp/ccMSDMms.s:29     .text:0000000000000018 .L0 
-     /tmp/ccMSDMms.s:30     .text:0000000000000018 .L0 
-     /tmp/ccMSDMms.s:37     .text:0000000000000034 .L0 
-     /tmp/ccMSDMms.s:42     .text:0000000000000040 .L0 
-     /tmp/ccMSDMms.s:43     .text:0000000000000040 .L0 
-     /tmp/ccMSDMms.s:44     .text:0000000000000040 .L0 
-     /tmp/ccMSDMms.s:46     .text:0000000000000044 .L0 
-     /tmp/ccMSDMms.s:48     .text:0000000000000048 .L0 
-     /tmp/ccMSDMms.s:49     .text:0000000000000048 .L0 
-     /tmp/ccMSDMms.s:52     .text:0000000000000050 .L0 
-     /tmp/ccMSDMms.s:53     .text:0000000000000050 .L0 
-     /tmp/ccMSDMms.s:56     .text:0000000000000054 .L0 
-     /tmp/ccMSDMms.s:59     .text:0000000000000058 .L0 
-     /tmp/ccMSDMms.s:60     .text:0000000000000058 .L0 
-     /tmp/ccMSDMms.s:67     .text:0000000000000074 .L0 
-     /tmp/ccMSDMms.s:68     .text:0000000000000078 .L0 
-     /tmp/ccMSDMms.s:70     .text:000000000000007c .L0 
-     /tmp/ccMSDMms.s:71     .text:000000000000007c .L0 
-     /tmp/ccMSDMms.s:73     .text:0000000000000080 .L0 
-     /tmp/ccMSDMms.s:76     .text:0000000000000084 .L0 
-     /tmp/ccMSDMms.s:78     .text:0000000000000088 .L0 
-     /tmp/ccMSDMms.s:84     .text:0000000000000088 _Z9getStringPci
-     /tmp/ccMSDMms.s:87     .text:0000000000000088 .L0 
-     /tmp/ccMSDMms.s:89     .text:0000000000000088 .L0 
-     /tmp/ccMSDMms.s:90     .text:000000000000008c .L0 
-     /tmp/ccMSDMms.s:97     .text:00000000000000a4 .L0 
-     /tmp/ccMSDMms.s:98     .text:00000000000000a4 .L0 
-     /tmp/ccMSDMms.s:99     .text:00000000000000a4 .L0 
-     /tmp/ccMSDMms.s:100    .text:00000000000000a4 .L0 
-     /tmp/ccMSDMms.s:101    .text:00000000000000a4 .L0 
-     /tmp/ccMSDMms.s:102    .text:00000000000000a4 .L0 
-     /tmp/ccMSDMms.s:104    .text:00000000000000a8 .L0 
-     /tmp/ccMSDMms.s:110    .text:00000000000000b0 .L0 
-     /tmp/ccMSDMms.s:111    .text:00000000000000b0 .L0 
-     /tmp/ccMSDMms.s:118    .text:00000000000000cc .L0 
-     /tmp/ccMSDMms.s:123    .text:00000000000000d8 .L0 
-     /tmp/ccMSDMms.s:127    .text:00000000000000dc .L0 
-     /tmp/ccMSDMms.s:129    .text:00000000000000e0 .L0 
-     /tmp/ccMSDMms.s:132    .text:00000000000000e4 .L0 
-     /tmp/ccMSDMms.s:134    .text:00000000000000e8 .L0 
-     /tmp/ccMSDMms.s:135    .text:00000000000000e8 .L0 
-     /tmp/ccMSDMms.s:138    .text:00000000000000f0 .L0 
-     /tmp/ccMSDMms.s:141    .text:00000000000000f4 .L0 
-     /tmp/ccMSDMms.s:142    .text:00000000000000f4 .L0 
-     /tmp/ccMSDMms.s:143    .text:00000000000000f4 .L0 
-     /tmp/ccMSDMms.s:145    .text:00000000000000f8 .L0 
-     /tmp/ccMSDMms.s:147    .text:00000000000000fc .L0 
-GAS LISTING /tmp/ccMSDMms.s 			page 12
+     /tmp/ccwvgm64.s:9      .text:0000000000000000 _Z11printStringPKc
+     /tmp/ccwvgm64.s:13     .text:0000000000000000 .L0 
+     /tmp/ccwvgm64.s:15     .text:0000000000000000 .L0 
+     /tmp/ccwvgm64.s:16     .text:0000000000000004 .L0 
+     /tmp/ccwvgm64.s:20     .text:0000000000000010 .L0 
+     /tmp/ccwvgm64.s:21     .text:0000000000000010 .L0 
+     /tmp/ccwvgm64.s:22     .text:0000000000000010 .L0 
+     /tmp/ccwvgm64.s:24     .text:0000000000000014 .L0 
+     /tmp/ccwvgm64.s:29     .text:0000000000000018 .L0 
+     /tmp/ccwvgm64.s:30     .text:0000000000000018 .L0 
+     /tmp/ccwvgm64.s:37     .text:0000000000000034 .L0 
+     /tmp/ccwvgm64.s:42     .text:0000000000000040 .L0 
+     /tmp/ccwvgm64.s:43     .text:0000000000000040 .L0 
+     /tmp/ccwvgm64.s:44     .text:0000000000000040 .L0 
+     /tmp/ccwvgm64.s:46     .text:0000000000000044 .L0 
+     /tmp/ccwvgm64.s:48     .text:0000000000000048 .L0 
+     /tmp/ccwvgm64.s:49     .text:0000000000000048 .L0 
+     /tmp/ccwvgm64.s:52     .text:0000000000000050 .L0 
+     /tmp/ccwvgm64.s:53     .text:0000000000000050 .L0 
+     /tmp/ccwvgm64.s:56     .text:0000000000000054 .L0 
+     /tmp/ccwvgm64.s:59     .text:0000000000000058 .L0 
+     /tmp/ccwvgm64.s:60     .text:0000000000000058 .L0 
+     /tmp/ccwvgm64.s:67     .text:0000000000000074 .L0 
+     /tmp/ccwvgm64.s:68     .text:0000000000000078 .L0 
+     /tmp/ccwvgm64.s:70     .text:000000000000007c .L0 
+     /tmp/ccwvgm64.s:71     .text:000000000000007c .L0 
+     /tmp/ccwvgm64.s:73     .text:0000000000000080 .L0 
+     /tmp/ccwvgm64.s:76     .text:0000000000000084 .L0 
+     /tmp/ccwvgm64.s:78     .text:0000000000000088 .L0 
+     /tmp/ccwvgm64.s:84     .text:0000000000000088 _Z9getStringPci
+     /tmp/ccwvgm64.s:87     .text:0000000000000088 .L0 
+     /tmp/ccwvgm64.s:89     .text:0000000000000088 .L0 
+     /tmp/ccwvgm64.s:90     .text:000000000000008c .L0 
+     /tmp/ccwvgm64.s:97     .text:00000000000000a4 .L0 
+     /tmp/ccwvgm64.s:98     .text:00000000000000a4 .L0 
+     /tmp/ccwvgm64.s:99     .text:00000000000000a4 .L0 
+     /tmp/ccwvgm64.s:100    .text:00000000000000a4 .L0 
+     /tmp/ccwvgm64.s:101    .text:00000000000000a4 .L0 
+     /tmp/ccwvgm64.s:102    .text:00000000000000a4 .L0 
+     /tmp/ccwvgm64.s:104    .text:00000000000000a8 .L0 
+     /tmp/ccwvgm64.s:110    .text:00000000000000b0 .L0 
+     /tmp/ccwvgm64.s:111    .text:00000000000000b0 .L0 
+     /tmp/ccwvgm64.s:118    .text:00000000000000cc .L0 
+     /tmp/ccwvgm64.s:123    .text:00000000000000d8 .L0 
+     /tmp/ccwvgm64.s:127    .text:00000000000000dc .L0 
+     /tmp/ccwvgm64.s:129    .text:00000000000000e0 .L0 
+     /tmp/ccwvgm64.s:132    .text:00000000000000e4 .L0 
+     /tmp/ccwvgm64.s:134    .text:00000000000000e8 .L0 
+     /tmp/ccwvgm64.s:135    .text:00000000000000e8 .L0 
+     /tmp/ccwvgm64.s:138    .text:00000000000000f0 .L0 
+     /tmp/ccwvgm64.s:141    .text:00000000000000f4 .L0 
+     /tmp/ccwvgm64.s:142    .text:00000000000000f4 .L0 
+     /tmp/ccwvgm64.s:143    .text:00000000000000f4 .L0 
+     /tmp/ccwvgm64.s:145    .text:00000000000000f8 .L0 
+     /tmp/ccwvgm64.s:147    .text:00000000000000fc .L0 
+GAS LISTING /tmp/ccwvgm64.s 			page 12
 
 
-     /tmp/ccMSDMms.s:150    .text:0000000000000104 .L0 
-     /tmp/ccMSDMms.s:153    .text:000000000000010c .L0 
-     /tmp/ccMSDMms.s:160    .text:0000000000000118 .L0 
-     /tmp/ccMSDMms.s:161    .text:0000000000000118 .L0 
-     /tmp/ccMSDMms.s:164    .text:000000000000011c .L0 
-     /tmp/ccMSDMms.s:167    .text:0000000000000120 .L0 
-     /tmp/ccMSDMms.s:168    .text:0000000000000120 .L0 
-     /tmp/ccMSDMms.s:175    .text:000000000000013c .L0 
-     /tmp/ccMSDMms.s:176    .text:000000000000013c .L0 
-     /tmp/ccMSDMms.s:178    .text:0000000000000144 .L0 
-     /tmp/ccMSDMms.s:180    .text:0000000000000148 .L0 
-     /tmp/ccMSDMms.s:181    .text:0000000000000148 .L0 
-     /tmp/ccMSDMms.s:183    .text:000000000000014c .L0 
-     /tmp/ccMSDMms.s:185    .text:0000000000000150 .L0 
-     /tmp/ccMSDMms.s:187    .text:0000000000000154 .L0 
-     /tmp/ccMSDMms.s:190    .text:0000000000000158 .L0 
-     /tmp/ccMSDMms.s:192    .text:000000000000015c .L0 
-     /tmp/ccMSDMms.s:194    .text:0000000000000160 .L0 
-     /tmp/ccMSDMms.s:200    .text:0000000000000160 _Z11stringToIntPKc
-     /tmp/ccMSDMms.s:203    .text:0000000000000160 .L0 
-     /tmp/ccMSDMms.s:205    .text:0000000000000160 .L0 
-     /tmp/ccMSDMms.s:206    .text:0000000000000164 .L0 
-     /tmp/ccMSDMms.s:208    .text:0000000000000168 .L0 
-     /tmp/ccMSDMms.s:210    .text:000000000000016c .L0 
-     /tmp/ccMSDMms.s:213    .text:0000000000000170 .L0 
-     /tmp/ccMSDMms.s:215    .text:0000000000000170 .L0 
-     /tmp/ccMSDMms.s:216    .text:0000000000000170 .L0 
-     /tmp/ccMSDMms.s:220    .text:0000000000000174 .L0 
-     /tmp/ccMSDMms.s:221    .text:0000000000000174 .L0 
-     /tmp/ccMSDMms.s:222    .text:0000000000000174 .L0 
-     /tmp/ccMSDMms.s:224    .text:0000000000000178 .L0 
-     /tmp/ccMSDMms.s:229    .text:0000000000000188 .L0 
-     /tmp/ccMSDMms.s:230    .text:0000000000000188 .L0 
-     /tmp/ccMSDMms.s:234    .text:0000000000000194 .L0 
-     /tmp/ccMSDMms.s:237    .text:0000000000000198 .L0 
-     /tmp/ccMSDMms.s:239    .text:000000000000019c .L0 
-     /tmp/ccMSDMms.s:242    .text:00000000000001a0 .L0 
-     /tmp/ccMSDMms.s:246    .text:00000000000001a4 .L0 
-     /tmp/ccMSDMms.s:247    .text:00000000000001a4 .L0 
-     /tmp/ccMSDMms.s:248    .text:00000000000001a8 .L0 
-     /tmp/ccMSDMms.s:249    .text:00000000000001a8 .L0 
-     /tmp/ccMSDMms.s:251    .text:00000000000001ac .L0 
-     /tmp/ccMSDMms.s:253    .text:00000000000001b0 .L0 
-     /tmp/ccMSDMms.s:259    .text:00000000000001b0 _Z8printIntiii
-     /tmp/ccMSDMms.s:262    .text:00000000000001b0 .L0 
-     /tmp/ccMSDMms.s:264    .text:00000000000001b0 .L0 
-     /tmp/ccMSDMms.s:265    .text:00000000000001b4 .L0 
-     /tmp/ccMSDMms.s:271    .text:00000000000001c8 .L0 
-     /tmp/ccMSDMms.s:272    .text:00000000000001c8 .L0 
-     /tmp/ccMSDMms.s:273    .text:00000000000001c8 .L0 
-     /tmp/ccMSDMms.s:274    .text:00000000000001c8 .L0 
-     /tmp/ccMSDMms.s:275    .text:00000000000001c8 .L0 
-     /tmp/ccMSDMms.s:277    .text:00000000000001cc .L0 
-     /tmp/ccMSDMms.s:284    .text:00000000000001d8 .L0 
-     /tmp/ccMSDMms.s:285    .text:00000000000001d8 .L0 
-     /tmp/ccMSDMms.s:292    .text:00000000000001f4 .L0 
-     /tmp/ccMSDMms.s:297    .text:0000000000000200 .L0 
-GAS LISTING /tmp/ccMSDMms.s 			page 13
+     /tmp/ccwvgm64.s:150    .text:0000000000000104 .L0 
+     /tmp/ccwvgm64.s:153    .text:000000000000010c .L0 
+     /tmp/ccwvgm64.s:160    .text:0000000000000118 .L0 
+     /tmp/ccwvgm64.s:161    .text:0000000000000118 .L0 
+     /tmp/ccwvgm64.s:164    .text:000000000000011c .L0 
+     /tmp/ccwvgm64.s:167    .text:0000000000000120 .L0 
+     /tmp/ccwvgm64.s:168    .text:0000000000000120 .L0 
+     /tmp/ccwvgm64.s:175    .text:000000000000013c .L0 
+     /tmp/ccwvgm64.s:176    .text:000000000000013c .L0 
+     /tmp/ccwvgm64.s:178    .text:0000000000000144 .L0 
+     /tmp/ccwvgm64.s:180    .text:0000000000000148 .L0 
+     /tmp/ccwvgm64.s:181    .text:0000000000000148 .L0 
+     /tmp/ccwvgm64.s:183    .text:000000000000014c .L0 
+     /tmp/ccwvgm64.s:185    .text:0000000000000150 .L0 
+     /tmp/ccwvgm64.s:187    .text:0000000000000154 .L0 
+     /tmp/ccwvgm64.s:190    .text:0000000000000158 .L0 
+     /tmp/ccwvgm64.s:192    .text:000000000000015c .L0 
+     /tmp/ccwvgm64.s:194    .text:0000000000000160 .L0 
+     /tmp/ccwvgm64.s:200    .text:0000000000000160 _Z11stringToIntPKc
+     /tmp/ccwvgm64.s:203    .text:0000000000000160 .L0 
+     /tmp/ccwvgm64.s:205    .text:0000000000000160 .L0 
+     /tmp/ccwvgm64.s:206    .text:0000000000000164 .L0 
+     /tmp/ccwvgm64.s:208    .text:0000000000000168 .L0 
+     /tmp/ccwvgm64.s:210    .text:000000000000016c .L0 
+     /tmp/ccwvgm64.s:213    .text:0000000000000170 .L0 
+     /tmp/ccwvgm64.s:215    .text:0000000000000170 .L0 
+     /tmp/ccwvgm64.s:216    .text:0000000000000170 .L0 
+     /tmp/ccwvgm64.s:220    .text:0000000000000174 .L0 
+     /tmp/ccwvgm64.s:221    .text:0000000000000174 .L0 
+     /tmp/ccwvgm64.s:222    .text:0000000000000174 .L0 
+     /tmp/ccwvgm64.s:224    .text:0000000000000178 .L0 
+     /tmp/ccwvgm64.s:229    .text:0000000000000188 .L0 
+     /tmp/ccwvgm64.s:230    .text:0000000000000188 .L0 
+     /tmp/ccwvgm64.s:234    .text:0000000000000194 .L0 
+     /tmp/ccwvgm64.s:237    .text:0000000000000198 .L0 
+     /tmp/ccwvgm64.s:239    .text:000000000000019c .L0 
+     /tmp/ccwvgm64.s:242    .text:00000000000001a0 .L0 
+     /tmp/ccwvgm64.s:246    .text:00000000000001a4 .L0 
+     /tmp/ccwvgm64.s:247    .text:00000000000001a4 .L0 
+     /tmp/ccwvgm64.s:248    .text:00000000000001a8 .L0 
+     /tmp/ccwvgm64.s:249    .text:00000000000001a8 .L0 
+     /tmp/ccwvgm64.s:251    .text:00000000000001ac .L0 
+     /tmp/ccwvgm64.s:253    .text:00000000000001b0 .L0 
+     /tmp/ccwvgm64.s:259    .text:00000000000001b0 _Z8printIntiii
+     /tmp/ccwvgm64.s:262    .text:00000000000001b0 .L0 
+     /tmp/ccwvgm64.s:264    .text:00000000000001b0 .L0 
+     /tmp/ccwvgm64.s:265    .text:00000000000001b4 .L0 
+     /tmp/ccwvgm64.s:271    .text:00000000000001c8 .L0 
+     /tmp/ccwvgm64.s:272    .text:00000000000001c8 .L0 
+     /tmp/ccwvgm64.s:273    .text:00000000000001c8 .L0 
+     /tmp/ccwvgm64.s:274    .text:00000000000001c8 .L0 
+     /tmp/ccwvgm64.s:275    .text:00000000000001c8 .L0 
+     /tmp/ccwvgm64.s:277    .text:00000000000001cc .L0 
+     /tmp/ccwvgm64.s:284    .text:00000000000001d8 .L0 
+     /tmp/ccwvgm64.s:285    .text:00000000000001d8 .L0 
+     /tmp/ccwvgm64.s:292    .text:00000000000001f4 .L0 
+     /tmp/ccwvgm64.s:297    .text:0000000000000200 .L0 
+GAS LISTING /tmp/ccwvgm64.s 			page 13
 
 
-     /tmp/ccMSDMms.s:298    .text:0000000000000200 .L0 
-     /tmp/ccMSDMms.s:299    .text:0000000000000200 .L0 
-     /tmp/ccMSDMms.s:301    .text:0000000000000200 .L0 
-     /tmp/ccMSDMms.s:302    .text:0000000000000200 .L0 
-     /tmp/ccMSDMms.s:304    .text:0000000000000204 .L0 
-     /tmp/ccMSDMms.s:307    .text:0000000000000208 .L0 
-     /tmp/ccMSDMms.s:308    .text:0000000000000208 .L0 
-     /tmp/ccMSDMms.s:311    .text:000000000000020c .L0 
-     /tmp/ccMSDMms.s:315    .text:0000000000000210 .L0 
-     /tmp/ccMSDMms.s:316    .text:0000000000000210 .L0 
-     /tmp/ccMSDMms.s:320    .text:0000000000000214 .L0 
-     /tmp/ccMSDMms.s:321    .text:0000000000000214 .L0 
-     /tmp/ccMSDMms.s:322    .text:0000000000000214 .L0 
-     /tmp/ccMSDMms.s:324    .text:0000000000000218 .L0 
-     /tmp/ccMSDMms.s:327    .text:0000000000000220 .L0 
-     /tmp/ccMSDMms.s:330    .text:0000000000000224 .L0 
-     /tmp/ccMSDMms.s:336    .text:000000000000023c .L0 
-     /tmp/ccMSDMms.s:340    .text:0000000000000248 .L0 
-     /tmp/ccMSDMms.s:342    .text:000000000000024c .L0 
-     /tmp/ccMSDMms.s:345    .text:0000000000000250 .L0 
-     /tmp/ccMSDMms.s:347    .text:0000000000000254 .L0 
-     /tmp/ccMSDMms.s:350    .text:0000000000000258 .L0 
-     /tmp/ccMSDMms.s:351    .text:0000000000000258 .L0 
-     /tmp/ccMSDMms.s:356    .text:0000000000000268 .L0 
-     /tmp/ccMSDMms.s:360    .text:000000000000026c .L0 
-     /tmp/ccMSDMms.s:361    .text:000000000000026c .L0 
-     /tmp/ccMSDMms.s:365    .text:0000000000000274 .L0 
-     /tmp/ccMSDMms.s:366    .text:0000000000000274 .L0 
-     /tmp/ccMSDMms.s:375    .text:000000000000028c .L0 
-     /tmp/ccMSDMms.s:376    .text:000000000000028c .L0 
-     /tmp/ccMSDMms.s:377    .text:000000000000028c .L0 
-     /tmp/ccMSDMms.s:380    .text:0000000000000290 .L0 
-     /tmp/ccMSDMms.s:382    .text:0000000000000294 .L0 
-     /tmp/ccMSDMms.s:386    .text:0000000000000298 .L0 
-     /tmp/ccMSDMms.s:387    .text:0000000000000298 .L0 
-     /tmp/ccMSDMms.s:394    .text:00000000000002b4 .L0 
-     /tmp/ccMSDMms.s:395    .text:00000000000002b8 .L0 
-     /tmp/ccMSDMms.s:397    .text:00000000000002bc .L0 
-     /tmp/ccMSDMms.s:398    .text:00000000000002bc .L0 
-     /tmp/ccMSDMms.s:400    .text:00000000000002c0 .L0 
-     /tmp/ccMSDMms.s:402    .text:00000000000002c4 .L0 
-     /tmp/ccMSDMms.s:404    .text:00000000000002c8 .L0 
-     /tmp/ccMSDMms.s:406    .text:00000000000002cc .L0 
-     /tmp/ccMSDMms.s:408    .text:00000000000002d0 .L0 
-     /tmp/ccMSDMms.s:418    .data:0000000000000000 digits
-     /tmp/ccMSDMms.s:425    .bss:0000000000000000 lockPrint
-     /tmp/ccMSDMms.s:415    .data:0000000000000000 .LANCHOR1
-     /tmp/ccMSDMms.s:422    .bss:0000000000000000 .LANCHOR0
-     /tmp/ccMSDMms.s:432    .text:00000000000002d0 .L0 
-     /tmp/ccMSDMms.s:32     .text:0000000000000020 .L0 
-     /tmp/ccMSDMms.s:62     .text:0000000000000060 .L0 
-     /tmp/ccMSDMms.s:113    .text:00000000000000b8 .L0 
-     /tmp/ccMSDMms.s:170    .text:0000000000000128 .L0 
-     /tmp/ccMSDMms.s:287    .text:00000000000001e0 .L0 
-     /tmp/ccMSDMms.s:332    .text:000000000000022c .L0 
-     /tmp/ccMSDMms.s:389    .text:00000000000002a0 .L0 
-     /tmp/ccMSDMms.s:40     .text:0000000000000040 .L2
-GAS LISTING /tmp/ccMSDMms.s 			page 14
+     /tmp/ccwvgm64.s:298    .text:0000000000000200 .L0 
+     /tmp/ccwvgm64.s:299    .text:0000000000000200 .L0 
+     /tmp/ccwvgm64.s:301    .text:0000000000000200 .L0 
+     /tmp/ccwvgm64.s:302    .text:0000000000000200 .L0 
+     /tmp/ccwvgm64.s:304    .text:0000000000000204 .L0 
+     /tmp/ccwvgm64.s:307    .text:0000000000000208 .L0 
+     /tmp/ccwvgm64.s:308    .text:0000000000000208 .L0 
+     /tmp/ccwvgm64.s:311    .text:000000000000020c .L0 
+     /tmp/ccwvgm64.s:315    .text:0000000000000210 .L0 
+     /tmp/ccwvgm64.s:316    .text:0000000000000210 .L0 
+     /tmp/ccwvgm64.s:320    .text:0000000000000214 .L0 
+     /tmp/ccwvgm64.s:321    .text:0000000000000214 .L0 
+     /tmp/ccwvgm64.s:322    .text:0000000000000214 .L0 
+     /tmp/ccwvgm64.s:324    .text:0000000000000218 .L0 
+     /tmp/ccwvgm64.s:327    .text:0000000000000220 .L0 
+     /tmp/ccwvgm64.s:330    .text:0000000000000224 .L0 
+     /tmp/ccwvgm64.s:336    .text:000000000000023c .L0 
+     /tmp/ccwvgm64.s:340    .text:0000000000000248 .L0 
+     /tmp/ccwvgm64.s:342    .text:000000000000024c .L0 
+     /tmp/ccwvgm64.s:345    .text:0000000000000250 .L0 
+     /tmp/ccwvgm64.s:347    .text:0000000000000254 .L0 
+     /tmp/ccwvgm64.s:350    .text:0000000000000258 .L0 
+     /tmp/ccwvgm64.s:351    .text:0000000000000258 .L0 
+     /tmp/ccwvgm64.s:356    .text:0000000000000268 .L0 
+     /tmp/ccwvgm64.s:360    .text:000000000000026c .L0 
+     /tmp/ccwvgm64.s:361    .text:000000000000026c .L0 
+     /tmp/ccwvgm64.s:365    .text:0000000000000274 .L0 
+     /tmp/ccwvgm64.s:366    .text:0000000000000274 .L0 
+     /tmp/ccwvgm64.s:375    .text:000000000000028c .L0 
+     /tmp/ccwvgm64.s:376    .text:000000000000028c .L0 
+     /tmp/ccwvgm64.s:377    .text:000000000000028c .L0 
+     /tmp/ccwvgm64.s:380    .text:0000000000000290 .L0 
+     /tmp/ccwvgm64.s:382    .text:0000000000000294 .L0 
+     /tmp/ccwvgm64.s:386    .text:0000000000000298 .L0 
+     /tmp/ccwvgm64.s:387    .text:0000000000000298 .L0 
+     /tmp/ccwvgm64.s:394    .text:00000000000002b4 .L0 
+     /tmp/ccwvgm64.s:395    .text:00000000000002b8 .L0 
+     /tmp/ccwvgm64.s:397    .text:00000000000002bc .L0 
+     /tmp/ccwvgm64.s:398    .text:00000000000002bc .L0 
+     /tmp/ccwvgm64.s:400    .text:00000000000002c0 .L0 
+     /tmp/ccwvgm64.s:402    .text:00000000000002c4 .L0 
+     /tmp/ccwvgm64.s:404    .text:00000000000002c8 .L0 
+     /tmp/ccwvgm64.s:406    .text:00000000000002cc .L0 
+     /tmp/ccwvgm64.s:408    .text:00000000000002d0 .L0 
+     /tmp/ccwvgm64.s:418    .data:0000000000000000 digits
+     /tmp/ccwvgm64.s:425    .bss:0000000000000000 lockPrint
+     /tmp/ccwvgm64.s:415    .data:0000000000000000 .LANCHOR1
+     /tmp/ccwvgm64.s:422    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccwvgm64.s:432    .text:00000000000002d0 .L0 
+     /tmp/ccwvgm64.s:32     .text:0000000000000020 .L0 
+     /tmp/ccwvgm64.s:62     .text:0000000000000060 .L0 
+     /tmp/ccwvgm64.s:113    .text:00000000000000b8 .L0 
+     /tmp/ccwvgm64.s:170    .text:0000000000000128 .L0 
+     /tmp/ccwvgm64.s:287    .text:00000000000001e0 .L0 
+     /tmp/ccwvgm64.s:332    .text:000000000000022c .L0 
+     /tmp/ccwvgm64.s:389    .text:00000000000002a0 .L0 
+     /tmp/ccwvgm64.s:40     .text:0000000000000040 .L2
+GAS LISTING /tmp/ccwvgm64.s 			page 14
 
 
-     /tmp/ccMSDMms.s:27     .text:0000000000000018 .L3
-     /tmp/ccMSDMms.s:57     .text:0000000000000058 .L4
-     /tmp/ccMSDMms.s:121    .text:00000000000000d8 .L11
-     /tmp/ccMSDMms.s:108    .text:00000000000000b0 .L8
-     /tmp/ccMSDMms.s:158    .text:0000000000000118 .L9
-     /tmp/ccMSDMms.s:155    .text:0000000000000114 .L12
-     /tmp/ccMSDMms.s:124    .text:00000000000000dc .L7
-     /tmp/ccMSDMms.s:165    .text:0000000000000120 .L10
-     /tmp/ccMSDMms.s:244    .text:00000000000001a4 .L15
-     /tmp/ccMSDMms.s:218    .text:0000000000000174 .L16
-     /tmp/ccMSDMms.s:295    .text:0000000000000200 .L19
-     /tmp/ccMSDMms.s:282    .text:00000000000001d8 .L20
-     /tmp/ccMSDMms.s:305    .text:0000000000000208 .L21
-     /tmp/ccMSDMms.s:373    .text:000000000000028c .L28
-     /tmp/ccMSDMms.s:318    .text:0000000000000214 .L23
-     /tmp/ccMSDMms.s:358    .text:000000000000026c .L26
-     /tmp/ccMSDMms.s:384    .text:0000000000000298 .L25
-     /tmp/ccMSDMms.s:313    .text:0000000000000210 .L22
-     /tmp/ccMSDMms.s:952    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccMSDMms.s:1604   .debug_str:0000000000000202 .LASF39
-     /tmp/ccMSDMms.s:1600   .debug_str:00000000000001e7 .LASF40
-     /tmp/ccMSDMms.s:1574   .debug_str:00000000000000ec .LASF41
-     /tmp/ccMSDMms.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccMSDMms.s:428    .text:00000000000002d0 .Letext0
-     /tmp/ccMSDMms.s:1530   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccMSDMms.s:1580   .debug_str:0000000000000148 .LASF0
-     /tmp/ccMSDMms.s:1546   .debug_str:0000000000000048 .LASF3
-     /tmp/ccMSDMms.s:1586   .debug_str:0000000000000176 .LASF1
-     /tmp/ccMSDMms.s:1572   .debug_str:00000000000000de .LASF2
-     /tmp/ccMSDMms.s:1562   .debug_str:00000000000000aa .LASF4
-     /tmp/ccMSDMms.s:1598   .debug_str:00000000000001d5 .LASF5
-     /tmp/ccMSDMms.s:1538   .debug_str:000000000000001e .LASF6
-     /tmp/ccMSDMms.s:1590   .debug_str:0000000000000198 .LASF7
-     /tmp/ccMSDMms.s:1578   .debug_str:0000000000000135 .LASF8
-     /tmp/ccMSDMms.s:1608   .debug_str:00000000000002d5 .LASF9
-     /tmp/ccMSDMms.s:1558   .debug_str:0000000000000090 .LASF10
-     /tmp/ccMSDMms.s:1594   .debug_str:00000000000001b0 .LASF11
-     /tmp/ccMSDMms.s:1606   .debug_str:00000000000002c6 .LASF12
-     /tmp/ccMSDMms.s:1540   .debug_str:0000000000000025 .LASF13
-     /tmp/ccMSDMms.s:1532   .debug_str:0000000000000000 .LASF14
-     /tmp/ccMSDMms.s:1544   .debug_str:000000000000003c .LASF15
-     /tmp/ccMSDMms.s:1596   .debug_str:00000000000001bf .LASF16
-     /tmp/ccMSDMms.s:1548   .debug_str:000000000000004d .LASF17
-     /tmp/ccMSDMms.s:1552   .debug_str:000000000000006d .LASF18
-     /tmp/ccMSDMms.s:1564   .debug_str:00000000000000b1 .LASF19
-     /tmp/ccMSDMms.s:1592   .debug_str:00000000000001ab .LASF20
-     /tmp/ccMSDMms.s:1568   .debug_str:00000000000000c7 .LASF21
-     /tmp/ccMSDMms.s:1556   .debug_str:0000000000000087 .LASF27
-     /tmp/ccMSDMms.s:1588   .debug_str:0000000000000189 .LASF29
-     /tmp/ccMSDMms.s:260    .text:00000000000001b0 .LFB40
-     /tmp/ccMSDMms.s:409    .text:00000000000002d0 .LFE40
-     /tmp/ccMSDMms.s:1304   .debug_loc:0000000000000000 .LLST8
-     /tmp/ccMSDMms.s:1610   .debug_str:00000000000002e5 .LASF22
-     /tmp/ccMSDMms.s:1318   .debug_loc:0000000000000039 .LLST9
-     /tmp/ccMSDMms.s:1332   .debug_loc:0000000000000072 .LLST10
-     /tmp/ccMSDMms.s:1346   .debug_loc:00000000000000ab .LLST11
-     /tmp/ccMSDMms.s:1368   .debug_loc:000000000000010a .LLST12
-GAS LISTING /tmp/ccMSDMms.s 			page 15
+     /tmp/ccwvgm64.s:27     .text:0000000000000018 .L3
+     /tmp/ccwvgm64.s:57     .text:0000000000000058 .L4
+     /tmp/ccwvgm64.s:121    .text:00000000000000d8 .L11
+     /tmp/ccwvgm64.s:108    .text:00000000000000b0 .L8
+     /tmp/ccwvgm64.s:158    .text:0000000000000118 .L9
+     /tmp/ccwvgm64.s:155    .text:0000000000000114 .L12
+     /tmp/ccwvgm64.s:124    .text:00000000000000dc .L7
+     /tmp/ccwvgm64.s:165    .text:0000000000000120 .L10
+     /tmp/ccwvgm64.s:244    .text:00000000000001a4 .L15
+     /tmp/ccwvgm64.s:218    .text:0000000000000174 .L16
+     /tmp/ccwvgm64.s:295    .text:0000000000000200 .L19
+     /tmp/ccwvgm64.s:282    .text:00000000000001d8 .L20
+     /tmp/ccwvgm64.s:305    .text:0000000000000208 .L21
+     /tmp/ccwvgm64.s:373    .text:000000000000028c .L28
+     /tmp/ccwvgm64.s:318    .text:0000000000000214 .L23
+     /tmp/ccwvgm64.s:358    .text:000000000000026c .L26
+     /tmp/ccwvgm64.s:384    .text:0000000000000298 .L25
+     /tmp/ccwvgm64.s:313    .text:0000000000000210 .L22
+     /tmp/ccwvgm64.s:952    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccwvgm64.s:1604   .debug_str:0000000000000202 .LASF39
+     /tmp/ccwvgm64.s:1600   .debug_str:00000000000001e7 .LASF40
+     /tmp/ccwvgm64.s:1574   .debug_str:00000000000000ec .LASF41
+     /tmp/ccwvgm64.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccwvgm64.s:428    .text:00000000000002d0 .Letext0
+     /tmp/ccwvgm64.s:1530   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccwvgm64.s:1580   .debug_str:0000000000000148 .LASF0
+     /tmp/ccwvgm64.s:1546   .debug_str:0000000000000048 .LASF3
+     /tmp/ccwvgm64.s:1586   .debug_str:0000000000000176 .LASF1
+     /tmp/ccwvgm64.s:1572   .debug_str:00000000000000de .LASF2
+     /tmp/ccwvgm64.s:1562   .debug_str:00000000000000aa .LASF4
+     /tmp/ccwvgm64.s:1598   .debug_str:00000000000001d5 .LASF5
+     /tmp/ccwvgm64.s:1538   .debug_str:000000000000001e .LASF6
+     /tmp/ccwvgm64.s:1590   .debug_str:0000000000000198 .LASF7
+     /tmp/ccwvgm64.s:1578   .debug_str:0000000000000135 .LASF8
+     /tmp/ccwvgm64.s:1608   .debug_str:00000000000002d5 .LASF9
+     /tmp/ccwvgm64.s:1558   .debug_str:0000000000000090 .LASF10
+     /tmp/ccwvgm64.s:1594   .debug_str:00000000000001b0 .LASF11
+     /tmp/ccwvgm64.s:1606   .debug_str:00000000000002c6 .LASF12
+     /tmp/ccwvgm64.s:1540   .debug_str:0000000000000025 .LASF13
+     /tmp/ccwvgm64.s:1532   .debug_str:0000000000000000 .LASF14
+     /tmp/ccwvgm64.s:1544   .debug_str:000000000000003c .LASF15
+     /tmp/ccwvgm64.s:1596   .debug_str:00000000000001bf .LASF16
+     /tmp/ccwvgm64.s:1548   .debug_str:000000000000004d .LASF17
+     /tmp/ccwvgm64.s:1552   .debug_str:000000000000006d .LASF18
+     /tmp/ccwvgm64.s:1564   .debug_str:00000000000000b1 .LASF19
+     /tmp/ccwvgm64.s:1592   .debug_str:00000000000001ab .LASF20
+     /tmp/ccwvgm64.s:1568   .debug_str:00000000000000c7 .LASF21
+     /tmp/ccwvgm64.s:1556   .debug_str:0000000000000087 .LASF27
+     /tmp/ccwvgm64.s:1588   .debug_str:0000000000000189 .LASF29
+     /tmp/ccwvgm64.s:260    .text:00000000000001b0 .LFB40
+     /tmp/ccwvgm64.s:409    .text:00000000000002d0 .LFE40
+     /tmp/ccwvgm64.s:1304   .debug_loc:0000000000000000 .LLST8
+     /tmp/ccwvgm64.s:1610   .debug_str:00000000000002e5 .LASF22
+     /tmp/ccwvgm64.s:1318   .debug_loc:0000000000000039 .LLST9
+     /tmp/ccwvgm64.s:1332   .debug_loc:0000000000000072 .LLST10
+     /tmp/ccwvgm64.s:1346   .debug_loc:00000000000000ab .LLST11
+     /tmp/ccwvgm64.s:1368   .debug_loc:000000000000010a .LLST12
+GAS LISTING /tmp/ccwvgm64.s 			page 15
 
 
-     /tmp/ccMSDMms.s:1385   .debug_loc:0000000000000155 .LLST13
-     /tmp/ccMSDMms.s:289    .text:00000000000001f0 .LVL28
-     /tmp/ccMSDMms.s:293    .text:00000000000001fc .LVL29
-     /tmp/ccMSDMms.s:370    .text:0000000000000288 .LVL39
-     /tmp/ccMSDMms.s:391    .text:00000000000002b0 .LVL43
-     /tmp/ccMSDMms.s:1560   .debug_str:000000000000009e .LASF23
-     /tmp/ccMSDMms.s:1584   .debug_str:0000000000000163 .LASF25
-     /tmp/ccMSDMms.s:201    .text:0000000000000160 .LFB39
-     /tmp/ccMSDMms.s:254    .text:00000000000001b0 .LFE39
-     /tmp/ccMSDMms.s:1414   .debug_loc:00000000000001ac .LLST6
-     /tmp/ccMSDMms.s:1425   .debug_loc:00000000000001e2 .LLST7
-     /tmp/ccMSDMms.s:1550   .debug_str:0000000000000063 .LASF24
-     /tmp/ccMSDMms.s:1614   .debug_str:00000000000002fd .LASF26
-     /tmp/ccMSDMms.s:85     .text:0000000000000088 .LFB38
-     /tmp/ccMSDMms.s:195    .text:0000000000000160 .LFE38
-     /tmp/ccMSDMms.s:1447   .debug_loc:0000000000000241 .LLST1
-     /tmp/ccMSDMms.s:1462   .debug_loc:000000000000028a .LLST2
-     /tmp/ccMSDMms.s:1476   .debug_loc:00000000000002c3 .LLST3
-     /tmp/ccMSDMms.s:1487   .debug_loc:00000000000002f9 .LLST4
-     /tmp/ccMSDMms.s:1499   .debug_loc:0000000000000321 .LLST5
-     /tmp/ccMSDMms.s:115    .text:00000000000000c8 .LVL10
-     /tmp/ccMSDMms.s:119    .text:00000000000000d4 .LVL11
-     /tmp/ccMSDMms.s:136    .text:00000000000000f0 .LVL14
-     /tmp/ccMSDMms.s:172    .text:0000000000000138 .LVL18
-     /tmp/ccMSDMms.s:1566   .debug_str:00000000000000bb .LASF28
-     /tmp/ccMSDMms.s:1612   .debug_str:00000000000002ea .LASF30
-     /tmp/ccMSDMms.s:10     .text:0000000000000000 .LFB37
-     /tmp/ccMSDMms.s:79     .text:0000000000000088 .LFE37
-     /tmp/ccMSDMms.s:1542   .debug_str:0000000000000035 .LASF31
-     /tmp/ccMSDMms.s:1506   .debug_loc:0000000000000344 .LLST0
-     /tmp/ccMSDMms.s:34     .text:0000000000000030 .LVL2
-     /tmp/ccMSDMms.s:38     .text:000000000000003c .LVL3
-     /tmp/ccMSDMms.s:50     .text:0000000000000050 .LVL4
-     /tmp/ccMSDMms.s:64     .text:0000000000000070 .LVL6
-     /tmp/ccMSDMms.s:1582   .debug_str:0000000000000155 .LASF32
-     /tmp/ccMSDMms.s:1554   .debug_str:0000000000000072 .LASF33
-     /tmp/ccMSDMms.s:1570   .debug_str:00000000000000ce .LASF34
-     /tmp/ccMSDMms.s:1602   .debug_str:00000000000001f9 .LASF35
-     /tmp/ccMSDMms.s:1576   .debug_str:0000000000000130 .LASF36
-     /tmp/ccMSDMms.s:1536   .debug_str:0000000000000015 .LASF37
-     /tmp/ccMSDMms.s:1534   .debug_str:0000000000000010 .LASF38
-     /tmp/ccMSDMms.s:263    .text:00000000000001b0 .LVL26
-     /tmp/ccMSDMms.s:281    .text:00000000000001d8 .LVL27
-     /tmp/ccMSDMms.s:312    .text:0000000000000210 .LVL32
-     /tmp/ccMSDMms.s:317    .text:0000000000000214 .LVL33
-     /tmp/ccMSDMms.s:328    .text:0000000000000224 .LVL34
-     /tmp/ccMSDMms.s:349    .text:0000000000000258 .LVL36
-     /tmp/ccMSDMms.s:357    .text:000000000000026c .LVL37
-     /tmp/ccMSDMms.s:362    .text:0000000000000270 .LVL38
-     /tmp/ccMSDMms.s:300    .text:0000000000000200 .LVL30
-     /tmp/ccMSDMms.s:372    .text:000000000000028c .LVL40
-     /tmp/ccMSDMms.s:383    .text:0000000000000298 .LVL42
-     /tmp/ccMSDMms.s:309    .text:000000000000020c .LVL31
-     /tmp/ccMSDMms.s:343    .text:0000000000000250 .LVL35
-     /tmp/ccMSDMms.s:378    .text:0000000000000290 .LVL41
-     /tmp/ccMSDMms.s:204    .text:0000000000000160 .LVL20
-     /tmp/ccMSDMms.s:217    .text:0000000000000174 .LVL22
-GAS LISTING /tmp/ccMSDMms.s 			page 16
+     /tmp/ccwvgm64.s:1385   .debug_loc:0000000000000155 .LLST13
+     /tmp/ccwvgm64.s:289    .text:00000000000001f0 .LVL28
+     /tmp/ccwvgm64.s:293    .text:00000000000001fc .LVL29
+     /tmp/ccwvgm64.s:370    .text:0000000000000288 .LVL39
+     /tmp/ccwvgm64.s:391    .text:00000000000002b0 .LVL43
+     /tmp/ccwvgm64.s:1560   .debug_str:000000000000009e .LASF23
+     /tmp/ccwvgm64.s:1584   .debug_str:0000000000000163 .LASF25
+     /tmp/ccwvgm64.s:201    .text:0000000000000160 .LFB39
+     /tmp/ccwvgm64.s:254    .text:00000000000001b0 .LFE39
+     /tmp/ccwvgm64.s:1414   .debug_loc:00000000000001ac .LLST6
+     /tmp/ccwvgm64.s:1425   .debug_loc:00000000000001e2 .LLST7
+     /tmp/ccwvgm64.s:1550   .debug_str:0000000000000063 .LASF24
+     /tmp/ccwvgm64.s:1614   .debug_str:00000000000002fd .LASF26
+     /tmp/ccwvgm64.s:85     .text:0000000000000088 .LFB38
+     /tmp/ccwvgm64.s:195    .text:0000000000000160 .LFE38
+     /tmp/ccwvgm64.s:1447   .debug_loc:0000000000000241 .LLST1
+     /tmp/ccwvgm64.s:1462   .debug_loc:000000000000028a .LLST2
+     /tmp/ccwvgm64.s:1476   .debug_loc:00000000000002c3 .LLST3
+     /tmp/ccwvgm64.s:1487   .debug_loc:00000000000002f9 .LLST4
+     /tmp/ccwvgm64.s:1499   .debug_loc:0000000000000321 .LLST5
+     /tmp/ccwvgm64.s:115    .text:00000000000000c8 .LVL10
+     /tmp/ccwvgm64.s:119    .text:00000000000000d4 .LVL11
+     /tmp/ccwvgm64.s:136    .text:00000000000000f0 .LVL14
+     /tmp/ccwvgm64.s:172    .text:0000000000000138 .LVL18
+     /tmp/ccwvgm64.s:1566   .debug_str:00000000000000bb .LASF28
+     /tmp/ccwvgm64.s:1612   .debug_str:00000000000002ea .LASF30
+     /tmp/ccwvgm64.s:10     .text:0000000000000000 .LFB37
+     /tmp/ccwvgm64.s:79     .text:0000000000000088 .LFE37
+     /tmp/ccwvgm64.s:1542   .debug_str:0000000000000035 .LASF31
+     /tmp/ccwvgm64.s:1506   .debug_loc:0000000000000344 .LLST0
+     /tmp/ccwvgm64.s:34     .text:0000000000000030 .LVL2
+     /tmp/ccwvgm64.s:38     .text:000000000000003c .LVL3
+     /tmp/ccwvgm64.s:50     .text:0000000000000050 .LVL4
+     /tmp/ccwvgm64.s:64     .text:0000000000000070 .LVL6
+     /tmp/ccwvgm64.s:1582   .debug_str:0000000000000155 .LASF32
+     /tmp/ccwvgm64.s:1554   .debug_str:0000000000000072 .LASF33
+     /tmp/ccwvgm64.s:1570   .debug_str:00000000000000ce .LASF34
+     /tmp/ccwvgm64.s:1602   .debug_str:00000000000001f9 .LASF35
+     /tmp/ccwvgm64.s:1576   .debug_str:0000000000000130 .LASF36
+     /tmp/ccwvgm64.s:1536   .debug_str:0000000000000015 .LASF37
+     /tmp/ccwvgm64.s:1534   .debug_str:0000000000000010 .LASF38
+     /tmp/ccwvgm64.s:263    .text:00000000000001b0 .LVL26
+     /tmp/ccwvgm64.s:281    .text:00000000000001d8 .LVL27
+     /tmp/ccwvgm64.s:312    .text:0000000000000210 .LVL32
+     /tmp/ccwvgm64.s:317    .text:0000000000000214 .LVL33
+     /tmp/ccwvgm64.s:328    .text:0000000000000224 .LVL34
+     /tmp/ccwvgm64.s:349    .text:0000000000000258 .LVL36
+     /tmp/ccwvgm64.s:357    .text:000000000000026c .LVL37
+     /tmp/ccwvgm64.s:362    .text:0000000000000270 .LVL38
+     /tmp/ccwvgm64.s:300    .text:0000000000000200 .LVL30
+     /tmp/ccwvgm64.s:372    .text:000000000000028c .LVL40
+     /tmp/ccwvgm64.s:383    .text:0000000000000298 .LVL42
+     /tmp/ccwvgm64.s:309    .text:000000000000020c .LVL31
+     /tmp/ccwvgm64.s:343    .text:0000000000000250 .LVL35
+     /tmp/ccwvgm64.s:378    .text:0000000000000290 .LVL41
+     /tmp/ccwvgm64.s:204    .text:0000000000000160 .LVL20
+     /tmp/ccwvgm64.s:217    .text:0000000000000174 .LVL22
+GAS LISTING /tmp/ccwvgm64.s 			page 16
 
 
-     /tmp/ccMSDMms.s:214    .text:0000000000000170 .LVL21
-     /tmp/ccMSDMms.s:240    .text:00000000000001a0 .LVL24
-     /tmp/ccMSDMms.s:243    .text:00000000000001a4 .LVL25
-     /tmp/ccMSDMms.s:88     .text:0000000000000088 .LVL8
-     /tmp/ccMSDMms.s:107    .text:00000000000000b0 .LVL9
-     /tmp/ccMSDMms.s:188    .text:0000000000000154 .LVL19
-     /tmp/ccMSDMms.s:125    .text:00000000000000dc .LVL12
-     /tmp/ccMSDMms.s:130    .text:00000000000000e4 .LVL13
-     /tmp/ccMSDMms.s:157    .text:0000000000000118 .LVL16
-     /tmp/ccMSDMms.s:162    .text:000000000000011c .LVL17
-     /tmp/ccMSDMms.s:140    .text:00000000000000f4 .LVL15
-     /tmp/ccMSDMms.s:14     .text:0000000000000000 .LVL0
-     /tmp/ccMSDMms.s:26     .text:0000000000000018 .LVL1
-     /tmp/ccMSDMms.s:74     .text:0000000000000080 .LVL7
-     /tmp/ccMSDMms.s:433    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccwvgm64.s:214    .text:0000000000000170 .LVL21
+     /tmp/ccwvgm64.s:240    .text:00000000000001a0 .LVL24
+     /tmp/ccwvgm64.s:243    .text:00000000000001a4 .LVL25
+     /tmp/ccwvgm64.s:88     .text:0000000000000088 .LVL8
+     /tmp/ccwvgm64.s:107    .text:00000000000000b0 .LVL9
+     /tmp/ccwvgm64.s:188    .text:0000000000000154 .LVL19
+     /tmp/ccwvgm64.s:125    .text:00000000000000dc .LVL12
+     /tmp/ccwvgm64.s:130    .text:00000000000000e4 .LVL13
+     /tmp/ccwvgm64.s:157    .text:0000000000000118 .LVL16
+     /tmp/ccwvgm64.s:162    .text:000000000000011c .LVL17
+     /tmp/ccwvgm64.s:140    .text:00000000000000f4 .LVL15
+     /tmp/ccwvgm64.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccwvgm64.s:26     .text:0000000000000018 .LVL1
+     /tmp/ccwvgm64.s:74     .text:0000000000000080 .LVL7
+     /tmp/ccwvgm64.s:433    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 copy_and_swap

@@ -81,7 +81,6 @@ int main()
 
 */
 
-
     TCB *threads[5];
 
     MemoryAllocator::initFreeBlock();
@@ -98,6 +97,8 @@ int main()
         thread_dispatch();
     }
 
+
+    printString("Vratio sam se u main");
     //userMain();
 
     return 0;
