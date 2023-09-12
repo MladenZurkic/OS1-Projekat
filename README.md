@@ -9,6 +9,8 @@ uključujući obradu niti, alokaciju memorije, semafore i prekide.
 Cela specifikacija projekta, režimi rada, hijerarhija poziva i slično se može videti u PDF fajlu ili zaključiti iz koda projekta
 
 U ovom repozitorijumu su odrađeni zadaci 1, 2 i 3.
+
+Takođe, u direktorijumu `modifikacije` mogu se naći implementacije nekih modifikacija. Više o tome u `README.md` tog foldera.
 <br></br>
 <br></br>
 
@@ -20,3 +22,6 @@ Instead, it handles tasks such as threads, memory allocation, semaphores, and in
 The entire project specification, operating modes, call hierarchy, and similar details can be seen in the PDF file or inferred from the project's code.
 
 In this repository, tasks 1, 2, and 3 have been completed.
+
+
+Also, in the `modifikacije` directory, you can find implementations of some modifications. More information can be found in the `README.md` of that folder.
