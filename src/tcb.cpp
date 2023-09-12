@@ -9,9 +9,6 @@
 
 TCB *TCB::running = nullptr;
 
-//uint64 TCB::timeSliceCounter = 0;
-//uint64 TCB::timeSliceCounterTest = 0;
-
 TCB *TCB::createThread(Body body, void* arg)
 {
     TCB* newTCB = new TCB(body, arg);
@@ -38,37 +35,36 @@ void TCB::dispatch()
     if (!old->isFinished() && !old->isBlocked()) { Scheduler::put(old); }
     running = Scheduler::get();
 
-    /*while(running->isBlocked()) {
-        Scheduler::put(running);
-        running = Scheduler::get();
-    }*/
-
-    //Ovde treba promena privilegije?
-
     if(running->isMain()) {
         Riscv::ms_sstatus(Riscv::SSTATUS_SPP);
     }
     else {
         Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
     }
-
     TCB::contextSwitch(&old->context, &running->context);
 }
 
 void TCB::threadWrapper()
 {
     Riscv::popSppSpie();
-    //Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
-    //Ovde smo uvek u niti koja nije main zar ne?
-
     running->body(running->arg);
     running->setFinished(true);
+    running->releaseAll();
     thread_dispatch();
 }
 
 void TCB::join(TCB* handle) {
-    while(!handle->isFinished()) {
-        TCB::dispatch();
-    }
+    running->setBlocked(true);
+    handle->joined.addLast(running);
+    //while(!handle->isFinished()) {
+      //  TCB::dispatch();
+    //}
 }
 
+void TCB::releaseAll() {
+    while (this->joined.peekFirst()) {
+        TCB* tcb = this->joined.removeFirst();
+        tcb->setBlocked(false);
+        Scheduler::put(tcb);
+    }
+}

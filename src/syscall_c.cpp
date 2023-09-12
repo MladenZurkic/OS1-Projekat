@@ -3,10 +3,6 @@
 #include "../h/mySemaphore.hpp"
 #include "../h/riscv.hpp"
 
-//void* mem_alloc(size_t size) {
-//    Riscv::w_a0(size);
-//    __asm__ volatile("ecall");
-//}
 
 void* mem_alloc(size_t size) {
     size_t newSize;
@@ -58,7 +54,6 @@ int thread_create_without_start(thread_t* handle,
     return (int)returnValue;
 }
 
-
 int thread_create(thread_t* handle, void (*start_routine)(void*), void* arg) {
 
     __asm__ volatile("mv a7, %0" : : "r"(arg));
@@ -67,11 +62,8 @@ int thread_create(thread_t* handle, void (*start_routine)(void*), void* arg) {
     __asm__ volatile("li a0, 0x11");
     __asm__ volatile("ecall");
 
-    uint64 returnValue; //bio je uint64 ali vrednosti mogu da budu i negativne
+    uint64 returnValue;
     __asm__ volatile("mv %0, a0" : "=r"(returnValue));
-    //if(returnValue == (uint32)4294967295) { //maxint
-      //  return -1;
-    //} //Ne mora izgleda da se ovo radi
     return (int)returnValue;
 }
 
@@ -95,7 +87,6 @@ void thread_join(thread_t handle) {
     __asm__ volatile("li a0, 0x14");
     __asm__ volatile ("ecall");
 }
-
 
 int sem_open(sem_t* handle, unsigned init) {
     __asm__ volatile ("mv a2, %0" : : "r" (init));

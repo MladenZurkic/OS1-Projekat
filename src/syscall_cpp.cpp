@@ -33,7 +33,7 @@ void Thread::join() {
 }
 
 Thread::~Thread() {
-    //thread_exit(); //Da li ovo tako treba? Msm da ne
+    //thread_exit();
     delete this->myHandle;
 }
 

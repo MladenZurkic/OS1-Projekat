@@ -34,11 +34,9 @@ void *MemoryAllocator::mem_alloc(size_t size) {
             if(curr->next) curr->next->prev = newBlock;
             newBlock->prev = curr->prev;
             newBlock->next = curr->next;
-            //size novi je sada prethodni size - novi size i jos - sizeof(DataBlock) jer se to ne brise kada se zauzme
-            //pa mora i to da se cuva
+
             newBlock->size = curr->size - newSize - sizeof(DataBlock);
             curr->size = newSize;
-
 
             //azuriranje USED liste
             if(used == nullptr) {

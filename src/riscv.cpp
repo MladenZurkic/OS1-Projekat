@@ -92,7 +92,6 @@ void Riscv::handleSupervisorTrap()
                 __asm__ volatile ("mv %0, a2" : "=r" (body));
                 __asm__ volatile ("mv %0, a7" : "=r" (arg));
                 *tcb = TCB::createThread(body, arg);
-                //POVRATNA VREDNOST: Upis mora na stek direktno, jer se posle ovoga vraca stari kontekst
                 if(*tcb != nullptr) {
                     //__asm__ volatile ("li a0, 0");
                     __asm__ volatile ("li t0, 0");
@@ -119,9 +118,11 @@ void Riscv::handleSupervisorTrap()
                 break;
 
             case 0x14:
+                //thread_join
                 thread_t handle;
                 __asm__ volatile ("mv %0, a1" : "=r" (handle));
                 TCB::join(handle);
+                TCB::dispatch();
                 break;
 
             case 0x21:
@@ -197,10 +198,10 @@ void Riscv::handleSupervisorTrap()
                 __putc(c);
                 break;
 
-            //Da li treba 0x41 i 0x42 ako se ne radi asinhrono? izgleda ne
             case 0x43:
                 TCB::dispatch();
                 break;
+
             default:
                 break;
         }
@@ -211,7 +212,6 @@ void Riscv::handleSupervisorTrap()
     else
     {
         // unexpected trap cause
-        // Ovde se ulazi ako se desi neki interrupt tabele
         printString("ERROR! SCAUSE:");
         printInt(scause);
         printString("\n");

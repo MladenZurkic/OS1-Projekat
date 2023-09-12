@@ -13,8 +13,6 @@ extern void userMain();
 
 int main()
 {
-
-
     /*
 
     TCB *threads[5];
@@ -97,9 +95,7 @@ int main()
         thread_dispatch();
     }
 
-
-    printString("Vratio sam se u main");
-    //userMain();
+    printString("Vratio sam se u main\n");
 
     return 0;
 }
