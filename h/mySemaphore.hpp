@@ -20,27 +20,12 @@ public:
     int close();
 
     void* operator new(size_t size) {
-        size_t newSize;
-        if(size%MEM_BLOCK_SIZE != 0) {
-            newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
-        }
-        else {
-            newSize = size;
-        }
-
-        return MemoryAllocator::mem_alloc(newSize);
+        return MemoryAllocator::mem_alloc(size);
     }
     void* operator new[](size_t size) {
-        size_t newSize;
-        if(size%MEM_BLOCK_SIZE != 0) {
-            newSize = ((size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE) * MEM_BLOCK_SIZE;
-        }
-        else {
-            newSize = size;
-        }
-
-        return MemoryAllocator::mem_alloc(newSize);
+        return MemoryAllocator::mem_alloc(size);
     }
+    
     void operator delete(void *ptr) {
         MemoryAllocator::mem_free(ptr);
     }
