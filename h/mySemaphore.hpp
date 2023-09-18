@@ -7,7 +7,6 @@
 
 class MySemaphore {
 public:
-    //check this -> explicit
     explicit MySemaphore(unsigned init = 1) {
         this->value = init;
         this->closed = false;

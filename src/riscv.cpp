@@ -118,7 +118,7 @@ void Riscv::handleSupervisorTrap()
                 break;
 
             case 0x14:
-                //thread_join
+                //thread_join(handle)
                 thread_t handle;
                 __asm__ volatile ("mv %0, a1" : "=r" (handle));
                 TCB::join(handle);
@@ -180,10 +180,6 @@ void Riscv::handleSupervisorTrap()
                 __asm__ volatile ("sw t0, 80(x8)");
                 break;
 
-            /*case 0x31:
-                //time_sleep
-                break;
-                */
             case 0x41:
                 //getc
                 returnValue = __getc();

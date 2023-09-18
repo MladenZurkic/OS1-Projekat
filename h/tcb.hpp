@@ -25,10 +25,6 @@ public:
 
     bool isMain() const { return this->main; }
 
-    //uint64 getTimeSlice() const { return timeSlice; }
-
-    //static uint64 getTimeSliceTest() { return timeSliceCounterTest; }
-
     using Body = void (*)(void*);
 
     static TCB *createThread(Body body, void* arg);
@@ -70,9 +66,7 @@ private:
             main(body == nullptr),
             arg(arg)
 
-    {
-        //if (body != nullptr) { Scheduler::put(this); }
-    }
+    {}
 
     struct Context
     {
@@ -100,11 +94,8 @@ private:
 
     static void join(TCB* handle);
     void releaseAll();
-    //static uint64 timeSliceCounter;
-    //static uint64 timeSliceCounterTest;
-
+    
     static uint64 constexpr STACK_SIZE = 1024;
-    //static uint64 constexpr TIME_SLICE = 2;
 };
 
 #endif //OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_TCB_HPP

@@ -11,7 +11,7 @@ int MySemaphore::wait() {
         TCB::running->setBlocked(true);
         thread_dispatch();
 
-        //Provera da li smo se vratili jer je bio signal() ili je bio close()
+        //Check if it was closed with close() or it was signaled with signal()
         if(this->closed) {
             return -1;
         }

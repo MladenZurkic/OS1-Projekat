@@ -70,14 +70,14 @@ void *MemoryAllocator::mem_alloc(size_t size) {
 
             if(curr->next) curr->next->prev = curr->prev;
 
-            //azuriranje USED liste
+            //Update USED list
             if(used == nullptr) {
                 used = curr;
                 curr->next = nullptr;
                 curr->prev = nullptr;
             }
             else if((char*) curr < (char*)used) {
-                //treba da ide pre trenutnog used
+                //Goes before current used 
                 used->prev = curr;
                 curr->prev = nullptr;
                 curr->next = used;

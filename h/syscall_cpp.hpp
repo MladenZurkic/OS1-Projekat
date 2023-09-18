@@ -41,7 +41,6 @@ public:
     Semaphore(unsigned init = 1);
     virtual ~Semaphore();
 
-    //~Semaphore();
     int wait();
     int signal();
 

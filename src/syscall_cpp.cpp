@@ -19,7 +19,6 @@ int Semaphore::signal() {
     return sem_signal(this->myHandle);
 }
 
-//THREAD
 void Thread::dispatch() {
     thread_dispatch();
 }
@@ -46,8 +45,8 @@ Thread::Thread() {
     thread_create_without_start(&this->myHandle, runWrapper, this);
 }
 
-void Thread::run() {
-    //todo
+void Thread::run() {    
+    //This is empty because it is supposed to be overriden
 }
 
 int Thread::sleep(time_t time) {

@@ -88,48 +88,6 @@ public:
     //write to a0 register
     static void w_a0(uint64 writeValue);
 
-    //read a1 register
-    static uint64 r_a1();
-
-    //write to a1 register
-    static void w_a1(uint64 writeValue);
-
-    //read a2 register
-    static uint64 r_a2();
-
-    //write to a2 register
-    static void w_a2(uint64 writeValue);
-
-    //read a3 register
-    static uint64 r_a3();
-
-    //write to a3 register
-    static void w_a3(uint64 writeValue);
-
-    //read a4 register
-    static uint64 r_a4();
-
-    //write to a4 register
-    static void w_a4(uint64 writeValue);
-
-    //read a5 register
-    static uint64 r_a5();
-
-    //write to a5 register
-    static void w_a5(uint64 writeValue);
-
-    //read a6 register
-    static uint64 r_a6();
-
-    //write to a6 register
-    static void w_a6(uint64 writeValue);
-
-    //read a7 register
-    static uint64 r_a7();
-
-    //write to a7 register
-    static void w_a7(uint64 writeValue);
-
 
 private:
 
