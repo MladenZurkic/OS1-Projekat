@@ -54,11 +54,10 @@ void TCB::threadWrapper()
 }
 
 void TCB::join(TCB* handle) {
-    running->setBlocked(true);
-    handle->joined.addLast(running);
-    //while(!handle->isFinished()) {
-      //  TCB::dispatch();
-    //}
+    if(!handle->isFinished()) {
+        running->setBlocked(true);
+        handle->joined.addLast(running);
+    }
 }
 
 void TCB::releaseAll() {

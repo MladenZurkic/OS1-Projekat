@@ -223,7 +223,7 @@ void Riscv::handleConsoleInterrupt() {
 }
 
 void Riscv::handleTimerInterrupt() {
-    mc_sip(SIP_SSIP); // MORA DA SE OBRISE PENDING BIT - ZATO NIJE RADILO!
+    mc_sip(SIP_SSIP);
     /*uint64 volatile sepc = r_sepc();
     uint64 volatile sstatus = r_sstatus();
     TCB::dispatch();
