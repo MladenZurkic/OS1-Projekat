@@ -1,7 +1,3 @@
-///usr/bin/make -f "/home/os/Desktop/project-base  projekat COPY1/project-base-v1.1 (2)/Makefile" -C "/home/os/Desktop/project-base  projekat COPY1/project-base-v1.1 (2)" qemu
-// Created by marko on 20.4.22..
-//
-
 #ifndef OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_TCB_HPP
 #define OS1_VEZBE07_RISCV_CONTEXT_SWITCH_2_INTERRUPT_TCB_HPP
 
